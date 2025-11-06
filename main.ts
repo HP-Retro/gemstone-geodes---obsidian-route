@@ -279,9 +279,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 `, obsidian, 0, -110)
             bleh = true
-        })
-        timer.after(600000, function () {
-            bleh = false
+            info.startCountdown(60)
         })
     }
 })
@@ -309,6 +307,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         timer.after(750, function () {
             shards = true
         })
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.castle.tilePath2, function (sprite, location) {
+    if (info.score() >= 3) {
+        tiles.setCurrentTilemap(tilemap`level4`)
+    } else {
+        obsidian.sayText("there's still enemies to defeat.", 500, false)
     }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -376,7 +381,6 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite25, o
     info.changeScoreBy(1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite27, otherSprite2) {
-    obsidian.startEffect(effects.rings, 1250)
     if (isInvincible == false) {
         isInvincible = true
         info.changeLifeBy(-5)
@@ -384,6 +388,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite27, other
             isInvincible = false
         })
     }
+})
+info.onCountdownEnd(function () {
+    bleh = false
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
