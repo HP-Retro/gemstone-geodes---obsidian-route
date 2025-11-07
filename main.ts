@@ -1,3 +1,28 @@
+namespace SpriteKind {
+    export const rizz = SpriteKind.create()
+    export const sigma = SpriteKind.create()
+    export const Boss = SpriteKind.create()
+    export const miniboss = SpriteKind.create()
+    export const t2enemy = SpriteKind.create()
+    export const t3enemy = SpriteKind.create()
+}
+sprites.onCreated(SpriteKind.Enemy, function (sprite) {
+    sprites.setDataNumber(sprite, "HP", 50)
+})
+info.onScore(400, function () {
+    info.setLife(200)
+})
+info.onScore(600, function () {
+    info.setLife(250)
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.t3enemy, function (sprite25, otherSprite) {
+    sprites.changeDataNumberBy(otherSprite, "HP", -13)
+    sprites.destroy(projectile)
+    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
+        sprites.destroy(otherSprite)
+        info.changeScoreBy(15)
+    }
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     obsidian,
@@ -90,6 +115,9 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     600,
     true
     )
+})
+sprites.onCreated(SpriteKind.t3enemy, function (sprite) {
+    sprites.setDataNumber(sprite, "HP", 100)
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (bleh == false) {
@@ -278,9 +306,33 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `, obsidian, 0, -110)
-            bleh = true
-            info.startCountdown(60)
         })
+    }
+})
+info.onScore(1200, function () {
+    info.setLife(400)
+})
+info.onScore(1000, function () {
+    info.setLife(300)
+})
+info.onScore(1400, function () {
+    info.setLife(450)
+})
+info.onScore(800, function () {
+    info.setLife(350)
+})
+sprites.onCreated(SpriteKind.Boss, function (sprite) {
+    sprites.setDataNumber(sprite, "HP", 1000)
+})
+sprites.onCreated(SpriteKind.t2enemy, function (sprite) {
+    sprites.setDataNumber(sprite, "HP", 75)
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite25, otherSprite) {
+    sprites.changeDataNumberBy(otherSprite, "HP", -10)
+    sprites.destroy(projectile)
+    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
+        sprites.destroy(otherSprite)
+        info.changeScoreBy(200)
     }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -304,7 +356,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             . . . . . . . . . . . . . . . . 
             `, obsidian, 110, 0)
         shards = false
-        timer.after(750, function () {
+        timer.after(250, function () {
             shards = true
         })
     }
@@ -312,8 +364,54 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.tilePath2, function (sprite, location) {
     if (info.score() >= 3) {
         tiles.setCurrentTilemap(tilemap`level4`)
+        diamond = sprites.create(img`
+            ...........ff...........
+            ..........faaf..........
+            .....f...faaaaf...f.....
+            ....faf...faaf...faf....
+            ....faaf..ffff..faaf....
+            .....faaffffffffaaf.....
+            ......ffffffffffff......
+            ......ffffffffffff......
+            ......ffffffffffff......
+            ....ffffffffffffffff....
+            ...faafffaaffaafffaaf...
+            ..faaffffaaffaaffffaaf..
+            ..faf.fffaaffaafff.faf..
+            ...f..ffffffffffff..f...
+            .....ffffaffffaffff.....
+            ....fffffaaffaafffff....
+            ....ffffffaaaaffffff....
+            ....fffffffaafffffff....
+            ........ffffffff........
+            .........ffffff.........
+            ........................
+            ........................
+            ........................
+            ........................
+            `, SpriteKind.miniboss)
+        diamond.follow(obsidian, 80)
+        tiles.placeOnTile(diamond, tiles.getTileLocation(14, 9))
+        tiles.placeOnTile(obsidian, tiles.getTileLocation(7, 8))
     } else {
         obsidian.sayText("there's still enemies to defeat.", 500, false)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.t2enemy, function (sprite27, otherSprite2) {
+    if (isInvincible == false) {
+        isInvincible = true
+        info.changeLifeBy(-5)
+        timer.after(1250, function () {
+            isInvincible = false
+        })
+    }
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.miniboss, function (sprite25, otherSprite) {
+    sprites.destroy(projectile)
+    sprites.changeDataNumberBy(otherSprite, "HP", -12)
+    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
+        sprites.destroy(otherSprite)
+        info.changeScoreBy(50)
     }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -375,10 +473,16 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+sprites.onCreated(SpriteKind.miniboss, function (sprite) {
+    sprites.setDataNumber(sprite, "HP", 500)
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite25, otherSprite) {
-    sprites.destroy(otherSprite, effects.ashes, 500)
+    sprites.changeDataNumberBy(otherSprite, "HP", -12)
     sprites.destroy(projectile)
-    info.changeScoreBy(1)
+    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
+        sprites.destroy(otherSprite)
+        info.changeScoreBy(5)
+    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite27, otherSprite2) {
     if (isInvincible == false) {
@@ -391,6 +495,18 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite27, other
 })
 info.onCountdownEnd(function () {
     bleh = false
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite27, otherSprite2) {
+    if (isInvincible == false) {
+        isInvincible = true
+        info.changeLifeBy(-25)
+        timer.after(1250, function () {
+            isInvincible = false
+        })
+    }
+})
+info.onScore(100, function () {
+    info.setLife(100)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -450,6 +566,61 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     600,
     true
     )
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.t3enemy, function (sprite27, otherSprite2) {
+    if (isInvincible == false) {
+        isInvincible = true
+        info.changeLifeBy(-5)
+        timer.after(1250, function () {
+            isInvincible = false
+        })
+    }
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.t2enemy, function (sprite25, otherSprite) {
+    sprites.changeDataNumberBy(otherSprite, "HP", -14)
+    sprites.destroy(projectile)
+    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
+        sprites.destroy(otherSprite)
+        info.changeScoreBy(10)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.builtin.forestTiles11, function (sprite, location) {
+    if (info.score() >= 10) {
+        tiles.setCurrentTilemap(tilemap`level1`)
+        diamond = sprites.create(img`
+            . . . . . . f f f f . . . . . . 
+            . . . . f f f 5 5 f f f . . . . 
+            . . . f f f 5 5 5 5 f f f . . . 
+            . . f f f 4 4 4 4 4 4 f f f . . 
+            . . f f 4 5 5 5 5 5 5 4 4 f . . 
+            . . f 4 5 f f f f f f 5 4 f . . 
+            . . f 5 f f f f f f f f 5 f . . 
+            . f f 5 f f 5 f f 5 f f 5 f f . 
+            . f f 5 f f 5 f f 5 f f 5 f f . 
+            . . f 5 f f f f f f f 5 5 f . . 
+            . f f f f f 5 4 4 4 5 5 f . . . 
+            . f 5 5 5 f 5 5 5 5 5 5 5 f . . 
+            . f 5 5 5 f 5 5 5 5 5 f 5 5 f . 
+            . . f 5 5 f 4 5 5 4 4 f 5 5 f . 
+            . . . f f f f f f f f f 5 5 f . 
+            . . . . . f f . . f f . f 5 f . 
+            . . . . . . . . . . . . . f . . 
+            `, SpriteKind.Boss)
+        diamond.follow(obsidian, 80)
+        tiles.placeOnTile(diamond, tiles.getTileLocation(14, 9))
+        tiles.placeOnTile(obsidian, tiles.getTileLocation(7, 8))
+    } else {
+        obsidian.sayText("i must kill the king.", 500, false)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.miniboss, function (sprite27, otherSprite2) {
+    if (isInvincible == false) {
+        isInvincible = true
+        info.changeLifeBy(-10)
+        timer.after(1250, function () {
+            isInvincible = false
+        })
+    }
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -544,10 +715,106 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level3`)
+    diamond = sprites.create(img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f 5 5 f f f . . . . 
+        . . . f f f 5 5 5 5 f f f . . . 
+        . . f f f 4 4 4 4 4 4 f f f . . 
+        . . f f 4 5 5 5 5 5 5 4 4 f . . 
+        . . f 4 5 f f f f f f 5 4 f . . 
+        . . f 5 f f f f f f f f 5 f . . 
+        . f f 5 f f 5 f f 5 f f 5 f f . 
+        . f f 5 f f 5 f f 5 f f 5 f f . 
+        . . f 5 f f f f f f f 5 5 f . . 
+        . f f f f f 5 4 4 4 5 5 f . . . 
+        . f 5 5 5 f 5 5 5 5 5 5 5 f . . 
+        . f 5 5 5 f 5 5 5 5 5 f 5 5 f . 
+        . . f 5 5 f 4 5 5 4 4 f 5 5 f . 
+        . . . f f f f f f f f f 5 5 f . 
+        . . . . . f f . . f f . f 5 f . 
+        . . . . . . . . . . . . . f . . 
+        `, SpriteKind.Boss)
+    helioite = sprites.create(img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f e e f f f . . . . 
+        . . . f f f e e e e f f f . . . 
+        . . f f f 4 4 4 4 4 4 f f f . . 
+        . . f f 4 e e e e e e 4 4 f . . 
+        . . f 4 e f f f f f f e 4 f . . 
+        . . f e f f f f f f f f e f . . 
+        . f f e f f e f f e f f e f f . 
+        . f f e f f e f f e f f e f f . 
+        . . f e f f f f f f f e e f . . 
+        . f f f f f e 4 4 4 e e f . . . 
+        . f e e e f e e e e e e e f . . 
+        . f e e e f e e e e e f e e f . 
+        . . f e e f 4 e e 4 4 f e e f . 
+        . . . f f f f f f f f f e e f . 
+        . . . . . f f . . f f . f e f . 
+        . . . . . . . . . . . . . f . . 
+        `, SpriteKind.Boss)
+    opal = sprites.create(img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f 1 1 f f f . . . . 
+        . . . f f f 1 1 1 1 f f f . . . 
+        . . f f f d d d d d d f f f . . 
+        . . f f d 1 1 1 1 1 1 d d f . . 
+        . . f d 1 f f f f f f 1 d f . . 
+        . . f 1 f f f f f f f f 1 f . . 
+        . f f 1 f f 1 f f 1 f f 1 f f . 
+        . f f 1 f f 1 f f 1 f f 1 f f . 
+        . . f 1 f f f f f f f 1 1 f . . 
+        . f f f f f 1 d d d 1 1 f . . . 
+        . f 1 1 1 f 1 1 1 1 1 1 1 f . . 
+        . f 1 1 1 f 1 1 1 1 1 f 1 1 f . 
+        . . f 1 1 f d 1 1 d d f 1 1 f . 
+        . . . f f f f f f f f f 1 1 f . 
+        . . . . . f f . . f f . f 1 f . 
+        . . . . . . . . . . . . . f . . 
+        `, SpriteKind.Boss)
+    ruby = sprites.create(img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f d d f f f . . . . 
+        . . . f f f d d d d f f f . . . 
+        . . f f f 1 1 1 1 1 1 f f f . . 
+        . . f f 1 d d d d d d 1 1 f . . 
+        . . f 1 d f f f f f f d 1 f . . 
+        . . f d f f f f f f f f d f . . 
+        . f f d f f d f f d f f d f f . 
+        . f f d f f d f f d f f d f f . 
+        . . f d f f f f f f f d d f . . 
+        . f f f f f d 1 1 1 d d f . . . 
+        . f d d d f d d d d d d d f . . 
+        . f d d d f d d d d d f d d f . 
+        . . f d d f 1 d d 1 1 f d d f . 
+        . . . f f f f f f f f f d d f . 
+        . . . . . f f . . f f . f d f . 
+        . . . . . . . . . . . . . f . . 
+        `, SpriteKind.Boss)
+    diamond.follow(obsidian, 100)
+    helioite.follow(obsidian, 80)
+    opal.follow(obsidian, 120)
+    ruby.follow(obsidian, 90)
+})
+info.onScore(1600, function () {
+    info.setLife(500)
+})
+info.onScore(50, function () {
+    info.setLife(75)
+})
+info.onScore(200, function () {
+    info.setLife(150)
+})
+let diamond: Sprite = null
 let projectile: Sprite = null
 let shards = false
 let isInvincible = false
 let bleh = false
+let ruby: Sprite = null
+let helioite: Sprite = null
+let opal: Sprite = null
 let obsidian: Sprite = null
 scene.cameraFollowSprite(obsidian)
 tiles.setCurrentTilemap(tilemap`level1`)
@@ -572,7 +839,7 @@ obsidian = sprites.create(img`
 scene.cameraFollowSprite(obsidian)
 info.setLife(50)
 controller.moveSprite(obsidian, 110, 110)
-let opal = sprites.create(img`
+opal = sprites.create(img`
     ........................
     ........................
     ........................
@@ -597,8 +864,8 @@ let opal = sprites.create(img`
     ........................
     ........................
     ........................
-    `, SpriteKind.Enemy)
-let helioite = sprites.create(img`
+    `, SpriteKind.t3enemy)
+helioite = sprites.create(img`
     ........................
     ........................
     ........................
@@ -623,8 +890,8 @@ let helioite = sprites.create(img`
     ........................
     ........................
     ........................
-    `, SpriteKind.Enemy)
-let ruby = sprites.create(img`
+    `, SpriteKind.t2enemy)
+ruby = sprites.create(img`
     ........................
     ........................
     ........................
