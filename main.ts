@@ -817,7 +817,7 @@ let helioite: Sprite = null
 let opal: Sprite = null
 let obsidian: Sprite = null
 scene.cameraFollowSprite(obsidian)
-tiles.setCurrentTilemap(tilemap`level1`)
+tiles.setCurrentTilemap(tilemap`level6`)
 obsidian = sprites.create(img`
     . . . . . f f c c f f . . . . . 
     . . . . f a c b b c a f . . . . 
@@ -920,6 +920,7 @@ ruby = sprites.create(img`
 tiles.placeOnTile(opal, tiles.getTileLocation(13, 9))
 tiles.placeOnTile(helioite, tiles.getTileLocation(12, 14))
 tiles.placeOnTile(ruby, tiles.getTileLocation(5, 14))
+tiles.placeOnTile(obsidian, tiles.getTileLocation(127, 127))
 helioite.follow(obsidian, 90)
 opal.follow(obsidian, 80)
 ruby.follow(obsidian, 70)
