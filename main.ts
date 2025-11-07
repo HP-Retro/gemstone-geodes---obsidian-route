@@ -306,6 +306,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `, obsidian, 0, -110)
+            bleh = true
+            info.startCountdown(60)
         })
     }
 })
@@ -795,8 +797,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, l
         `, SpriteKind.Boss)
     diamond.follow(obsidian, 100)
     helioite.follow(obsidian, 80)
-    opal.follow(obsidian, 120)
+    opal.follow(obsidian, 110)
     ruby.follow(obsidian, 90)
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(7, 9))
 })
 info.onScore(1600, function () {
     info.setLife(500)
@@ -838,6 +841,7 @@ obsidian = sprites.create(img`
     `, SpriteKind.Player)
 scene.cameraFollowSprite(obsidian)
 info.setLife(50)
+info.setScore(1000)
 controller.moveSprite(obsidian, 110, 110)
 opal = sprites.create(img`
     ........................
@@ -927,3 +931,80 @@ ruby.follow(obsidian, 70)
 bleh = false
 isInvincible = false
 shards = true
+forever(function () {
+    if (info.score() >= 1000) {
+        projectile = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . f f f f . . . . . . . . . . 
+            . f b a a b f . . . . . . . . . 
+            f b b a b a b f . . . . . . . . 
+            a a a b a a a a f . . . . . . . 
+            f b b a b a b f . . . . . . . . 
+            . f b a a b f . . . . . . . . . 
+            . . f f f f . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, obsidian, 110, 0)
+        projectile = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . f f f f . . . . . . . . . . 
+            . f b a a b f . . . . . . . . . 
+            f b b a b a b f . . . . . . . . 
+            a a a b a a a a f . . . . . . . 
+            f b b a b a b f . . . . . . . . 
+            . f b a a b f . . . . . . . . . 
+            . . f f f f . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, obsidian, 0, 110)
+        projectile = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . f f f f . . . . . . . . . . 
+            . f b a a b f . . . . . . . . . 
+            f b b a b a b f . . . . . . . . 
+            a a a b a a a a f . . . . . . . 
+            f b b a b a b f . . . . . . . . 
+            . f b a a b f . . . . . . . . . 
+            . . f f f f . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, obsidian, -110, 0)
+        projectile = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . f f f f . . . . . . . . . . 
+            . f b a a b f . . . . . . . . . 
+            f b b a b a b f . . . . . . . . 
+            a a a b a a a a f . . . . . . . 
+            f b b a b a b f . . . . . . . . 
+            . f b a a b f . . . . . . . . . 
+            . . f f f f . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, obsidian, 0, -110)
+        pause(10000)
+    }
+})
