@@ -19,6 +19,9 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.t3enemy, function (sprite25,
     if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
         sprites.destroy(otherSprite)
         info.changeScoreBy(15)
+        if (info.life() < 50) {
+            info.changeLifeBy(3)
+        }
     }
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -119,6 +122,195 @@ info.onScore(1300, function () {
     controller.moveSprite(obsidian, 100, 100)
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (LostSoul == true) {
+        LostSoul = false
+        chargeblast = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . f f . . . . . f f f . . . . . 
+            f f f . f f f f f f f f f a a . 
+            f f f f f f f f f f f f f f a a 
+            a f f f f f f f f a f f f f f a 
+            a a a a a a a a a a a a a a a a 
+            a a a a a a a a a a a a a a a a 
+            a f f f f f f f f a f f f f f a 
+            f f f f f f f f f f f f f f a a 
+            f f f . f f f f f f f f f a a . 
+            . f f . . . . . f f f . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, obsidian, 80, 0)
+    }
+    timer.after(10000, function () {
+        LostSoul = true
+    })
+})
+info.onScore(1000, function () {
+    info.setLife(225)
+    controller.moveSprite(obsidian, 95, 95)
+})
+sprites.onCreated(SpriteKind.Boss, function (sprite) {
+    sprites.setDataNumber(sprite, "HP", 1000)
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite25, otherSprite) {
+    sprites.changeDataNumberBy(otherSprite, "HP", -10)
+    sprites.destroy(projectile)
+    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
+        sprites.destroy(otherSprite)
+        info.changeScoreBy(200)
+    }
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (shards == true) {
+        projectile = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . f f f f . . . . . . . . . . 
+            . f b a a b f . . . . . . . . . 
+            f b b a b a b f . . . . . . . . 
+            a a a b a a a a f . . . . . . . 
+            f b b a b a b f . . . . . . . . 
+            . f b a a b f . . . . . . . . . 
+            . . f f f f . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, obsidian, 110, 0)
+        shards = false
+        timer.after(250, function () {
+            shards = true
+        })
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.castle.tilePath2, function (sprite, location) {
+    if (info.score() >= 3) {
+        tiles.setCurrentTilemap(tilemap`level4`)
+        diamond = sprites.create(img`
+            ...........ff...........
+            ..........faaf..........
+            .....f...faaaaf...f.....
+            ....faf...faaf...faf....
+            ....faaf..ffff..faaf....
+            .....faaffffffffaaf.....
+            ......ffffffffffff......
+            ......ffffffffffff......
+            ......ffffffffffff......
+            ....ffffffffffffffff....
+            ...faafffaaffaafffaaf...
+            ..faaffffaaffaaffffaaf..
+            ..faf.fffaaffaafff.faf..
+            ...f..ffffffffffff..f...
+            .....ffffaffffaffff.....
+            ....fffffaaffaafffff....
+            ....ffffffaaaaffffff....
+            ....fffffffaafffffff....
+            ........ffffffff........
+            .........ffffff.........
+            ........................
+            ........................
+            ........................
+            ........................
+            `, SpriteKind.miniboss)
+        diamond.follow(obsidian, 80)
+        tiles.placeOnTile(diamond, tiles.getTileLocation(14, 9))
+        tiles.placeOnTile(obsidian, tiles.getTileLocation(7, 8))
+    } else {
+        obsidian.sayText("there's still enemies to defeat.", 500, false)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.t2enemy, function (sprite27, otherSprite2) {
+    if (isInvincible == false) {
+        isInvincible = true
+        info.changeLifeBy(-5)
+        timer.after(1000, function () {
+            isInvincible = false
+        })
+    }
+})
+info.onScore(1700, function () {
+    info.setLife(325)
+    controller.moveSprite(obsidian, 110, 110)
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.miniboss, function (sprite25, otherSprite) {
+    sprites.changeDataNumberBy(otherSprite, "HP", -12)
+    sprites.destroy(projectile)
+    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
+        sprites.destroy(otherSprite)
+        info.changeScoreBy(50)
+        if (info.life() < 50) {
+            info.changeLifeBy(25)
+        }
+    }
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    obsidian,
+    [img`
+        . . . f b c f f f f . . . . . . 
+        . . f c a b c b f b f f . . . . 
+        . . f a b a b c a a b b f . . . 
+        . . f b c b c a a a a a b f . . 
+        . . f a a a a a a a a a b f . . 
+        . f a a f f b b b b a a b f . . 
+        . f a a f f f f f b a a b f . . 
+        . f a f f f a f f b a a b f . . 
+        . . f f 1 1 a f f b a a b f . . 
+        . . . f 1 1 1 1 f b a a b f f . 
+        . . . f f f f f f f b a a b f . 
+        . . . f c c c f 1 1 f b b f . . 
+        . . . f c c c f 1 1 f f f . . . 
+        . . f f b f b f b f f f . . . . 
+        . . f f f b f b f b f f . . . . 
+        . . . . f f b f b f . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . f b c f f f f . . . . . . 
+        . . f c c b c b f b f f . . . . 
+        . . f c b c b c b a b b f . . . 
+        . . f b c b c a a a a a b f . . 
+        . f a a a a a a a a a a b f . . 
+        . f a a f f b b b b a a b f . . 
+        . f a a f f f f f b a a b f . . 
+        . . f f f f a f f b a a b f f . 
+        . . . f 1 1 a f f b a a a b f . 
+        . . . f 1 1 1 1 f b a a a b f . 
+        . . . f f f f f 1 1 b b b f . . 
+        . . . f c c c f 1 1 f f f . . . 
+        . . f c c c c c f f c c f . . . 
+        . . f b f b f b f b f f . . . . 
+        . . . f b f b f b f f . . . . . 
+        `,img`
+        . . . f b c f f f f . . . . . . 
+        . . f c a b c b f b f f . . . . 
+        . . f a b a b c a a b b f . . . 
+        . . f b c b c a a a a a b f . . 
+        . . f a a a a a a a a a b f . . 
+        . f a a f f b b b b a a b f . . 
+        . f a a f f f f f b a a b f . . 
+        . f a f f f a f f b a a b f . . 
+        . . f f 1 1 a f f b a a b f . . 
+        . . . f 1 1 1 1 f b a a b f f . 
+        . . . f f f f f f f b a a b f . 
+        . . . f c c c f 1 1 f b b f . . 
+        . . . f c c c f 1 1 f f f . . . 
+        . . f f b f b f b f f f . . . . 
+        . . f f f b f b f b f f . . . . 
+        . . . . f f b f b f . . . . . . 
+        `],
+    600,
+    true
+    )
+})
+sprites.onCreated(SpriteKind.miniboss, function (sprite) {
+    sprites.setDataNumber(sprite, "HP", 500)
+})
+controller.combos.attachCombo("a+b", function () {
     if (bleh == false) {
         animation.runImageAnimation(
         obsidian,
@@ -310,172 +502,15 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         })
     }
 })
-info.onScore(1000, function () {
-    info.setLife(225)
-    controller.moveSprite(obsidian, 95, 95)
-})
-sprites.onCreated(SpriteKind.Boss, function (sprite) {
-    sprites.setDataNumber(sprite, "HP", 1000)
-})
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite25, otherSprite) {
-    sprites.changeDataNumberBy(otherSprite, "HP", -10)
-    sprites.destroy(projectile)
-    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
-        sprites.destroy(otherSprite)
-        info.changeScoreBy(200)
-    }
-})
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (shards == true) {
-        projectile = sprites.createProjectileFromSprite(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . f f f f . . . . . . . . . . 
-            . f b a a b f . . . . . . . . . 
-            f b b a b a b f . . . . . . . . 
-            a a a b a a a a f . . . . . . . 
-            f b b a b a b f . . . . . . . . 
-            . f b a a b f . . . . . . . . . 
-            . . f f f f . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, obsidian, 110, 0)
-        shards = false
-        timer.after(250, function () {
-            shards = true
-        })
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, sprites.castle.tilePath2, function (sprite, location) {
-    if (info.score() >= 3) {
-        tiles.setCurrentTilemap(tilemap`level4`)
-        diamond = sprites.create(img`
-            ...........ff...........
-            ..........faaf..........
-            .....f...faaaaf...f.....
-            ....faf...faaf...faf....
-            ....faaf..ffff..faaf....
-            .....faaffffffffaaf.....
-            ......ffffffffffff......
-            ......ffffffffffff......
-            ......ffffffffffff......
-            ....ffffffffffffffff....
-            ...faafffaaffaafffaaf...
-            ..faaffffaaffaaffffaaf..
-            ..faf.fffaaffaafff.faf..
-            ...f..ffffffffffff..f...
-            .....ffffaffffaffff.....
-            ....fffffaaffaafffff....
-            ....ffffffaaaaffffff....
-            ....fffffffaafffffff....
-            ........ffffffff........
-            .........ffffff.........
-            ........................
-            ........................
-            ........................
-            ........................
-            `, SpriteKind.miniboss)
-        diamond.follow(obsidian, 80)
-        tiles.placeOnTile(diamond, tiles.getTileLocation(14, 9))
-        tiles.placeOnTile(obsidian, tiles.getTileLocation(7, 8))
-    } else {
-        obsidian.sayText("there's still enemies to defeat.", 500, false)
-    }
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.t2enemy, function (sprite27, otherSprite2) {
-    if (isInvincible == false) {
-        isInvincible = true
-        info.changeLifeBy(-5)
-        timer.after(500, function () {
-            isInvincible = false
-        })
-    }
-})
-info.onScore(1700, function () {
-    info.setLife(325)
-    controller.moveSprite(obsidian, 110, 110)
-})
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.miniboss, function (sprite25, otherSprite) {
-    sprites.destroy(projectile)
-    sprites.changeDataNumberBy(null, "HP", -12)
-    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
-        sprites.destroy(otherSprite)
-        info.changeScoreBy(50)
-    }
-})
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    obsidian,
-    [img`
-        . . . f b c f f f f . . . . . . 
-        . . f c a b c b f b f f . . . . 
-        . . f a b a b c a a b b f . . . 
-        . . f b c b c a a a a a b f . . 
-        . . f a a a a a a a a a b f . . 
-        . f a a f f b b b b a a b f . . 
-        . f a a f f f f f b a a b f . . 
-        . f a f f f a f f b a a b f . . 
-        . . f f 1 1 a f f b a a b f . . 
-        . . . f 1 1 1 1 f b a a b f f . 
-        . . . f f f f f f f b a a b f . 
-        . . . f c c c f 1 1 f b b f . . 
-        . . . f c c c f 1 1 f f f . . . 
-        . . f f b f b f b f f f . . . . 
-        . . f f f b f b f b f f . . . . 
-        . . . . f f b f b f . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . f b c f f f f . . . . . . 
-        . . f c c b c b f b f f . . . . 
-        . . f c b c b c b a b b f . . . 
-        . . f b c b c a a a a a b f . . 
-        . f a a a a a a a a a a b f . . 
-        . f a a f f b b b b a a b f . . 
-        . f a a f f f f f b a a b f . . 
-        . . f f f f a f f b a a b f f . 
-        . . . f 1 1 a f f b a a a b f . 
-        . . . f 1 1 1 1 f b a a a b f . 
-        . . . f f f f f 1 1 b b b f . . 
-        . . . f c c c f 1 1 f f f . . . 
-        . . f c c c c c f f c c f . . . 
-        . . f b f b f b f b f f . . . . 
-        . . . f b f b f b f f . . . . . 
-        `,img`
-        . . . f b c f f f f . . . . . . 
-        . . f c a b c b f b f f . . . . 
-        . . f a b a b c a a b b f . . . 
-        . . f b c b c a a a a a b f . . 
-        . . f a a a a a a a a a b f . . 
-        . f a a f f b b b b a a b f . . 
-        . f a a f f f f f b a a b f . . 
-        . f a f f f a f f b a a b f . . 
-        . . f f 1 1 a f f b a a b f . . 
-        . . . f 1 1 1 1 f b a a b f f . 
-        . . . f f f f f f f b a a b f . 
-        . . . f c c c f 1 1 f b b f . . 
-        . . . f c c c f 1 1 f f f . . . 
-        . . f f b f b f b f f f . . . . 
-        . . f f f b f b f b f f . . . . 
-        . . . . f f b f b f . . . . . . 
-        `],
-    600,
-    true
-    )
-})
-sprites.onCreated(SpriteKind.miniboss, function (sprite) {
-    sprites.setDataNumber(sprite, "HP", 500)
-})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite25, otherSprite) {
     sprites.changeDataNumberBy(otherSprite, "HP", -15)
     sprites.destroy(projectile)
     if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
         sprites.destroy(otherSprite)
         info.changeScoreBy(5)
+        if (info.life() < 50) {
+            info.changeLifeBy(1)
+        }
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite27, otherSprite2) {
@@ -573,6 +608,9 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.t2enemy, function (sprite25,
     if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
         sprites.destroy(otherSprite)
         info.changeScoreBy(10)
+        if (info.life() < 50) {
+            info.changeLifeBy(2)
+        }
     }
 })
 info.onScore(2500, function () {
@@ -806,7 +844,9 @@ let ruby: Sprite = null
 let opal: Sprite = null
 let helioite: Sprite = null
 let diamond: Sprite = null
+let chargeblast: Sprite = null
 let projectile: Sprite = null
+let LostSoul = false
 let shards = false
 let isInvincible = false
 let bleh = false
@@ -832,12 +872,13 @@ obsidian = sprites.create(img`
     . . . . f f b f b f b f . . . . 
     `, SpriteKind.Player)
 scene.cameraFollowSprite(obsidian)
-info.setLife(50)
 bleh = false
 isInvincible = false
 shards = true
 tiles.placeOnTile(obsidian, tiles.getTileLocation(127, 127))
 controller.moveSprite(obsidian, 80, 80)
+LostSoul = true
+info.setLife(50)
 game.onUpdateInterval(5000, function () {
     ruby = sprites.create(img`
         ........................
@@ -896,8 +937,9 @@ game.onUpdateInterval(600000, function () {
         ........................
         ........................
         `, SpriteKind.miniboss)
+    sprites.setDataNumber(diamond, "HP", 500)
     tiles.placeOnRandomTile(diamond, sprites.castle.tilePath5)
-    diamond.follow(obsidian, 100)
+    diamond.follow(obsidian, 90)
 })
 forever(function () {
     if (info.score() >= 1000) {
