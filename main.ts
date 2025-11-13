@@ -307,6 +307,9 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level7`)
+})
 sprites.onCreated(SpriteKind.miniboss, function (sprite) {
     sprites.setDataNumber(sprite, "HP", 500)
 })
