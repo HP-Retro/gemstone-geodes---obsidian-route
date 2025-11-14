@@ -5,6 +5,8 @@ namespace SpriteKind {
     export const miniboss = SpriteKind.create()
     export const t2enemy = SpriteKind.create()
     export const t3enemy = SpriteKind.create()
+    export const Finale_Ultima_Boss_Phase_1 = SpriteKind.create()
+    export const Finale_Ultima_Boss_Phase_2 = SpriteKind.create()
 }
 info.onScore(3000, function () {
     info.setLife(500)
@@ -117,35 +119,272 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+sprites.onCreated(SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite) {
+    sprites.setDataNumber(sprite, "HP", 2000)
+})
 info.onScore(1300, function () {
     info.setLife(275)
     controller.moveSprite(obsidian, 100, 100)
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (LostSoul == true) {
-        LostSoul = false
-        chargeblast = sprites.createProjectileFromSprite(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . f f . . . . . f f f . . . . . 
-            f f f . f f f f f f f f f a a . 
-            f f f f f f f f f f f f f f a a 
-            a f f f f f f f f a f f f f f a 
-            a a a a a a a a a a a a a a a a 
-            a a a a a a a a a a a a a a a a 
-            a f f f f f f f f a f f f f f a 
-            f f f f f f f f f f f f f f a a 
-            f f f . f f f f f f f f f a a . 
-            . f f . . . . . f f f . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, obsidian, 80, 0)
+    if (info.score() >= 500) {
+        if (LostSoul == true) {
+            obsidian.setImage(img`
+                . . . . . f f c c f f . . . . . 
+                . . . . f a c b b c a f . . . . 
+                . . . f a b f a a f b a f . . . 
+                . . f c b d c f f c d b c f . . 
+                . . f b d b b c c b b d b f . . 
+                . f a a f b c f f c b f a a f . 
+                . f a a f a f f f f a f a a f . 
+                . f c c f f a f f a f f c c f . 
+                . f c c f a f f f f a f c c f . 
+                f f c f 1 1 1 1 1 1 1 1 f c f f 
+                f c f a f 1 f f f f 1 f a f c f 
+                . f a f f f b f f b f f f a f . 
+                . 1 f a f b f b b f b f a f 1 . 
+                . . f f c c c a a c c c f f . . 
+                . . . f f b f b f b f f f . . . 
+                . . . . f f b f b f b f . . . . 
+                `)
+            timer.after(500, function () {
+                obsidian.setImage(img`
+                    . . . . . f f c c f f . . . . . 
+                    . . . . f a c b b c a f . . . . 
+                    . . . f a b b a a b b a f . . . 
+                    . . f c b d c b b c d b c f . . 
+                    . . f b d b b c c b b d b f . . 
+                    . f a a f b c f f c b f a a f . 
+                    . f a a f f f f f f f f a a f . 
+                    . f c c f f a f f a f f c c f . 
+                    . f c c f f a f f a f f c c f . 
+                    f f c c f 1 1 1 1 1 1 f c c f f 
+                    f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
+                    . f 1 1 f c b b b b c f 1 1 f . 
+                    . . f a c b b b b b b c a f . . 
+                    . . f f c c c a a c c c f f . . 
+                    . . . f f b f b f b f f f . . . 
+                    . . . . f f b f b f b f . . . . 
+                    `)
+            })
+            LostSoul = false
+            chargeblast = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . f f . . . . . f f f . . . . . 
+                f f f . f f f f f f f f f a a . 
+                f f f f f f f f f f f f f f a a 
+                a f f f f f f f f a f f f f f a 
+                a a a a a a a a a a a a a a a a 
+                a a a a a a a a a a a a a a a a 
+                a f f f f f f f f a f f f f f a 
+                f f f f f f f f f f f f f f a a 
+                f f f . f f f f f f f f f a a . 
+                . f f . . . . . f f f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, obsidian, 80, 0)
+        }
+        timer.after(10000, function () {
+            LostSoul = true
+        })
     }
-    timer.after(10000, function () {
-        LostSoul = true
-    })
+    if (info.score() >= 1500) {
+        if (LostSoul == true) {
+            obsidian.setImage(img`
+                . . . . . f f c c f f . . . . . 
+                . . . . f a c b b c a f . . . . 
+                . . . f a b f a a f b a f . . . 
+                . . f c b d c f f c d b c f . . 
+                . . f b d b b c c b b d b f . . 
+                . f a a f b c f f c b f a a f . 
+                . f a a f a f f f f a f a a f . 
+                . f c c f f a f f a f f c c f . 
+                . f c c f a f f f f a f c c f . 
+                f f c f 1 1 1 1 1 1 1 1 f c f f 
+                f c f a f 1 f f f f 1 f a f c f 
+                . f a f f f b f f b f f f a f . 
+                . 1 f a f b f b b f b f a f 1 . 
+                . . f f c c c a a c c c f f . . 
+                . . . f f b f b f b f f f . . . 
+                . . . . f f b f b f b f . . . . 
+                `)
+            timer.after(500, function () {
+                obsidian.setImage(img`
+                    . . . . . f f c c f f . . . . . 
+                    . . . . f a c b b c a f . . . . 
+                    . . . f a b b a a b b a f . . . 
+                    . . f c b d c b b c d b c f . . 
+                    . . f b d b b c c b b d b f . . 
+                    . f a a f b c f f c b f a a f . 
+                    . f a a f f f f f f f f a a f . 
+                    . f c c f f a f f a f f c c f . 
+                    . f c c f f a f f a f f c c f . 
+                    f f c c f 1 1 1 1 1 1 f c c f f 
+                    f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
+                    . f 1 1 f c b b b b c f 1 1 f . 
+                    . . f a c b b b b b b c a f . . 
+                    . . f f c c c a a c c c f f . . 
+                    . . . f f b f b f b f f f . . . 
+                    . . . . f f b f b f b f . . . . 
+                    `)
+            })
+            LostSoul = false
+            chargeblast = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . f f . . . . . f f f . . . . . 
+                f f f . f f f f f f f f f a a . 
+                f f f f f f f f f f f f f f a a 
+                a f f f f f f f f a f f f f f a 
+                a a a a a a a a a a a a a a a a 
+                a a a a a a a a a a a a a a a a 
+                a f f f f f f f f a f f f f f a 
+                f f f f f f f f f f f f f f a a 
+                f f f . f f f f f f f f f a a . 
+                . f f . . . . . f f f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, obsidian, 80, 0)
+            pause(200)
+            chargeblast = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . f f . . . . . f f f . . . . . 
+                f f f . f f f f f f f f f a a . 
+                f f f f f f f f f f f f f f a a 
+                a f f f f f f f f a f f f f f a 
+                a a a a a a a a a a a a a a a a 
+                a a a a a a a a a a a a a a a a 
+                a f f f f f f f f a f f f f f a 
+                f f f f f f f f f f f f f f a a 
+                f f f . f f f f f f f f f a a . 
+                . f f . . . . . f f f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, obsidian, 80, 0)
+        }
+        timer.after(10000, function () {
+            LostSoul = true
+        })
+    }
+    if (info.score() >= 3000) {
+        if (LostSoul == true) {
+            obsidian.setImage(img`
+                . . . . . f f c c f f . . . . . 
+                . . . . f a c b b c a f . . . . 
+                . . . f a b f a a f b a f . . . 
+                . . f c b d c f f c d b c f . . 
+                . . f b d b b c c b b d b f . . 
+                . f a a f b c f f c b f a a f . 
+                . f a a f a f f f f a f a a f . 
+                . f c c f f a f f a f f c c f . 
+                . f c c f a f f f f a f c c f . 
+                f f c f 1 1 1 1 1 1 1 1 f c f f 
+                f c f a f 1 f f f f 1 f a f c f 
+                . f a f f f b f f b f f f a f . 
+                . 1 f a f b f b b f b f a f 1 . 
+                . . f f c c c a a c c c f f . . 
+                . . . f f b f b f b f f f . . . 
+                . . . . f f b f b f b f . . . . 
+                `)
+            timer.after(500, function () {
+                obsidian.setImage(img`
+                    . . . . . f f c c f f . . . . . 
+                    . . . . f a c b b c a f . . . . 
+                    . . . f a b b a a b b a f . . . 
+                    . . f c b d c b b c d b c f . . 
+                    . . f b d b b c c b b d b f . . 
+                    . f a a f b c f f c b f a a f . 
+                    . f a a f f f f f f f f a a f . 
+                    . f c c f f a f f a f f c c f . 
+                    . f c c f f a f f a f f c c f . 
+                    f f c c f 1 1 1 1 1 1 f c c f f 
+                    f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
+                    . f 1 1 f c b b b b c f 1 1 f . 
+                    . . f a c b b b b b b c a f . . 
+                    . . f f c c c a a c c c f f . . 
+                    . . . f f b f b f b f f f . . . 
+                    . . . . f f b f b f b f . . . . 
+                    `)
+            })
+            LostSoul = false
+            chargeblast = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . f f . . . . . f f f . . . . . 
+                f f f . f f f f f f f f f a a . 
+                f f f f f f f f f f f f f f a a 
+                a f f f f f f f f a f f f f f a 
+                a a a a a a a a a a a a a a a a 
+                a a a a a a a a a a a a a a a a 
+                a f f f f f f f f a f f f f f a 
+                f f f f f f f f f f f f f f a a 
+                f f f . f f f f f f f f f a a . 
+                . f f . . . . . f f f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, obsidian, 80, 0)
+            pause(200)
+            chargeblast = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . f f . . . . . f f f . . . . . 
+                f f f . f f f f f f f f f a a . 
+                f f f f f f f f f f f f f f a a 
+                a f f f f f f f f a f f f f f a 
+                a a a a a a a a a a a a a a a a 
+                a a a a a a a a a a a a a a a a 
+                a f f f f f f f f a f f f f f a 
+                f f f f f f f f f f f f f f a a 
+                f f f . f f f f f f f f f a a . 
+                . f f . . . . . f f f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, obsidian, 80, 0)
+            pause(200)
+            chargeblast = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . f f . . . . . f f f . . . . . 
+                f f f . f f f f f f f f f a a . 
+                f f f f f f f f f f f f f f a a 
+                a f f f f f f f f a f f f f f a 
+                a a a a a a a a a a a a a a a a 
+                a a a a a a a a a a a a a a a a 
+                a f f f f f f f f a f f f f f a 
+                f f f f f f f f f f f f f f a a 
+                f f f . f f f f f f f f f a a . 
+                . f f . . . . . f f f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, obsidian, 80, 0)
+        }
+        timer.after(10000, function () {
+            LostSoul = true
+        })
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite27, otherSprite2) {
+    if (isInvincible == false) {
+        isInvincible = true
+        info.changeLifeBy(-50)
+        timer.after(1000, function () {
+            isInvincible = false
+        })
+    }
 })
 info.onScore(1000, function () {
     info.setLife(225)
@@ -185,6 +424,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         shards = false
         timer.after(250, function () {
             shards = true
+        })
+        timer.after(3000, function () {
+        	
         })
     }
 })
@@ -306,9 +548,6 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     600,
     true
     )
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
-    tiles.setCurrentTilemap(tilemap`level7`)
 })
 sprites.onCreated(SpriteKind.miniboss, function (sprite) {
     sprites.setDataNumber(sprite, "HP", 500)
@@ -505,6 +744,36 @@ controller.combos.attachCombo("a+b", function () {
         })
     }
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite25, otherSprite) {
+    if (sprite25 == sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . f f f f . . . . . . . . . . 
+        . f b a a b f . . . . . . . . . 
+        f b b a b a b f . . . . . . . . 
+        a a a b a a a a f . . . . . . . 
+        f b b a b a b f . . . . . . . . 
+        . f b a a b f . . . . . . . . . 
+        . . f f f f . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Projectile)) {
+        sprites.destroy(sprite25)
+        sprites.changeDataNumberBy(otherSprite, "HP", -10)
+    }
+    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
+        sprites.destroy(otherSprite)
+        info.changeScoreBy(1000)
+        if (info.life() < 50) {
+            info.changeLifeBy(25)
+        }
+    }
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite25, otherSprite) {
     sprites.changeDataNumberBy(otherSprite, "HP", -15)
     sprites.destroy(projectile)
@@ -527,6 +796,36 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite27, other
 })
 info.onCountdownEnd(function () {
     bleh = false
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite25, otherSprite) {
+    if (sprite25 == sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . f f f f . . . . . . . . . . 
+        . f b a a b f . . . . . . . . . 
+        f b b a b a b f . . . . . . . . 
+        a a a b a a a a f . . . . . . . 
+        f b b a b a b f . . . . . . . . 
+        . f b a a b f . . . . . . . . . 
+        . . f f f f . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Projectile)) {
+        sprites.destroy(sprite25)
+        sprites.changeDataNumberBy(otherSprite, "HP", -10)
+    }
+    if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
+        sprites.destroy(otherSprite)
+        info.changeScoreBy(1000)
+        if (info.life() < 50) {
+            info.changeLifeBy(25)
+        }
+    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite27, otherSprite2) {
     if (isInvincible == false) {
@@ -835,6 +1134,97 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, l
     ruby.follow(obsidian, 90)
     tiles.placeOnTile(obsidian, tiles.getTileLocation(7, 9))
 })
+sprites.onCreated(SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite) {
+    sprites.setDataNumber(sprite, "HP", 1000)
+    for (let index = 0; index < 3; index++) {
+        timer.after(10000, function () {
+            wrath = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                2 f f f . . . . . . . 2 . . . . 
+                2 2 f f f . . . . . 2 . 2 . . . 
+                f 2 2 2 f f f f f 2 . . . 2 . . 
+                f f f 2 2 f f f f f f . . . 2 . 
+                f f f f f 2 2 f f f f f f f f 2 
+                f f f f f 2 2 f f f f f f f f 2 
+                f f f 2 2 f f f f f f . . . 2 . 
+                f 2 2 2 f f f f f 2 . . . 2 . . 
+                2 2 f f f . . . . . 2 . 2 . . . 
+                2 f f f . . . . . . . 2 . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, you, 50, 0)
+            pause(500)
+            wrath = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . 2 . . . . . . . f f f 2 
+                . . . 2 . 2 . . . . . f f f 2 2 
+                . . 2 . . . 2 f f f f f 2 2 2 f 
+                . 2 . . . f f f f f f 2 2 f f f 
+                2 f f f f f f f f 2 2 f f f f f 
+                2 f f f f f f f f 2 2 f f f f f 
+                . 2 . . . f f f f f f 2 2 f f f 
+                . . 2 . . . 2 f f f f f 2 2 2 f 
+                . . . 2 . 2 . . . . . f f f 2 2 
+                . . . . 2 . . . . . . . f f f 2 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, you, -50, 0)
+            pause(500)
+            wrath = sprites.createProjectileFromSprite(img`
+                . . . 2 2 f f f f f f 2 2 . . . 
+                . . . f 2 2 f f f f 2 2 f . . . 
+                . . . f f 2 f f f f 2 f f . . . 
+                . . . f f 2 2 f f 2 2 f f . . . 
+                . . . . f f 2 f f 2 f f . . . . 
+                . . . . . f f 2 2 f f . . . . . 
+                . . . . . f f 2 2 f f . . . . . 
+                . . . . . f f f f f f . . . . . 
+                . . . . . f f f f f f . . . . . 
+                . . . . . 2 f f f f 2 . . . . . 
+                . . . . 2 . f f f f . 2 . . . . 
+                . . . 2 . . . f f . . . 2 . . . 
+                . . . . 2 . . f f . . 2 . . . . 
+                . . . . . 2 . f f . 2 . . . . . 
+                . . . . . . 2 f f 2 . . . . . . 
+                . . . . . . . 2 2 . . . . . . . 
+                `, you, 0, 50)
+            pause(500)
+            wrath = sprites.createProjectileFromSprite(img`
+                . . . . . . . 2 2 . . . . . . . 
+                . . . . . . 2 f f 2 . . . . . . 
+                . . . . . 2 . f f . 2 . . . . . 
+                . . . . 2 . . f f . . 2 . . . . 
+                . . . 2 . . . f f . . . 2 . . . 
+                . . . . 2 . f f f f . 2 . . . . 
+                . . . . . 2 f f f f 2 . . . . . 
+                . . . . . f f f f f f . . . . . 
+                . . . . . f f f f f f . . . . . 
+                . . . . . f f 2 2 f f . . . . . 
+                . . . . . f f 2 2 f f . . . . . 
+                . . . . f f 2 f f 2 f f . . . . 
+                . . . f f 2 2 f f 2 2 f f . . . 
+                . . . f f 2 f f f f 2 f f . . . 
+                . . . f 2 2 f f f f 2 2 f . . . 
+                . . . 2 2 f f f f f f 2 2 . . . 
+                `, you, 0, -50)
+        })
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite27, otherSprite2) {
+    if (isInvincible == false) {
+        isInvincible = true
+        info.changeLifeBy(-50)
+        timer.after(1000, function () {
+            isInvincible = false
+        })
+    }
+})
 info.onScore(200, function () {
     info.setLife(100)
     controller.moveSprite(obsidian, 90, 90)
@@ -843,6 +1233,315 @@ info.onScore(2100, function () {
     info.setLife(375)
     controller.moveSprite(obsidian, 120, 120)
 })
+sprites.onDestroyed(SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite) {
+    animation.runMovementAnimation(
+    you,
+    animation.animationPresets(animation.flyToCenter),
+    2000,
+    false
+    )
+    you = sprites.create(img`
+        ................
+        ......2..2......
+        ....222..2222...
+        ...2222...222...
+        ...2.2.....22...
+        ...2........2...
+        ...2fffaafff2...
+        ...2ffaffaff2...
+        ....fa2222af....
+        ....af2ff2fa....
+        ....fa2222af....
+        ...fffaffafff...
+        ...ffffaaffff...
+        ...f11111111f...
+        ...f11111111f...
+        ...ff111111ff...
+        .aaff111111ffaaa
+        aa.ff111111ff..a
+        a.22f111111f22.a
+        a.2.f111111f.2.a
+        a.2.f111111f.2.a
+        a.2..211112f2.aa
+        aa.2.221122ffff.
+        .aaff222222fffff
+        ..ff..2222ffffff
+        ..ff..2222111.ff
+        ..ff..f22f11f..f
+        ..ff..f1f11ff..f
+        ..ff..fffffff..f
+        ..ff..ffffff...f
+        ..ff..f1f1ff...f
+        .fff.f11f1ff..ff
+        .ff..f1ff1ff..ff
+        .ff..11ff111..ff
+        .ff..fffffff..ff
+        .ff..ffff1ff..ff
+        .ff..ff1f1ff..ff
+        .22..f11f11f..22
+        .2..f11fff1f..22
+        .2..f1ffff11...2
+        ..2.ffffffff...2
+        ....ff....ff....
+        ....ff....ff....
+        ....f......ff...
+        ...22......ff...
+        ...2.......ff...
+        ...2........22..
+        ...2........22..
+        `, SpriteKind.Finale_Ultima_Boss_Phase_2)
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        2 f f f . . . . . . . 2 . . . . 
+        2 2 f f f . . . . . 2 . 2 . . . 
+        f 2 2 2 f f f f f 2 . . . 2 . . 
+        f f f 2 2 f f f f f f . . . 2 . 
+        f f f f f 2 2 f f f f f f f f 2 
+        f f f f f 2 2 f f f f f f f f 2 
+        f f f 2 2 f f f f f f . . . 2 . 
+        f 2 2 2 f f f f f 2 . . . 2 . . 
+        2 2 f f f . . . . . 2 . 2 . . . 
+        2 f f f . . . . . . . 2 . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, you, 110, 0)
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . 2 . . . . . . . f f f 2 
+        . . . 2 . 2 . . . . . f f f 2 2 
+        . . 2 . . . 2 f f f f f 2 2 2 f 
+        . 2 . . . f f f f f f 2 2 f f f 
+        2 f f f f f f f f 2 2 f f f f f 
+        2 f f f f f f f f 2 2 f f f f f 
+        . 2 . . . f f f f f f 2 2 f f f 
+        . . 2 . . . 2 f f f f f 2 2 2 f 
+        . . . 2 . 2 . . . . . f f f 2 2 
+        . . . . 2 . . . . . . . f f f 2 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, you, -110, 0)
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . 2 2 . . . . . . . 
+        . . . . . . 2 f f 2 . . . . . . 
+        . . . . . 2 . f f . 2 . . . . . 
+        . . . . 2 . . f f . . 2 . . . . 
+        . . . 2 . . . f f . . . 2 . . . 
+        . . . . 2 . f f f f . 2 . . . . 
+        . . . . . 2 f f f f 2 . . . . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f 2 2 f f . . . . . 
+        . . . . . f f 2 2 f f . . . . . 
+        . . . . f f 2 f f 2 f f . . . . 
+        . . . f f 2 2 f f 2 2 f f . . . 
+        . . . f f 2 f f f f 2 f f . . . 
+        . . . f 2 2 f f f f 2 2 f . . . 
+        . . . 2 2 f f f f f f 2 2 . . . 
+        `, you, 0, 110)
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . 2 2 f f f f f f 2 2 . . . 
+        . . . f 2 2 f f f f 2 2 f . . . 
+        . . . f f 2 f f f f 2 f f . . . 
+        . . . f f 2 2 f f 2 2 f f . . . 
+        . . . . f f 2 f f 2 f f . . . . 
+        . . . . . f f 2 2 f f . . . . . 
+        . . . . . f f 2 2 f f . . . . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . 2 f f f f 2 . . . . . 
+        . . . . 2 . f f f f . 2 . . . . 
+        . . . 2 . . . f f . . . 2 . . . 
+        . . . . 2 . . f f . . 2 . . . . 
+        . . . . . 2 . f f . 2 . . . . . 
+        . . . . . . 2 f f 2 . . . . . . 
+        . . . . . . . 2 2 . . . . . . . 
+        `, you, 0, -110)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile23`, function (sprite, location) {
+    scene.setBackgroundImage(img`
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbfffffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbffbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbfffbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbffbfbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbfbbbbbffbbfbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbfbbbffbbffbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbffffbbbfbbbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbfbbbbfbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbffffffffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbffbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbffffbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfffffffffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfffbbbbbbbbbbbbbbbbbbbbbbbbfffbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfffbbbffbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbfbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbfbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbffbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbfbbbbbbbbbbbbbffbbbbbbbbbbbffbbbbbbbbfffbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbfbbbbbbbbbbfffbbbbbbbbbbbbbbbfffbbbfffbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbfbbbbffffffbbbbbbbbbbbbbbbbbbbbfffbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbfffffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbffffffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        `)
+    tiles.setCurrentTilemap(tilemap`level8`)
+    you = sprites.create(img`
+        ................
+        ................
+        ................
+        ................
+        ................
+        ................
+        .....ffffff.....
+        ....ffffffff....
+        ....f1ff11ff....
+        ....f1ff11ff....
+        ....ffffffff....
+        ...ffffffffff...
+        ...ffffffffff...
+        ...f11111111f...
+        ...f11111111f...
+        ...ff111111ff...
+        ...ff111111ff...
+        ...ff111111ff...
+        ....f111111f....
+        ....f111111f....
+        ....f111111f....
+        .....f1111ff....
+        .....ff11ffffff.
+        ...fffffffffffff
+        ..ff..1fffffffff
+        ..ff..11ff111.ff
+        ..ff..f1ff11f..f
+        ..ff..f1f11ff..f
+        ..ff..fffffff..f
+        ..ff..ffffff...f
+        ..ff..f1f1ff...f
+        .fff.f11f1ff..ff
+        .ff..f1ff1ff..ff
+        .ff..11ff111..ff
+        .ff..fffffff..ff
+        .ff..ffff1ff..ff
+        .ff..ff1f1ff..ff
+        .22..f11f11f..22
+        .2..f11fff1f..22
+        .2..f1ffff11...2
+        ..2.ffffffff...2
+        ....ff....ff....
+        ....ff....ff....
+        ....f......ff...
+        ...22......ff...
+        ...2.......ff...
+        ...2........22..
+        ...2........22..
+        `, SpriteKind.Finale_Ultima_Boss_Phase_1)
+    tiles.placeOnTile(you, tiles.getTileLocation(9, 3))
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(9, 3))
+})
+let you: Sprite = null
+let wrath: Sprite = null
 let ruby: Sprite = null
 let opal: Sprite = null
 let helioite: Sprite = null
@@ -879,70 +1578,14 @@ bleh = false
 isInvincible = false
 shards = true
 tiles.placeOnTile(obsidian, tiles.getTileLocation(127, 127))
-controller.moveSprite(obsidian, 80, 80)
+controller.moveSprite(obsidian, 150, 150)
 LostSoul = true
-info.setLife(50)
+info.setLife(500)
 game.onUpdateInterval(5000, function () {
-    ruby = sprites.create(img`
-        ........................
-        ........................
-        ........................
-        ........................
-        ..........ffff..........
-        ........ff1111ff........
-        .......fb111111bf.......
-        .......f11111111f.......
-        ......fd11111111df......
-        ......fd11111111df......
-        ......fddd1111dddf......
-        ......fbdbfddfbdbf......
-        ......fcdcf11fcdcf......
-        .......fb111111bf.......
-        ......fffcdb1bdffff.....
-        ....fc111cbfbfc111cf....
-        ....f1b1b1ffff1b1b1f....
-        ....fbfbffffffbfbfbf....
-        .........ffffff.........
-        ...........fff..........
-        ........................
-        ........................
-        ........................
-        ........................
-        `, SpriteKind.Enemy)
-    sprites.setDataNumber(ruby, "HP", 50)
-    tiles.placeOnRandomTile(ruby, assets.tile`myTile8`)
-    ruby.follow(obsidian, 70)
+	
 })
 game.onUpdateInterval(600000, function () {
-    diamond = sprites.create(img`
-        ...........ff...........
-        ..........faaf..........
-        .....f...faaaaf...f.....
-        ....faf...faaf...faf....
-        ....faaf..ffff..faaf....
-        .....faaffffffffaaf.....
-        ......ffffffffffff......
-        ......ffffffffffff......
-        ......ffffffffffff......
-        ....ffffffffffffffff....
-        ...faafffaaffaafffaaf...
-        ..faaffffaaffaaffffaaf..
-        ..faf.fffaaffaafff.faf..
-        ...f..ffffffffffff..f...
-        .....ffffaffffaffff.....
-        ....fffffaaffaafffff....
-        ....ffffffaaaaffffff....
-        ....fffffffaafffffff....
-        ........ffffffff........
-        .........ffffff.........
-        ........................
-        ........................
-        ........................
-        ........................
-        `, SpriteKind.miniboss)
-    sprites.setDataNumber(diamond, "HP", 500)
-    tiles.placeOnRandomTile(diamond, sprites.castle.tilePath5)
-    diamond.follow(obsidian, 90)
+	
 })
 forever(function () {
     if (info.score() >= 1000) {
@@ -1043,64 +1686,8 @@ forever(function () {
     }
 })
 game.onUpdateInterval(20000, function () {
-    opal = sprites.create(img`
-        ........................
-        ........................
-        ........................
-        ........................
-        ..........ffff..........
-        ........ff1111ff........
-        .......fb151151bf.......
-        .......f15155151f.......
-        ......fd11555511df......
-        ......fd15155151df......
-        ......fddd5115dddf......
-        ......fbdb5dd5bdbf......
-        ......fcdc5115cdcf......
-        .......fb111111bf.......
-        ......fffcdb1bdffff.....
-        ....fc111cbfbfc111cf....
-        ....f1b1b1ffff1b1b1f....
-        ....fbfbffffffbfbfbf....
-        .........ffffff.........
-        ...........fff..........
-        ........................
-        ........................
-        ........................
-        ........................
-        `, SpriteKind.t3enemy)
-    sprites.setDataNumber(opal, "HP", 100)
-    tiles.placeOnRandomTile(opal, assets.tile`myTile8`)
-    opal.follow(obsidian, 80)
+	
 })
 game.onUpdateInterval(10000, function () {
-    helioite = sprites.create(img`
-        ........................
-        ........................
-        ........................
-        ........................
-        ..........ffff..........
-        ........ff1111ff........
-        .......fb111111bf.......
-        .......f11133111f.......
-        ......fd11333311df......
-        ......fd11133111df......
-        ......fddd1111dddf......
-        ......fbdb3dd3bdbf......
-        ......fcdc3113cdcf......
-        .......fb111111bf.......
-        ......fffcdb1bdffff.....
-        ....fc111cbfbfc111cf....
-        ....f1b1b1ffff1b1b1f....
-        ....fbfbffffffbfbfbf....
-        .........ffffff.........
-        ...........fff..........
-        ........................
-        ........................
-        ........................
-        ........................
-        `, SpriteKind.t2enemy)
-    sprites.setDataNumber(helioite, "HP", 75)
-    tiles.placeOnRandomTile(helioite, assets.tile`myTile8`)
-    helioite.follow(obsidian, 80)
+	
 })
