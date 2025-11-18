@@ -12,14 +12,12 @@ info.onScore(600, function () {
     info.setLife(175)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.t3enemy, function (sprite25, otherSprite) {
-    sprites.changeDataNumberBy(otherSprite, "HP", -13)
     sprites.destroy(projectile)
+    sprites.changeDataNumberBy(otherSprite, "HP", -13)
     if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
         sprites.destroy(otherSprite)
         info.changeScoreBy(15)
-        if (info.life() < 50) {
-            info.changeLifeBy(3)
-        }
+        info.changeLifeBy(3)
     }
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -126,6 +124,29 @@ info.onScore(1300, function () {
     controller.moveSprite(obsidian, 100, 100)
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (LostSoul == true) {
+        timer.after(500, function () {
+            LostSoul = false
+            chargeblast = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . f f . . . . . f f f . . . . . 
+                f f f . f f f f f f f f f a a . 
+                f f f f f f f f f f f f f f a a 
+                a f f f f f f f f a f f f f f a 
+                a a a a a a a a a a a a a a a a 
+                a a a a a a a a a a a a a a a a 
+                a f f f f f f f f a f f f f f a 
+                f f f f f f f f f f f f f f a a 
+                f f f . f f f f f f f f f a a . 
+                . f f . . . . . f f f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, obsidian, 80, 0)
+        })
+    }
     if (info.score() >= 500) {
         if (LostSoul == true) {
             timer.after(500, function () {
@@ -150,9 +171,6 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                     `, obsidian, 80, 0)
             })
         }
-        timer.after(10000, function () {
-            LostSoul = true
-        })
     }
     if (info.score() >= 1500) {
         if (LostSoul == true) {
@@ -176,71 +194,11 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     `, obsidian, 80, 0)
-                pause(200)
-                chargeblast = sprites.createProjectileFromSprite(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . f f . . . . . f f f . . . . . 
-                    f f f . f f f f f f f f f a a . 
-                    f f f f f f f f f f f f f f a a 
-                    a f f f f f f f f a f f f f f a 
-                    a a a a a a a a a a a a a a a a 
-                    a a a a a a a a a a a a a a a a 
-                    a f f f f f f f f a f f f f f a 
-                    f f f f f f f f f f f f f f a a 
-                    f f f . f f f f f f f f f a a . 
-                    . f f . . . . . f f f . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, obsidian, 80, 0)
             })
         }
-        timer.after(10000, function () {
-            LostSoul = true
-        })
     }
     if (info.score() >= 3000) {
         if (LostSoul == true) {
-            obsidian.setImage(img`
-                . . . . . f f c c f f . . . . . 
-                . . . . f a c b b c a f . . . . 
-                . . . f a b f a a f b a f . . . 
-                . . f c b d c f f c d b c f . . 
-                . . f b d b b c c b b d b f . . 
-                . f a a f b c f f c b f a a f . 
-                . f a a f a f f f f a f a a f . 
-                . f c c f f a f f a f f c c f . 
-                . f c c f a f f f f a f c c f . 
-                f f c f 1 1 1 1 1 1 1 1 f c f f 
-                f c f a f 1 f f f f 1 f a f c f 
-                . f a f f f b f f b f f f a f . 
-                . 1 f a f b f b b f b f a f 1 . 
-                . . f f c c c a a c c c f f . . 
-                . . . f f b f b f b f f f . . . 
-                . . . . f f b f b f b f . . . . 
-                `)
-            timer.after(500, function () {
-                obsidian.setImage(img`
-                    . . . . . f f c c f f . . . . . 
-                    . . . . f a c b b c a f . . . . 
-                    . . . f a b b a a b b a f . . . 
-                    . . f c b d c b b c d b c f . . 
-                    . . f b d b b c c b b d b f . . 
-                    . f a a f b c f f c b f a a f . 
-                    . f a a f f f f f f f f a a f . 
-                    . f c c f f a f f a f f c c f . 
-                    . f c c f f a f f a f f c c f . 
-                    f f c c f 1 1 1 1 1 1 f c c f f 
-                    f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
-                    . f 1 1 f c b b b b c f 1 1 f . 
-                    . . f a c b b b b b b c a f . . 
-                    . . f f c c c a a c c c f f . . 
-                    . . . f f b f b f b f f f . . . 
-                    . . . . f f b f b f b f . . . . 
-                    `)
-            })
             LostSoul = false
             chargeblast = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -260,49 +218,11 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `, obsidian, 80, 0)
-            pause(200)
-            chargeblast = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . f f . . . . . f f f . . . . . 
-                f f f . f f f f f f f f f a a . 
-                f f f f f f f f f f f f f f a a 
-                a f f f f f f f f a f f f f f a 
-                a a a a a a a a a a a a a a a a 
-                a a a a a a a a a a a a a a a a 
-                a f f f f f f f f a f f f f f a 
-                f f f f f f f f f f f f f f a a 
-                f f f . f f f f f f f f f a a . 
-                . f f . . . . . f f f . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, 80, 0)
-            pause(200)
-            chargeblast = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . f f . . . . . f f f . . . . . 
-                f f f . f f f f f f f f f a a . 
-                f f f f f f f f f f f f f f a a 
-                a f f f f f f f f a f f f f f a 
-                a a a a a a a a a a a a a a a a 
-                a a a a a a a a a a a a a a a a 
-                a f f f f f f f f a f f f f f a 
-                f f f f f f f f f f f f f f a a 
-                f f f . f f f f f f f f f a a . 
-                . f f . . . . . f f f . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, 80, 0)
         }
-        timer.after(10000, function () {
-            LostSoul = true
-        })
     }
+    timer.after(10000, function () {
+        LostSoul = true
+    })
 })
 scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile22`, function (sprite, location) {
     sprites.destroy(sprite)
@@ -315,6 +235,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Finale_Ultima_Boss_Phase_2, func
             isInvincible = false
         })
     }
+})
+scene.onOverlapTile(SpriteKind.t3enemy, sprites.swamp.swampTile16, function (sprite, location) {
+    sprites.destroy(sprite)
 })
 info.onScore(1000, function () {
     info.setLife(225)
@@ -355,45 +278,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         timer.after(250, function () {
             shards = true
         })
-        timer.after(3000, function () {
-            sprites.destroy(projectile)
-        })
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, sprites.castle.tilePath2, function (sprite, location) {
-    if (info.score() >= 3) {
-        tiles.setCurrentTilemap(tilemap`level4`)
-        diamond = sprites.create(img`
-            ...........ff...........
-            ..........faaf..........
-            .....f...faaaaf...f.....
-            ....faf...faaf...faf....
-            ....faaf..ffff..faaf....
-            .....faaffffffffaaf.....
-            ......ffffffffffff......
-            ......ffffffffffff......
-            ......ffffffffffff......
-            ....ffffffffffffffff....
-            ...faafffaaffaafffaaf...
-            ..faaffffaaffaaffffaaf..
-            ..faf.fffaaffaafff.faf..
-            ...f..ffffffffffff..f...
-            .....ffffaffffaffff.....
-            ....fffffaaffaafffff....
-            ....ffffffaaaaffffff....
-            ....fffffffaafffffff....
-            ........ffffffff........
-            .........ffffff.........
-            ........................
-            ........................
-            ........................
-            ........................
-            `, SpriteKind.miniboss)
-        diamond.follow(obsidian, 80)
-        tiles.placeOnTile(diamond, tiles.getTileLocation(14, 9))
-        tiles.placeOnTile(obsidian, tiles.getTileLocation(7, 8))
-    } else {
-        obsidian.sayText("there's still enemies to defeat.", 500, false)
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.t2enemy, function (sprite27, otherSprite2) {
@@ -690,14 +574,12 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Finale_Ultima_Boss_Phase_2, 
     }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite25, otherSprite) {
-    sprites.changeDataNumberBy(otherSprite, "HP", -15)
     sprites.destroy(projectile)
+    sprites.changeDataNumberBy(otherSprite, "HP", -15)
     if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
         sprites.destroy(otherSprite)
         info.changeScoreBy(5)
-        if (info.life() < 50) {
-            info.changeLifeBy(1)
-        }
+        info.changeLifeBy(1)
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite27, otherSprite2) {
@@ -731,6 +613,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite27, otherS
             isInvincible = false
         })
     }
+})
+scene.onOverlapTile(SpriteKind.Enemy, sprites.swamp.swampTile16, function (sprite, location) {
+    sprites.destroy(sprite)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -791,6 +676,9 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+scene.onOverlapTile(SpriteKind.t2enemy, sprites.swamp.swampTile16, function (sprite, location) {
+    sprites.destroy(sprite)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.t3enemy, function (sprite27, otherSprite2) {
     if (isInvincible == false) {
         isInvincible = true
@@ -801,48 +689,17 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.t3enemy, function (sprite27, oth
     }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.t2enemy, function (sprite25, otherSprite) {
-    sprites.changeDataNumberBy(otherSprite, "HP", -14)
     sprites.destroy(projectile)
+    sprites.changeDataNumberBy(otherSprite, "HP", -14)
     if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
         sprites.destroy(otherSprite)
+        info.changeLifeBy(2)
         info.changeScoreBy(10)
-        if (info.life() < 50) {
-            info.changeLifeBy(2)
-        }
     }
 })
 info.onScore(2500, function () {
     info.setLife(400)
     controller.moveSprite(obsidian, 130, 130)
-})
-scene.onOverlapTile(SpriteKind.Player, sprites.builtin.forestTiles11, function (sprite, location) {
-    if (info.score() >= 10) {
-        tiles.setCurrentTilemap(tilemap`level1`)
-        diamond = sprites.create(img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 5 5 f f f . . . . 
-            . . . f f f 5 5 5 5 f f f . . . 
-            . . f f f 4 4 4 4 4 4 f f f . . 
-            . . f f 4 5 5 5 5 5 5 4 4 f . . 
-            . . f 4 5 f f f f f f 5 4 f . . 
-            . . f 5 f f f f f f f f 5 f . . 
-            . f f 5 f f 5 f f 5 f f 5 f f . 
-            . f f 5 f f 5 f f 5 f f 5 f f . 
-            . . f 5 f f f f f f f 5 5 f . . 
-            . f f f f f 5 4 4 4 5 5 f . . . 
-            . f 5 5 5 f 5 5 5 5 5 5 5 f . . 
-            . f 5 5 5 f 5 5 5 5 5 f 5 5 f . 
-            . . f 5 5 f 4 5 5 4 4 f 5 5 f . 
-            . . . f f f f f f f f f 5 5 f . 
-            . . . . . f f . . f f . f 5 f . 
-            . . . . . . . . . . . . . f . . 
-            `, SpriteKind.Boss)
-        diamond.follow(obsidian, 80)
-        tiles.placeOnTile(diamond, tiles.getTileLocation(14, 9))
-        tiles.placeOnTile(obsidian, tiles.getTileLocation(7, 8))
-    } else {
-        obsidian.sayText("i must kill the king.", 500, false)
-    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.miniboss, function (sprite27, otherSprite2) {
     if (isInvincible == false) {
@@ -945,90 +802,6 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     600,
     true
     )
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
-    tiles.setCurrentTilemap(tilemap`level3`)
-    diamond = sprites.create(img`
-        . . . . . . f f f f . . . . . . 
-        . . . . f f f 5 5 f f f . . . . 
-        . . . f f f 5 5 5 5 f f f . . . 
-        . . f f f 4 4 4 4 4 4 f f f . . 
-        . . f f 4 5 5 5 5 5 5 4 4 f . . 
-        . . f 4 5 f f f f f f 5 4 f . . 
-        . . f 5 f f f f f f f f 5 f . . 
-        . f f 5 f f 5 f f 5 f f 5 f f . 
-        . f f 5 f f 5 f f 5 f f 5 f f . 
-        . . f 5 f f f f f f f 5 5 f . . 
-        . f f f f f 5 4 4 4 5 5 f . . . 
-        . f 5 5 5 f 5 5 5 5 5 5 5 f . . 
-        . f 5 5 5 f 5 5 5 5 5 f 5 5 f . 
-        . . f 5 5 f 4 5 5 4 4 f 5 5 f . 
-        . . . f f f f f f f f f 5 5 f . 
-        . . . . . f f . . f f . f 5 f . 
-        . . . . . . . . . . . . . f . . 
-        `, SpriteKind.Boss)
-    helioite = sprites.create(img`
-        . . . . . . f f f f . . . . . . 
-        . . . . f f f e e f f f . . . . 
-        . . . f f f e e e e f f f . . . 
-        . . f f f 4 4 4 4 4 4 f f f . . 
-        . . f f 4 e e e e e e 4 4 f . . 
-        . . f 4 e f f f f f f e 4 f . . 
-        . . f e f f f f f f f f e f . . 
-        . f f e f f e f f e f f e f f . 
-        . f f e f f e f f e f f e f f . 
-        . . f e f f f f f f f e e f . . 
-        . f f f f f e 4 4 4 e e f . . . 
-        . f e e e f e e e e e e e f . . 
-        . f e e e f e e e e e f e e f . 
-        . . f e e f 4 e e 4 4 f e e f . 
-        . . . f f f f f f f f f e e f . 
-        . . . . . f f . . f f . f e f . 
-        . . . . . . . . . . . . . f . . 
-        `, SpriteKind.Boss)
-    opal = sprites.create(img`
-        . . . . . . f f f f . . . . . . 
-        . . . . f f f 1 1 f f f . . . . 
-        . . . f f f 1 1 1 1 f f f . . . 
-        . . f f f d d d d d d f f f . . 
-        . . f f d 1 1 1 1 1 1 d d f . . 
-        . . f d 1 f f f f f f 1 d f . . 
-        . . f 1 f f f f f f f f 1 f . . 
-        . f f 1 f f 1 f f 1 f f 1 f f . 
-        . f f 1 f f 1 f f 1 f f 1 f f . 
-        . . f 1 f f f f f f f 1 1 f . . 
-        . f f f f f 1 d d d 1 1 f . . . 
-        . f 1 1 1 f 1 1 1 1 1 1 1 f . . 
-        . f 1 1 1 f 1 1 1 1 1 f 1 1 f . 
-        . . f 1 1 f d 1 1 d d f 1 1 f . 
-        . . . f f f f f f f f f 1 1 f . 
-        . . . . . f f . . f f . f 1 f . 
-        . . . . . . . . . . . . . f . . 
-        `, SpriteKind.Boss)
-    ruby = sprites.create(img`
-        . . . . . . f f f f . . . . . . 
-        . . . . f f f d d f f f . . . . 
-        . . . f f f d d d d f f f . . . 
-        . . f f f 1 1 1 1 1 1 f f f . . 
-        . . f f 1 d d d d d d 1 1 f . . 
-        . . f 1 d f f f f f f d 1 f . . 
-        . . f d f f f f f f f f d f . . 
-        . f f d f f d f f d f f d f f . 
-        . f f d f f d f f d f f d f f . 
-        . . f d f f f f f f f d d f . . 
-        . f f f f f d 1 1 1 d d f . . . 
-        . f d d d f d d d d d d d f . . 
-        . f d d d f d d d d d f d d f . 
-        . . f d d f 1 d d 1 1 f d d f . 
-        . . . f f f f f f f f f d d f . 
-        . . . . . f f . . f f . f d f . 
-        . . . . . . . . . . . . . f . . 
-        `, SpriteKind.Boss)
-    diamond.follow(obsidian, 100)
-    helioite.follow(obsidian, 80)
-    opal.follow(obsidian, 110)
-    ruby.follow(obsidian, 90)
-    tiles.placeOnTile(obsidian, tiles.getTileLocation(7, 9))
 })
 sprites.onCreated(SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite) {
     sprites.setDataNumber(sprite, "HP", 1000)
@@ -1364,11 +1137,11 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile23`, function (sprite, 
     tiles.placeOnTile(you, tiles.getTileLocation(9, 3))
     tiles.placeOnTile(obsidian, tiles.getTileLocation(9, 3))
 })
-let you: Sprite = null
-let ruby: Sprite = null
-let opal: Sprite = null
 let helioite: Sprite = null
 let diamond: Sprite = null
+let ruby: Sprite = null
+let opal: Sprite = null
+let you: Sprite = null
 let chargeblast: Sprite = null
 let projectile: Sprite = null
 let LostSoul = false
