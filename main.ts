@@ -8,10 +8,6 @@ namespace SpriteKind {
     export const Finale_Ultima_Boss_Phase_1 = SpriteKind.create()
     export const Finale_Ultima_Boss_Phase_2 = SpriteKind.create()
 }
-info.onScore(3000, function () {
-    info.setLife(500)
-    controller.moveSprite(obsidian, 150, 150)
-})
 info.onScore(600, function () {
     info.setLife(175)
 })
@@ -119,6 +115,9 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+scene.onOverlapTile(SpriteKind.t2enemy, assets.tile`myTile22`, function (sprite, location) {
+    sprites.destroy(sprite)
+})
 sprites.onCreated(SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite) {
     sprites.setDataNumber(sprite, "HP", 2000)
 })
@@ -129,63 +128,27 @@ info.onScore(1300, function () {
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (info.score() >= 500) {
         if (LostSoul == true) {
-            obsidian.setImage(img`
-                . . . . . f f c c f f . . . . . 
-                . . . . f a c b b c a f . . . . 
-                . . . f a b f a a f b a f . . . 
-                . . f c b d c f f c d b c f . . 
-                . . f b d b b c c b b d b f . . 
-                . f a a f b c f f c b f a a f . 
-                . f a a f a f f f f a f a a f . 
-                . f c c f f a f f a f f c c f . 
-                . f c c f a f f f f a f c c f . 
-                f f c f 1 1 1 1 1 1 1 1 f c f f 
-                f c f a f 1 f f f f 1 f a f c f 
-                . f a f f f b f f b f f f a f . 
-                . 1 f a f b f b b f b f a f 1 . 
-                . . f f c c c a a c c c f f . . 
-                . . . f f b f b f b f f f . . . 
-                . . . . f f b f b f b f . . . . 
-                `)
             timer.after(500, function () {
-                obsidian.setImage(img`
-                    . . . . . f f c c f f . . . . . 
-                    . . . . f a c b b c a f . . . . 
-                    . . . f a b b a a b b a f . . . 
-                    . . f c b d c b b c d b c f . . 
-                    . . f b d b b c c b b d b f . . 
-                    . f a a f b c f f c b f a a f . 
-                    . f a a f f f f f f f f a a f . 
-                    . f c c f f a f f a f f c c f . 
-                    . f c c f f a f f a f f c c f . 
-                    f f c c f 1 1 1 1 1 1 f c c f f 
-                    f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
-                    . f 1 1 f c b b b b c f 1 1 f . 
-                    . . f a c b b b b b b c a f . . 
-                    . . f f c c c a a c c c f f . . 
-                    . . . f f b f b f b f f f . . . 
-                    . . . . f f b f b f b f . . . . 
-                    `)
+                LostSoul = false
+                chargeblast = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . f f . . . . . f f f . . . . . 
+                    f f f . f f f f f f f f f a a . 
+                    f f f f f f f f f f f f f f a a 
+                    a f f f f f f f f a f f f f f a 
+                    a a a a a a a a a a a a a a a a 
+                    a a a a a a a a a a a a a a a a 
+                    a f f f f f f f f a f f f f f a 
+                    f f f f f f f f f f f f f f a a 
+                    f f f . f f f f f f f f f a a . 
+                    . f f . . . . . f f f . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 80, 0)
             })
-            LostSoul = false
-            chargeblast = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . f f . . . . . f f f . . . . . 
-                f f f . f f f f f f f f f a a . 
-                f f f f f f f f f f f f f f a a 
-                a f f f f f f f f a f f f f f a 
-                a a a a a a a a a a a a a a a a 
-                a a a a a a a a a a a a a a a a 
-                a f f f f f f f f a f f f f f a 
-                f f f f f f f f f f f f f f a a 
-                f f f . f f f f f f f f f a a . 
-                . f f . . . . . f f f . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, 80, 0)
         }
         timer.after(10000, function () {
             LostSoul = true
@@ -193,82 +156,46 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     if (info.score() >= 1500) {
         if (LostSoul == true) {
-            obsidian.setImage(img`
-                . . . . . f f c c f f . . . . . 
-                . . . . f a c b b c a f . . . . 
-                . . . f a b f a a f b a f . . . 
-                . . f c b d c f f c d b c f . . 
-                . . f b d b b c c b b d b f . . 
-                . f a a f b c f f c b f a a f . 
-                . f a a f a f f f f a f a a f . 
-                . f c c f f a f f a f f c c f . 
-                . f c c f a f f f f a f c c f . 
-                f f c f 1 1 1 1 1 1 1 1 f c f f 
-                f c f a f 1 f f f f 1 f a f c f 
-                . f a f f f b f f b f f f a f . 
-                . 1 f a f b f b b f b f a f 1 . 
-                . . f f c c c a a c c c f f . . 
-                . . . f f b f b f b f f f . . . 
-                . . . . f f b f b f b f . . . . 
-                `)
             timer.after(500, function () {
-                obsidian.setImage(img`
-                    . . . . . f f c c f f . . . . . 
-                    . . . . f a c b b c a f . . . . 
-                    . . . f a b b a a b b a f . . . 
-                    . . f c b d c b b c d b c f . . 
-                    . . f b d b b c c b b d b f . . 
-                    . f a a f b c f f c b f a a f . 
-                    . f a a f f f f f f f f a a f . 
-                    . f c c f f a f f a f f c c f . 
-                    . f c c f f a f f a f f c c f . 
-                    f f c c f 1 1 1 1 1 1 f c c f f 
-                    f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
-                    . f 1 1 f c b b b b c f 1 1 f . 
-                    . . f a c b b b b b b c a f . . 
-                    . . f f c c c a a c c c f f . . 
-                    . . . f f b f b f b f f f . . . 
-                    . . . . f f b f b f b f . . . . 
-                    `)
+                LostSoul = false
+                chargeblast = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . f f . . . . . f f f . . . . . 
+                    f f f . f f f f f f f f f a a . 
+                    f f f f f f f f f f f f f f a a 
+                    a f f f f f f f f a f f f f f a 
+                    a a a a a a a a a a a a a a a a 
+                    a a a a a a a a a a a a a a a a 
+                    a f f f f f f f f a f f f f f a 
+                    f f f f f f f f f f f f f f a a 
+                    f f f . f f f f f f f f f a a . 
+                    . f f . . . . . f f f . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 80, 0)
+                pause(200)
+                chargeblast = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . f f . . . . . f f f . . . . . 
+                    f f f . f f f f f f f f f a a . 
+                    f f f f f f f f f f f f f f a a 
+                    a f f f f f f f f a f f f f f a 
+                    a a a a a a a a a a a a a a a a 
+                    a a a a a a a a a a a a a a a a 
+                    a f f f f f f f f a f f f f f a 
+                    f f f f f f f f f f f f f f a a 
+                    f f f . f f f f f f f f f a a . 
+                    . f f . . . . . f f f . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 80, 0)
             })
-            LostSoul = false
-            chargeblast = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . f f . . . . . f f f . . . . . 
-                f f f . f f f f f f f f f a a . 
-                f f f f f f f f f f f f f f a a 
-                a f f f f f f f f a f f f f f a 
-                a a a a a a a a a a a a a a a a 
-                a a a a a a a a a a a a a a a a 
-                a f f f f f f f f a f f f f f a 
-                f f f f f f f f f f f f f f a a 
-                f f f . f f f f f f f f f a a . 
-                . f f . . . . . f f f . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, 80, 0)
-            pause(200)
-            chargeblast = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . f f . . . . . f f f . . . . . 
-                f f f . f f f f f f f f f a a . 
-                f f f f f f f f f f f f f f a a 
-                a f f f f f f f f a f f f f f a 
-                a a a a a a a a a a a a a a a a 
-                a a a a a a a a a a a a a a a a 
-                a f f f f f f f f a f f f f f a 
-                f f f f f f f f f f f f f f a a 
-                f f f . f f f f f f f f f a a . 
-                . f f . . . . . f f f . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, 80, 0)
         }
         timer.after(10000, function () {
             LostSoul = true
@@ -377,6 +304,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         })
     }
 })
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile22`, function (sprite, location) {
+    sprites.destroy(sprite)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite27, otherSprite2) {
     if (isInvincible == false) {
         isInvincible = true
@@ -426,7 +356,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             shards = true
         })
         timer.after(3000, function () {
-        	
+            sprites.destroy(projectile)
         })
     }
 })
@@ -548,6 +478,10 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     600,
     true
     )
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level9`)
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(80, 99))
 })
 sprites.onCreated(SpriteKind.miniboss, function (sprite) {
     sprites.setDataNumber(sprite, "HP", 500)
@@ -745,27 +679,8 @@ controller.combos.attachCombo("a+b", function () {
     }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite25, otherSprite) {
-    if (sprite25 == sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . f f f f . . . . . . . . . . 
-        . f b a a b f . . . . . . . . . 
-        f b b a b a b f . . . . . . . . 
-        a a a b a a a a f . . . . . . . 
-        f b b a b a b f . . . . . . . . 
-        . f b a a b f . . . . . . . . . 
-        . . f f f f . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Projectile)) {
-        sprites.destroy(sprite25)
-        sprites.changeDataNumberBy(otherSprite, "HP", -10)
-    }
+    sprites.destroy(sprite25)
+    sprites.changeDataNumberBy(otherSprite, "HP", -10)
     if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
         sprites.destroy(otherSprite)
         info.changeScoreBy(1000)
@@ -798,27 +713,8 @@ info.onCountdownEnd(function () {
     bleh = false
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite25, otherSprite) {
-    if (sprite25 == sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . f f f f . . . . . . . . . . 
-        . f b a a b f . . . . . . . . . 
-        f b b a b a b f . . . . . . . . 
-        a a a b a a a a f . . . . . . . 
-        f b b a b a b f . . . . . . . . 
-        . f b a a b f . . . . . . . . . 
-        . . f f f f . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Projectile)) {
-        sprites.destroy(sprite25)
-        sprites.changeDataNumberBy(otherSprite, "HP", -10)
-    }
+    sprites.destroy(sprite25)
+    sprites.changeDataNumberBy(otherSprite, "HP", -10)
     if (sprites.readDataNumber(otherSprite, "HP") <= 0) {
         sprites.destroy(otherSprite)
         info.changeScoreBy(1000)
@@ -1136,85 +1032,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, l
 })
 sprites.onCreated(SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite) {
     sprites.setDataNumber(sprite, "HP", 1000)
-    for (let index = 0; index < 3; index++) {
-        timer.after(10000, function () {
-            wrath = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                2 f f f . . . . . . . 2 . . . . 
-                2 2 f f f . . . . . 2 . 2 . . . 
-                f 2 2 2 f f f f f 2 . . . 2 . . 
-                f f f 2 2 f f f f f f . . . 2 . 
-                f f f f f 2 2 f f f f f f f f 2 
-                f f f f f 2 2 f f f f f f f f 2 
-                f f f 2 2 f f f f f f . . . 2 . 
-                f 2 2 2 f f f f f 2 . . . 2 . . 
-                2 2 f f f . . . . . 2 . 2 . . . 
-                2 f f f . . . . . . . 2 . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, you, 50, 0)
-            pause(500)
-            wrath = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . 2 . . . . . . . f f f 2 
-                . . . 2 . 2 . . . . . f f f 2 2 
-                . . 2 . . . 2 f f f f f 2 2 2 f 
-                . 2 . . . f f f f f f 2 2 f f f 
-                2 f f f f f f f f 2 2 f f f f f 
-                2 f f f f f f f f 2 2 f f f f f 
-                . 2 . . . f f f f f f 2 2 f f f 
-                . . 2 . . . 2 f f f f f 2 2 2 f 
-                . . . 2 . 2 . . . . . f f f 2 2 
-                . . . . 2 . . . . . . . f f f 2 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, you, -50, 0)
-            pause(500)
-            wrath = sprites.createProjectileFromSprite(img`
-                . . . 2 2 f f f f f f 2 2 . . . 
-                . . . f 2 2 f f f f 2 2 f . . . 
-                . . . f f 2 f f f f 2 f f . . . 
-                . . . f f 2 2 f f 2 2 f f . . . 
-                . . . . f f 2 f f 2 f f . . . . 
-                . . . . . f f 2 2 f f . . . . . 
-                . . . . . f f 2 2 f f . . . . . 
-                . . . . . f f f f f f . . . . . 
-                . . . . . f f f f f f . . . . . 
-                . . . . . 2 f f f f 2 . . . . . 
-                . . . . 2 . f f f f . 2 . . . . 
-                . . . 2 . . . f f . . . 2 . . . 
-                . . . . 2 . . f f . . 2 . . . . 
-                . . . . . 2 . f f . 2 . . . . . 
-                . . . . . . 2 f f 2 . . . . . . 
-                . . . . . . . 2 2 . . . . . . . 
-                `, you, 0, 50)
-            pause(500)
-            wrath = sprites.createProjectileFromSprite(img`
-                . . . . . . . 2 2 . . . . . . . 
-                . . . . . . 2 f f 2 . . . . . . 
-                . . . . . 2 . f f . 2 . . . . . 
-                . . . . 2 . . f f . . 2 . . . . 
-                . . . 2 . . . f f . . . 2 . . . 
-                . . . . 2 . f f f f . 2 . . . . 
-                . . . . . 2 f f f f 2 . . . . . 
-                . . . . . f f f f f f . . . . . 
-                . . . . . f f f f f f . . . . . 
-                . . . . . f f 2 2 f f . . . . . 
-                . . . . . f f 2 2 f f . . . . . 
-                . . . . f f 2 f f 2 f f . . . . 
-                . . . f f 2 2 f f 2 2 f f . . . 
-                . . . f f 2 f f f f 2 f f . . . 
-                . . . f 2 2 f f f f 2 2 f . . . 
-                . . . 2 2 f f f f f f 2 2 . . . 
-                `, you, 0, -50)
-        })
-    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite27, otherSprite2) {
     if (isInvincible == false) {
@@ -1224,6 +1041,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Finale_Ultima_Boss_Phase_1, func
             isInvincible = false
         })
     }
+})
+info.onScore(3001, function () {
+    info.setLife(500)
+    controller.moveSprite(obsidian, 150, 150)
 })
 info.onScore(200, function () {
     info.setLife(100)
@@ -1362,6 +1183,9 @@ sprites.onDestroyed(SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite) {
         . . . . . . 2 f f 2 . . . . . . 
         . . . . . . . 2 2 . . . . . . . 
         `, you, 0, -110)
+})
+scene.onOverlapTile(SpriteKind.t3enemy, assets.tile`myTile22`, function (sprite, location) {
+    sprites.destroy(sprite)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile23`, function (sprite, location) {
     scene.setBackgroundImage(img`
@@ -1541,7 +1365,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile23`, function (sprite, 
     tiles.placeOnTile(obsidian, tiles.getTileLocation(9, 3))
 })
 let you: Sprite = null
-let wrath: Sprite = null
 let ruby: Sprite = null
 let opal: Sprite = null
 let helioite: Sprite = null
@@ -1555,6 +1378,128 @@ let bleh = false
 let obsidian: Sprite = null
 scene.cameraFollowSprite(obsidian)
 tiles.setCurrentTilemap(tilemap`level6`)
+scene.setBackgroundImage(img`
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    `)
 obsidian = sprites.create(img`
     . . . . . f f c c f f . . . . . 
     . . . . f a c b b c a f . . . . 
@@ -1578,14 +1523,102 @@ bleh = false
 isInvincible = false
 shards = true
 tiles.placeOnTile(obsidian, tiles.getTileLocation(127, 127))
-controller.moveSprite(obsidian, 150, 150)
+controller.moveSprite(obsidian, 85, 85)
 LostSoul = true
-info.setLife(500)
-game.onUpdateInterval(5000, function () {
-	
+info.setLife(50)
+info.setScore(3000)
+game.onUpdateInterval(15000, function () {
+    opal = sprites.create(img`
+        ........................
+        ........................
+        ........................
+        ........................
+        ..........ffff..........
+        ........ff1111ff........
+        .......fb111111bf.......
+        .......f11133111f.......
+        ......fd11333311df......
+        ......fd11133111df......
+        ......fdd311113ddf......
+        ......fbdb3dd3bdbf......
+        ......fcdc3113cdcf......
+        .......fb311113bf.......
+        ......fffcdb1bdffff.....
+        ....fc111cbfbfc111cf....
+        ....f1b1b1ffff1b1b1f....
+        ....fbfbffffffbfbfbf....
+        .........ffffff.........
+        ...........fff..........
+        ........................
+        ........................
+        ........................
+        ........................
+        `, SpriteKind.t2enemy)
+    sprites.setDataNumber(opal, "HP", 75)
+    tiles.placeOnRandomTile(opal, assets.tile`myTile8`)
+    opal.follow(obsidian, 80)
+})
+game.onUpdateInterval(15000, function () {
+    ruby = sprites.create(img`
+        ........................
+        ........................
+        ........................
+        ........................
+        ..........ffff..........
+        ........ff1111ff........
+        .......fb111111bf.......
+        .......f11111111f.......
+        ......fd11111111df......
+        ......fd11111111df......
+        ......fddd1111dddf......
+        ......fbdbfddfbdbf......
+        ......fcdcf11fcdcf......
+        .......fb111111bf.......
+        ......fffcdb1bdffff.....
+        ....fc111cbfbfc111cf....
+        ....f1b1b1ffff1b1b1f....
+        ....fbfbffffffbfbfbf....
+        .........ffffff.........
+        ...........fff..........
+        ........................
+        ........................
+        ........................
+        ........................
+        `, SpriteKind.Enemy)
+    sprites.setDataNumber(ruby, "HP", 50)
+    tiles.placeOnRandomTile(ruby, assets.tile`myTile8`)
+    ruby.follow(obsidian, 70)
 })
 game.onUpdateInterval(600000, function () {
-	
+    diamond = sprites.create(img`
+        ...........ff...........
+        ..........faaf..........
+        .....f...faaaaf...f.....
+        ....faf...faaf...faf....
+        ....faaf..ffff..faaf....
+        .....faaffffffffaaf.....
+        ......ffffffffffff......
+        ......ffffffffffff......
+        ......ffffffffffff......
+        ....ffffffffffffffff....
+        ...faafffaaffaafffaaf...
+        ..faaffffaaffaaffffaaf..
+        ..faf.fffaaffaafff.faf..
+        ...f..ffffffffffff..f...
+        .....ffffaffffaffff.....
+        ....fffffaaffaafffff....
+        ....ffffffaaaaffffff....
+        ....fffffffaafffffff....
+        ........ffffffff........
+        .........ffffff.........
+        ........................
+        ........................
+        ........................
+        ........................
+        `, SpriteKind.miniboss)
+    sprites.setDataNumber(diamond, "HP", 500)
+    tiles.placeOnRandomTile(diamond, assets.tile`myTile28`)
+    diamond.follow(obsidian, 90)
 })
 forever(function () {
     if (info.score() >= 1000) {
@@ -1686,8 +1719,33 @@ forever(function () {
     }
 })
 game.onUpdateInterval(20000, function () {
-	
-})
-game.onUpdateInterval(10000, function () {
-	
+    helioite = sprites.create(img`
+        ........................
+        ........................
+        ........................
+        ........................
+        ..........ffff..........
+        ........ff1111ff........
+        .......fb151151bf.......
+        .......f15155151f.......
+        ......fd11555511df......
+        ......fd15155151df......
+        ......fddd5115dddf......
+        ......fbdb5dd5bdbf......
+        ......fcdc5115cdcf......
+        .......fb111111bf.......
+        ......fffcdb1bdffff.....
+        ....fc111cbfbfc111cf....
+        ....f1b1b1ffff1b1b1f....
+        ....fbfbffffffbfbfbf....
+        .........ffffff.........
+        ...........fff..........
+        ........................
+        ........................
+        ........................
+        ........................
+        `, SpriteKind.t3enemy)
+    sprites.setDataNumber(helioite, "HP", 100)
+    tiles.placeOnRandomTile(helioite, assets.tile`myTile8`)
+    helioite.follow(obsidian, 80)
 })
