@@ -126,7 +126,6 @@ info.onScore(1300, function () {
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (LostSoul == true) {
         timer.after(500, function () {
-            LostSoul = false
             chargeblast = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
@@ -146,11 +145,59 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 `, obsidian, 80, 0)
         })
-    }
-    if (info.score() >= 500) {
-        if (LostSoul == true) {
-            timer.after(500, function () {
-                LostSoul = false
+        pause(100)
+        if (info.score() >= 500) {
+            if (LostSoul == true) {
+                timer.after(500, function () {
+                    chargeblast = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . f f . . . . . f f f . . . . . 
+                        f f f . f f f f f f f f f a a . 
+                        f f f f f f f f f f f f f f a a 
+                        a f f f f f f f f a f f f f f a 
+                        a a a a a a a a a a a a a a a a 
+                        a a a a a a a a a a a a a a a a 
+                        a f f f f f f f f a f f f f f a 
+                        f f f f f f f f f f f f f f a a 
+                        f f f . f f f f f f f f f a a . 
+                        . f f . . . . . f f f . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, obsidian, 80, 0)
+                })
+                pause(100)
+            }
+        }
+        if (info.score() >= 1500) {
+            if (LostSoul == true) {
+                timer.after(500, function () {
+                    chargeblast = sprites.createProjectileFromSprite(img`
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . f f . . . . . f f f . . . . . 
+                        f f f . f f f f f f f f f a a . 
+                        f f f f f f f f f f f f f f a a 
+                        a f f f f f f f f a f f f f f a 
+                        a a a a a a a a a a a a a a a a 
+                        a a a a a a a a a a a a a a a a 
+                        a f f f f f f f f a f f f f f a 
+                        f f f f f f f f f f f f f f a a 
+                        f f f . f f f f f f f f f a a . 
+                        . f f . . . . . f f f . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        `, obsidian, 80, 0)
+                })
+                pause(100)
+            }
+        }
+        if (info.score() >= 3000) {
+            if (LostSoul == true) {
                 chargeblast = sprites.createProjectileFromSprite(img`
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
@@ -169,60 +216,14 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     `, obsidian, 80, 0)
-            })
+                pause(100)
+            }
         }
+        LostSoul = false
+        timer.after(10000, function () {
+            LostSoul = true
+        })
     }
-    if (info.score() >= 1500) {
-        if (LostSoul == true) {
-            timer.after(500, function () {
-                LostSoul = false
-                chargeblast = sprites.createProjectileFromSprite(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . f f . . . . . f f f . . . . . 
-                    f f f . f f f f f f f f f a a . 
-                    f f f f f f f f f f f f f f a a 
-                    a f f f f f f f f a f f f f f a 
-                    a a a a a a a a a a a a a a a a 
-                    a a a a a a a a a a a a a a a a 
-                    a f f f f f f f f a f f f f f a 
-                    f f f f f f f f f f f f f f a a 
-                    f f f . f f f f f f f f f a a . 
-                    . f f . . . . . f f f . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, obsidian, 80, 0)
-            })
-        }
-    }
-    if (info.score() >= 3000) {
-        if (LostSoul == true) {
-            LostSoul = false
-            chargeblast = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . f f . . . . . f f f . . . . . 
-                f f f . f f f f f f f f f a a . 
-                f f f f f f f f f f f f f f a a 
-                a f f f f f f f f a f f f f f a 
-                a a a a a a a a a a a a a a a a 
-                a a a a a a a a a a a a a a a a 
-                a f f f f f f f f a f f f f f a 
-                f f f f f f f f f f f f f f a a 
-                f f f . f f f f f f f f f a a . 
-                . f f . . . . . f f f . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, 80, 0)
-        }
-    }
-    timer.after(10000, function () {
-        LostSoul = true
-    })
 })
 scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile22`, function (sprite, location) {
     sprites.destroy(sprite)
