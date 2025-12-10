@@ -9,6 +9,17 @@ class SpriteKind:
     Finale_Ultima_Boss_Phase_1 = SpriteKind.create()
     Finale_Ultima_Boss_Phase_2 = SpriteKind.create()
 
+def on_overlap_tile(sprite10, location7):
+    tiles.set_current_tilemap(tilemap("""
+        level6
+        """))
+    tiles.place_on_tile(obsidian, tiles.get_tile_location(1, 128))
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile43
+        """),
+    on_overlap_tile)
+
 def on_on_score():
     info.set_life(175)
 info.on_score(600, on_on_score)
@@ -118,22 +129,37 @@ def on_up_pressed():
         True)
 controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
-def on_overlap_tile(sprite, location):
+def on_overlap_tile2(sprite, location):
     sprites.destroy(sprite)
 scene.on_overlap_tile(SpriteKind.t2enemy,
     assets.tile("""
         myTile22
         """),
-    on_overlap_tile)
-
-def on_on_created(sprite2):
-    sprites.set_data_number(sprite2, "HP", 2000)
-sprites.on_created(SpriteKind.Finale_Ultima_Boss_Phase_2, on_on_created)
+    on_overlap_tile2)
 
 def on_on_score2():
     info.set_life(275)
     controller.move_sprite(obsidian, 100, 100)
 info.on_score(1300, on_on_score2)
+
+def on_on_created(sprite5):
+    sprites.set_data_number(sprite5, "HP", 1000)
+sprites.on_created(SpriteKind.Boss, on_on_created)
+
+def on_overlap_tile3(sprite9, location6):
+    sprites.destroy(sprite9)
+scene.on_overlap_tile(SpriteKind.t2enemy,
+    sprites.swamp.swamp_tile16,
+    on_overlap_tile3)
+
+def on_on_overlap2(sprite255, otherSprite6):
+    sprites.destroy(projectile)
+    sprites.change_data_number_by(otherSprite6, "HP", -15)
+    if sprites.read_data_number(otherSprite6, "HP") <= 0:
+        sprites.destroy(otherSprite6)
+        info.change_score_by(5)
+        info.change_life_by(1)
+sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_on_overlap2)
 
 def on_b_pressed():
     global LostSoul
@@ -203,15 +229,7 @@ def on_b_pressed():
         
 controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
 
-def on_overlap_tile2(sprite3, location2):
-    sprites.destroy(sprite3)
-scene.on_overlap_tile(SpriteKind.enemy,
-    assets.tile("""
-        myTile22
-        """),
-    on_overlap_tile2)
-
-def on_on_overlap2(sprite27, otherSprite2):
+def on_on_overlap3(sprite27, otherSprite2):
     global isInvincible
     if isInvincible == False:
         isInvincible = True
@@ -224,30 +242,35 @@ def on_on_overlap2(sprite27, otherSprite2):
         
 sprites.on_overlap(SpriteKind.player,
     SpriteKind.Finale_Ultima_Boss_Phase_2,
-    on_on_overlap2)
+    on_on_overlap3)
 
-def on_overlap_tile3(sprite4, location3):
-    sprites.destroy(sprite4)
-scene.on_overlap_tile(SpriteKind.t3enemy,
-    sprites.swamp.swamp_tile16,
-    on_overlap_tile3)
+def on_on_overlap4(sprite254, otherSprite5):
+    sprites.destroy(sprite254)
+    sprites.change_data_number_by(otherSprite5, "HP", -10)
+    if sprites.read_data_number(otherSprite5, "HP") <= 0:
+        sprites.destroy(otherSprite5)
+        info.change_score_by(1000)
+        if info.life() < 50:
+            info.change_life_by(25)
+sprites.on_overlap(SpriteKind.projectile,
+    SpriteKind.Finale_Ultima_Boss_Phase_2,
+    on_on_overlap4)
 
 def on_on_score3():
     info.set_life(225)
     controller.move_sprite(obsidian, 95, 95)
 info.on_score(1000, on_on_score3)
 
-def on_on_created2(sprite5):
-    sprites.set_data_number(sprite5, "HP", 1000)
-sprites.on_created(SpriteKind.Boss, on_on_created2)
-
-def on_on_overlap3(sprite252, otherSprite3):
-    sprites.change_data_number_by(otherSprite3, "HP", -10)
-    sprites.destroy(projectile)
-    if sprites.read_data_number(otherSprite3, "HP") <= 0:
-        sprites.destroy(otherSprite3)
-        info.change_score_by(200)
-sprites.on_overlap(SpriteKind.projectile, SpriteKind.Boss, on_on_overlap3)
+def on_overlap_tile4(sprite15, location10):
+    tiles.set_current_tilemap(tilemap("""
+        level6
+        """))
+    tiles.place_on_tile(obsidian, tiles.get_tile_location(123, 253))
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile11
+        """),
+    on_overlap_tile4)
 
 def on_a_pressed():
     global projectile, shards
@@ -282,33 +305,30 @@ def on_a_pressed():
         
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
 
-def on_on_overlap4(sprite272, otherSprite22):
-    global isInvincible
-    if isInvincible == False:
-        isInvincible = True
-        info.change_life_by(-5)
-        
-        def on_after6():
-            global isInvincible
-            isInvincible = False
-        timer.after(1000, on_after6)
-        
-sprites.on_overlap(SpriteKind.player, SpriteKind.t2enemy, on_on_overlap4)
+def on_on_overlap5(sprite256, otherSprite7):
+    sprites.destroy(sprite256)
+    sprites.change_data_number_by(otherSprite7, "HP", -10)
+    if sprites.read_data_number(otherSprite7, "HP") <= 0:
+        sprites.destroy(otherSprite7)
+        info.change_score_by(1000)
+        if info.life() < 50:
+            info.change_life_by(25)
+sprites.on_overlap(SpriteKind.projectile,
+    SpriteKind.Finale_Ultima_Boss_Phase_1,
+    on_on_overlap5)
+
+def on_overlap_tile5(sprite3, location2):
+    sprites.destroy(sprite3)
+scene.on_overlap_tile(SpriteKind.enemy,
+    assets.tile("""
+        myTile22
+        """),
+    on_overlap_tile5)
 
 def on_on_score4():
     info.set_life(325)
     controller.move_sprite(obsidian, 110, 110)
 info.on_score(1700, on_on_score4)
-
-def on_on_overlap5(sprite253, otherSprite4):
-    sprites.change_data_number_by(otherSprite4, "HP", -12)
-    sprites.destroy(projectile)
-    if sprites.read_data_number(otherSprite4, "HP") <= 0:
-        sprites.destroy(otherSprite4)
-        info.change_score_by(50)
-        if info.life() < 50:
-            info.change_life_by(25)
-sprites.on_overlap(SpriteKind.projectile, SpriteKind.miniboss, on_on_overlap5)
 
 def on_left_pressed():
     animation.run_image_animation(obsidian,
@@ -370,21 +390,6 @@ def on_left_pressed():
         True)
 controller.left.on_event(ControllerButtonEvent.PRESSED, on_left_pressed)
 
-def on_overlap_tile4(sprite6, location4):
-    tiles.set_current_tilemap(tilemap("""
-        level9
-        """))
-    tiles.place_on_tile(obsidian, tiles.get_tile_location(81, 97))
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile9
-        """),
-    on_overlap_tile4)
-
-def on_on_created3(sprite7):
-    sprites.set_data_number(sprite7, "HP", 500)
-sprites.on_created(SpriteKind.miniboss, on_on_created3)
-
 def on_combos_attach_combo():
     if bleh == False:
         animation.run_image_animation(obsidian,
@@ -427,7 +432,7 @@ def on_combos_attach_combo():
             1000,
             False)
         
-        def on_after7():
+        def on_after6():
             global projectile, bleh
             projectile = sprites.create_projectile_from_sprite(img("""
                     . . . . . . . . . . . . . . . .
@@ -599,79 +604,74 @@ def on_combos_attach_combo():
                 -110)
             bleh = True
             info.start_countdown(60)
-        timer.after(1, on_after7)
+        timer.after(1, on_after6)
         
 controller.combos.attach_combo("a+b", on_combos_attach_combo)
 
-def on_on_overlap6(sprite254, otherSprite5):
-    sprites.destroy(sprite254)
-    sprites.change_data_number_by(otherSprite5, "HP", -10)
-    if sprites.read_data_number(otherSprite5, "HP") <= 0:
-        sprites.destroy(otherSprite5)
-        info.change_score_by(1000)
-        if info.life() < 50:
-            info.change_life_by(25)
-sprites.on_overlap(SpriteKind.projectile,
-    SpriteKind.Finale_Ultima_Boss_Phase_2,
-    on_on_overlap6)
+def on_overlap_tile6(sprite6, location4):
+    tiles.set_current_tilemap(tilemap("""
+        level9
+        """))
+    tiles.place_on_tile(obsidian, tiles.get_tile_location(81, 97))
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile9
+        """),
+    on_overlap_tile6)
 
-def on_on_overlap7(sprite255, otherSprite6):
-    sprites.destroy(projectile)
-    sprites.change_data_number_by(otherSprite6, "HP", -15)
-    if sprites.read_data_number(otherSprite6, "HP") <= 0:
-        sprites.destroy(otherSprite6)
-        info.change_score_by(5)
-        info.change_life_by(1)
-sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_on_overlap7)
-
-def on_on_overlap8(sprite273, otherSprite23):
+def on_on_overlap6(sprite272, otherSprite22):
     global isInvincible
     if isInvincible == False:
         isInvincible = True
         info.change_life_by(-5)
         
+        def on_after7():
+            global isInvincible
+            isInvincible = False
+        timer.after(1000, on_after7)
+        
+sprites.on_overlap(SpriteKind.player, SpriteKind.t2enemy, on_on_overlap6)
+
+def on_on_overlap7(sprite274, otherSprite24):
+    global isInvincible
+    if isInvincible == False:
+        isInvincible = True
+        info.change_life_by(-25)
+        
         def on_after8():
             global isInvincible
             isInvincible = False
-        timer.after(1000, on_after8)
+        timer.after(1250, on_after8)
         
-sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap8)
+sprites.on_overlap(SpriteKind.player, SpriteKind.Boss, on_on_overlap7)
+
+def on_on_overlap8(sprite276, otherSprite26):
+    global isInvincible
+    if isInvincible == False:
+        isInvincible = True
+        info.change_life_by(-10)
+        
+        def on_after9():
+            global isInvincible
+            isInvincible = False
+        timer.after(1000, on_after9)
+        
+sprites.on_overlap(SpriteKind.player, SpriteKind.miniboss, on_on_overlap8)
+
+def on_overlap_tile7(sprite4, location3):
+    sprites.destroy(sprite4)
+scene.on_overlap_tile(SpriteKind.t3enemy,
+    sprites.swamp.swamp_tile16,
+    on_overlap_tile7)
 
 def on_countdown_end():
     global bleh
     bleh = False
 info.on_countdown_end(on_countdown_end)
 
-def on_on_overlap9(sprite256, otherSprite7):
-    sprites.destroy(sprite256)
-    sprites.change_data_number_by(otherSprite7, "HP", -10)
-    if sprites.read_data_number(otherSprite7, "HP") <= 0:
-        sprites.destroy(otherSprite7)
-        info.change_score_by(1000)
-        if info.life() < 50:
-            info.change_life_by(25)
-sprites.on_overlap(SpriteKind.projectile,
-    SpriteKind.Finale_Ultima_Boss_Phase_1,
-    on_on_overlap9)
-
-def on_on_overlap10(sprite274, otherSprite24):
-    global isInvincible
-    if isInvincible == False:
-        isInvincible = True
-        info.change_life_by(-25)
-        
-        def on_after9():
-            global isInvincible
-            isInvincible = False
-        timer.after(1250, on_after9)
-        
-sprites.on_overlap(SpriteKind.player, SpriteKind.Boss, on_on_overlap10)
-
-def on_overlap_tile5(sprite8, location5):
-    sprites.destroy(sprite8)
-scene.on_overlap_tile(SpriteKind.enemy,
-    sprites.swamp.swamp_tile16,
-    on_overlap_tile5)
+def on_on_created2(sprite11):
+    sprites.set_data_number(sprite11, "HP", 1000)
+sprites.on_created(SpriteKind.Finale_Ultima_Boss_Phase_1, on_on_created2)
 
 def on_right_pressed():
     animation.run_image_animation(obsidian,
@@ -732,193 +732,6 @@ def on_right_pressed():
         600,
         True)
 controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
-
-def on_overlap_tile6(sprite9, location6):
-    sprites.destroy(sprite9)
-scene.on_overlap_tile(SpriteKind.t2enemy,
-    sprites.swamp.swamp_tile16,
-    on_overlap_tile6)
-
-def on_on_overlap11(sprite275, otherSprite25):
-    global isInvincible
-    if isInvincible == False:
-        isInvincible = True
-        info.change_life_by(-5)
-        
-        def on_after10():
-            global isInvincible
-            isInvincible = False
-        timer.after(1000, on_after10)
-        
-sprites.on_overlap(SpriteKind.player, SpriteKind.t3enemy, on_on_overlap11)
-
-def on_on_overlap12(sprite257, otherSprite8):
-    sprites.destroy(projectile)
-    sprites.change_data_number_by(otherSprite8, "HP", -14)
-    if sprites.read_data_number(otherSprite8, "HP") <= 0:
-        sprites.destroy(otherSprite8)
-        info.change_life_by(2)
-        info.change_score_by(10)
-sprites.on_overlap(SpriteKind.projectile, SpriteKind.t2enemy, on_on_overlap12)
-
-def on_on_score5():
-    info.set_life(400)
-    controller.move_sprite(obsidian, 130, 130)
-info.on_score(2500, on_on_score5)
-
-def on_overlap_tile7(sprite10, location7):
-    tiles.set_current_tilemap(tilemap("""
-        level6
-        """))
-    tiles.place_on_tile(obsidian, tiles.get_tile_location(1, 128))
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile43
-        """),
-    on_overlap_tile7)
-
-def on_on_overlap13(sprite276, otherSprite26):
-    global isInvincible
-    if isInvincible == False:
-        isInvincible = True
-        info.change_life_by(-10)
-        
-        def on_after11():
-            global isInvincible
-            isInvincible = False
-        timer.after(1000, on_after11)
-        
-sprites.on_overlap(SpriteKind.player, SpriteKind.miniboss, on_on_overlap13)
-
-def on_down_pressed():
-    animation.run_image_animation(obsidian,
-        [img("""
-                . . . . . f f c c f f . . . . .
-                . . . . f a c b b c a f . . . .
-                . . . f a b b a a b b a f . . .
-                . . f c b d c b b c d b c f . .
-                . . f b d b b c c b b d b f . .
-                . f a a f b c f f c b f a a f .
-                . f a a f f f f f f f f a a f .
-                . f c c f f a f f a f f c c f .
-                . f c c f f a f f a f f c c f .
-                f f c c f 1 1 1 1 1 1 f c c f f
-                f c 1 1 f 1 1 f f 1 1 f 1 1 c f
-                . f 1 1 f c b b b b c f 1 1 f .
-                . . f a c b b b b b b c a f . .
-                . . f f c c c a a c c c f f . .
-                . . . f f b f b f b f f f . . .
-                . . . . f f b f b f b f . . . .
-                """),
-            img("""
-                . . . . . . . f f . . . . . . .
-                . . . . . f f b b f f . . . . .
-                . . . . f c b a a b c f . . . .
-                . . . f c 1 c b b c 1 c f . . .
-                . . f c 1 c b c c b c 1 c f . .
-                . f a a f b c f f c b f a a f .
-                . f a a f f f f f f f f a a f .
-                . f b a f f f f f f f f a b f .
-                f f b b f f a f f a f f b b f f
-                f b b b f f a 1 1 a f f b b b f
-                . f b b f 1 1 f f 1 1 f b b f .
-                . . f 1 1 1 f b b b c f f f . .
-                . . f f 1 1 f b b b b c 1 f . .
-                . . . f f f b b c b c c f f . .
-                . . . f f f b f b f b f f . . .
-                . . . . f f f b f b f b f . . .
-                """),
-            img("""
-                . . . . . f f c c f f . . . . .
-                . . . . f a c b b c a f . . . .
-                . . . f a b b a a b b a f . . .
-                . . f c b d c b b c d b c f . .
-                . . f b d b b c c b b d b f . .
-                . f a a f b c f f c b f a a f .
-                . f a a f f f f f f f f a a f .
-                . f c c f f a f f a f f c c f .
-                . f c c f f a f f a f f c c f .
-                f f c c f 1 1 1 1 1 1 f c c f f
-                f c 1 1 f 1 1 f f 1 1 f 1 1 c f
-                . f 1 1 f c b b b b c f 1 1 f .
-                . . f a c b b b b b b c a f . .
-                . . f f c c c a a c c c f f . .
-                . . . f f b f b f b f f f . . .
-                . . . . f f b f b f b f . . . .
-                """),
-            img("""
-                . . . . . . . f f . . . . . . .
-                . . . . . f f b b f f . . . . .
-                . . . . f c b a a b c f . . . .
-                . . . f c 1 c b b c 1 c f . . .
-                . . f c 1 c b c c b c 1 c f . .
-                . f a a f b c f f c b f a a f .
-                . f a a f f f f f f f f a a f .
-                . f b a f f f f f f f f a b f .
-                f f b b f f a f f a f f b b f f
-                f b b b f f a 1 1 a f f b b b f
-                . f b b f 1 1 f f 1 1 f b b f .
-                . . f f f c b b b f 1 1 1 f . .
-                . . f 1 c b b b b f 1 1 f f . .
-                . . f f c c b c b b f f f . . .
-                . . . f f b f b f b f f f . . .
-                . . . f b f b f b f f f . . . .
-                """),
-            img("""
-                . . . . . f f c c f f . . . . .
-                . . . . f a c b b c a f . . . .
-                . . . f a b b a a b b a f . . .
-                . . f c b d c b b c d b c f . .
-                . . f b d b b c c b b d b f . .
-                . f a a f b c f f c b f a a f .
-                . f a a f f f f f f f f a a f .
-                . f c c f f a f f a f f c c f .
-                . f c c f f a f f a f f c c f .
-                f f c c f 1 1 1 1 1 1 f c c f f
-                f c 1 1 f 1 1 f f 1 1 f 1 1 c f
-                . f 1 1 f c b b b b c f 1 1 f .
-                . . f a c b b b b b b c a f . .
-                . . f f c c c a a c c c f f . .
-                . . . f f b f b f b f f f . . .
-                . . . . f f b f b f b f . . . .
-                """)],
-        600,
-        True)
-controller.down.on_event(ControllerButtonEvent.PRESSED, on_down_pressed)
-
-def on_on_created4(sprite11):
-    sprites.set_data_number(sprite11, "HP", 1000)
-sprites.on_created(SpriteKind.Finale_Ultima_Boss_Phase_1, on_on_created4)
-
-def on_on_overlap14(sprite277, otherSprite27):
-    global isInvincible
-    if isInvincible == False:
-        isInvincible = True
-        info.change_life_by(-50)
-        
-        def on_after12():
-            global isInvincible
-            isInvincible = False
-        timer.after(1000, on_after12)
-        
-sprites.on_overlap(SpriteKind.player,
-    SpriteKind.Finale_Ultima_Boss_Phase_1,
-    on_on_overlap14)
-
-def on_on_score6():
-    info.set_life(500)
-    controller.move_sprite(obsidian, 150, 150)
-info.on_score(3001, on_on_score6)
-
-def on_on_score7():
-    info.set_life(100)
-    controller.move_sprite(obsidian, 90, 90)
-info.on_score(200, on_on_score7)
-
-def on_on_score8():
-    info.set_life(375)
-    controller.move_sprite(obsidian, 120, 120)
-info.on_score(2100, on_on_score8)
 
 def on_on_destroyed(sprite12):
     global you, projectile
@@ -1063,15 +876,25 @@ def on_on_destroyed(sprite12):
         -110)
 sprites.on_destroyed(SpriteKind.Finale_Ultima_Boss_Phase_1, on_on_destroyed)
 
-def on_overlap_tile8(sprite13, location8):
-    sprites.destroy(sprite13)
-scene.on_overlap_tile(SpriteKind.t3enemy,
-    assets.tile("""
-        myTile22
-        """),
-    on_overlap_tile8)
+def on_on_overlap9(sprite275, otherSprite25):
+    global isInvincible
+    if isInvincible == False:
+        isInvincible = True
+        info.change_life_by(-5)
+        
+        def on_after10():
+            global isInvincible
+            isInvincible = False
+        timer.after(1000, on_after10)
+        
+sprites.on_overlap(SpriteKind.player, SpriteKind.t3enemy, on_on_overlap9)
 
-def on_overlap_tile9(sprite14, location9):
+def on_on_score5():
+    info.set_life(400)
+    controller.move_sprite(obsidian, 130, 130)
+info.on_score(2500, on_on_score5)
+
+def on_overlap_tile8(sprite14, location9):
     global you
     scene.set_background_image(img("""
         bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
@@ -1255,18 +1078,195 @@ scene.on_overlap_tile(SpriteKind.player,
     assets.tile("""
         myTile23
         """),
+    on_overlap_tile8)
+
+def on_on_overlap10(sprite257, otherSprite8):
+    sprites.destroy(projectile)
+    sprites.change_data_number_by(otherSprite8, "HP", -14)
+    if sprites.read_data_number(otherSprite8, "HP") <= 0:
+        sprites.destroy(otherSprite8)
+        info.change_life_by(2)
+        info.change_score_by(10)
+sprites.on_overlap(SpriteKind.projectile, SpriteKind.t2enemy, on_on_overlap10)
+
+def on_on_overlap11(sprite252, otherSprite3):
+    sprites.change_data_number_by(otherSprite3, "HP", -10)
+    sprites.destroy(projectile)
+    if sprites.read_data_number(otherSprite3, "HP") <= 0:
+        sprites.destroy(otherSprite3)
+        info.change_score_by(500)
+sprites.on_overlap(SpriteKind.projectile, SpriteKind.Boss, on_on_overlap11)
+
+def on_down_pressed():
+    animation.run_image_animation(obsidian,
+        [img("""
+                . . . . . f f c c f f . . . . .
+                . . . . f a c b b c a f . . . .
+                . . . f a b b a a b b a f . . .
+                . . f c b d c b b c d b c f . .
+                . . f b d b b c c b b d b f . .
+                . f a a f b c f f c b f a a f .
+                . f a a f f f f f f f f a a f .
+                . f c c f f a f f a f f c c f .
+                . f c c f f a f f a f f c c f .
+                f f c c f 1 1 1 1 1 1 f c c f f
+                f c 1 1 f 1 1 f f 1 1 f 1 1 c f
+                . f 1 1 f c b b b b c f 1 1 f .
+                . . f a c b b b b b b c a f . .
+                . . f f c c c a a c c c f f . .
+                . . . f f b f b f b f f f . . .
+                . . . . f f b f b f b f . . . .
+                """),
+            img("""
+                . . . . . . . f f . . . . . . .
+                . . . . . f f b b f f . . . . .
+                . . . . f c b a a b c f . . . .
+                . . . f c 1 c b b c 1 c f . . .
+                . . f c 1 c b c c b c 1 c f . .
+                . f a a f b c f f c b f a a f .
+                . f a a f f f f f f f f a a f .
+                . f b a f f f f f f f f a b f .
+                f f b b f f a f f a f f b b f f
+                f b b b f f a 1 1 a f f b b b f
+                . f b b f 1 1 f f 1 1 f b b f .
+                . . f 1 1 1 f b b b c f f f . .
+                . . f f 1 1 f b b b b c 1 f . .
+                . . . f f f b b c b c c f f . .
+                . . . f f f b f b f b f f . . .
+                . . . . f f f b f b f b f . . .
+                """),
+            img("""
+                . . . . . f f c c f f . . . . .
+                . . . . f a c b b c a f . . . .
+                . . . f a b b a a b b a f . . .
+                . . f c b d c b b c d b c f . .
+                . . f b d b b c c b b d b f . .
+                . f a a f b c f f c b f a a f .
+                . f a a f f f f f f f f a a f .
+                . f c c f f a f f a f f c c f .
+                . f c c f f a f f a f f c c f .
+                f f c c f 1 1 1 1 1 1 f c c f f
+                f c 1 1 f 1 1 f f 1 1 f 1 1 c f
+                . f 1 1 f c b b b b c f 1 1 f .
+                . . f a c b b b b b b c a f . .
+                . . f f c c c a a c c c f f . .
+                . . . f f b f b f b f f f . . .
+                . . . . f f b f b f b f . . . .
+                """),
+            img("""
+                . . . . . . . f f . . . . . . .
+                . . . . . f f b b f f . . . . .
+                . . . . f c b a a b c f . . . .
+                . . . f c 1 c b b c 1 c f . . .
+                . . f c 1 c b c c b c 1 c f . .
+                . f a a f b c f f c b f a a f .
+                . f a a f f f f f f f f a a f .
+                . f b a f f f f f f f f a b f .
+                f f b b f f a f f a f f b b f f
+                f b b b f f a 1 1 a f f b b b f
+                . f b b f 1 1 f f 1 1 f b b f .
+                . . f f f c b b b f 1 1 1 f . .
+                . . f 1 c b b b b f 1 1 f f . .
+                . . f f c c b c b b f f f . . .
+                . . . f f b f b f b f f f . . .
+                . . . f b f b f b f f f . . . .
+                """),
+            img("""
+                . . . . . f f c c f f . . . . .
+                . . . . f a c b b c a f . . . .
+                . . . f a b b a a b b a f . . .
+                . . f c b d c b b c d b c f . .
+                . . f b d b b c c b b d b f . .
+                . f a a f b c f f c b f a a f .
+                . f a a f f f f f f f f a a f .
+                . f c c f f a f f a f f c c f .
+                . f c c f f a f f a f f c c f .
+                f f c c f 1 1 1 1 1 1 f c c f f
+                f c 1 1 f 1 1 f f 1 1 f 1 1 c f
+                . f 1 1 f c b b b b c f 1 1 f .
+                . . f a c b b b b b b c a f . .
+                . . f f c c c a a c c c f f . .
+                . . . f f b f b f b f f f . . .
+                . . . . f f b f b f b f . . . .
+                """)],
+        600,
+        True)
+controller.down.on_event(ControllerButtonEvent.PRESSED, on_down_pressed)
+
+def on_overlap_tile9(sprite8, location5):
+    sprites.destroy(sprite8)
+scene.on_overlap_tile(SpriteKind.enemy,
+    sprites.swamp.swamp_tile16,
     on_overlap_tile9)
 
-def on_overlap_tile10(sprite15, location10):
-    tiles.set_current_tilemap(tilemap("""
-        level6
-        """))
-    tiles.place_on_tile(obsidian, tiles.get_tile_location(123, 253))
-scene.on_overlap_tile(SpriteKind.player,
+def on_on_overlap12(sprite277, otherSprite27):
+    global isInvincible
+    if isInvincible == False:
+        isInvincible = True
+        info.change_life_by(-50)
+        
+        def on_after11():
+            global isInvincible
+            isInvincible = False
+        timer.after(1000, on_after11)
+        
+sprites.on_overlap(SpriteKind.player,
+    SpriteKind.Finale_Ultima_Boss_Phase_1,
+    on_on_overlap12)
+
+def on_on_score6():
+    info.set_life(100)
+    controller.move_sprite(obsidian, 90, 90)
+info.on_score(200, on_on_score6)
+
+def on_on_score7():
+    info.set_life(375)
+    controller.move_sprite(obsidian, 120, 120)
+info.on_score(2100, on_on_score7)
+
+def on_overlap_tile10(sprite13, location8):
+    sprites.destroy(sprite13)
+scene.on_overlap_tile(SpriteKind.t3enemy,
     assets.tile("""
-        myTile11
+        myTile22
         """),
     on_overlap_tile10)
+
+def on_on_created3(sprite7):
+    sprites.set_data_number(sprite7, "HP", 500)
+sprites.on_created(SpriteKind.miniboss, on_on_created3)
+
+def on_on_overlap13(sprite253, otherSprite4):
+    sprites.change_data_number_by(otherSprite4, "HP", -12)
+    sprites.destroy(projectile)
+    if sprites.read_data_number(otherSprite4, "HP") <= 0:
+        sprites.destroy(otherSprite4)
+        info.change_score_by(200)
+        if info.life() < 50:
+            info.change_life_by(25)
+sprites.on_overlap(SpriteKind.projectile, SpriteKind.miniboss, on_on_overlap13)
+
+def on_on_overlap14(sprite273, otherSprite23):
+    global isInvincible
+    if isInvincible == False:
+        isInvincible = True
+        info.change_life_by(-5)
+        
+        def on_after12():
+            global isInvincible
+            isInvincible = False
+        timer.after(1000, on_after12)
+        
+sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap14)
+
+def on_on_score8():
+    info.set_life(500)
+    controller.move_sprite(obsidian, 150, 150)
+info.on_score(3100, on_on_score8)
+
+def on_on_created4(sprite2):
+    sprites.set_data_number(sprite2, "HP", 2000)
+sprites.on_created(SpriteKind.Finale_Ultima_Boss_Phase_2, on_on_created4)
 
 def on_overlap_tile11(sprite16, location11):
     tiles.set_current_tilemap(tilemap("""
@@ -1455,7 +1455,7 @@ mySprite = sprites.create(img("""
         . 2 . . . f f . . f f . . . 2 .
         """),
     SpriteKind.miniboss)
-mySprite = sprites.create(img("""
+meh = sprites.create(img("""
         . . 2 . . . 5 5 5 5 . . . 2 . .
         . . 2 2 2 5 5 4 4 5 5 2 2 2 . .
         . . . 2 5 4 4 4 4 4 4 5 2 . . .
@@ -1493,15 +1493,37 @@ myEnemy = sprites.create(img("""
         . 9 . . . f f . . f f . . . 9 .
         """),
     SpriteKind.miniboss)
+erm = sprites.create(img("""
+        . . . . . . 1 1 1 1 . . . . . .
+        . . . . 1 1 1 6 6 1 1 9 . . . .
+        . . . 9 1 6 6 6 6 6 6 1 9 . . .
+        . . 9 1 6 1 1 1 1 1 1 6 1 9 . .
+        . . 9 1 1 9 6 6 6 6 9 1 1 9 . .
+        . . 9 1 6 1 9 1 1 9 1 6 1 9 . .
+        . . 9 9 1 f f 9 9 f f 1 9 9 . .
+        . 9 9 1 f 8 8 f f 8 8 f 1 9 9 .
+        . 9 1 1 f f 1 f f 1 f f 1 1 9 .
+        . . 9 1 1 f f f f f f 1 1 9 . .
+        . . . 9 1 6 f 8 8 f 6 1 9 . . .
+        1 1 1 1 6 1 6 1 1 6 1 6 1 1 1 1
+        1 f 8 9 9 6 1 1 1 1 6 9 9 8 f 1
+        1 f 8 9 6 9 1 1 1 1 9 6 9 8 f 1
+        f f f . . 6 9 1 1 9 6 . . f f f
+        . f . . . 9 9 . . 9 9 . . . f .
+        """),
+    SpriteKind.miniboss)
 bleh = False
 isInvincible = False
 shards = True
 tiles.place_on_tile(myEnemy, tiles.get_tile_location(1, 129))
 tiles.place_on_tile(obsidian, tiles.get_tile_location(127, 127))
 tiles.place_on_tile(mySprite, tiles.get_tile_location(127, 4))
+tiles.place_on_tile(meh, tiles.get_tile_location(123, 253))
+tiles.place_on_tile(erm, tiles.get_tile_location(253, 115))
 controller.move_sprite(obsidian, 85, 85)
 LostSoul = True
 info.set_life(50)
+info.change_score_by(3095)
 
 def on_update_interval():
     global opal
@@ -1651,7 +1673,7 @@ def on_forever():
                 . . . . . . . . . . . . . . . .
                 """),
             obsidian,
-            110,
+            -110,
             0)
         pause(10000)
 forever(on_forever)
@@ -1662,63 +1684,61 @@ def on_forever2():
             ruby.follow(None)
         else:
             ruby.follow(obsidian, 80)
-    pause(100)
-    if not (spriteutils.is_destroyed(ruby)):
-        if spriteutils.distance_between(obsidian, ruby) > 125:
-            ruby.follow(None)
-        else:
-            ruby.follow(obsidian, 80)
 forever(on_forever2)
 
 def on_forever3():
-    if not (spriteutils.is_destroyed(helioite)):
-        if spriteutils.distance_between(obsidian, opal) > 125:
-            helioite.follow(None)
+    if not (spriteutils.is_destroyed(mySprite)):
+        if spriteutils.distance_between(obsidian, mySprite) > 300:
+            mySprite.follow(None)
         else:
-            helioite.follow(obsidian, 80)
+            mySprite.follow(obsidian, 100)
     pause(100)
-    if not (spriteutils.is_destroyed(helioite)):
-        if spriteutils.distance_between(obsidian, opal) > 125:
-            helioite.follow(None)
+    if not (spriteutils.is_destroyed(mySprite)):
+        if spriteutils.distance_between(obsidian, mySprite) > 300:
+            mySprite.follow(None)
         else:
-            helioite.follow(obsidian, 80)
+            mySprite.follow(obsidian, 90)
 forever(on_forever3)
 
 def on_forever4():
-    if not (spriteutils.is_destroyed(mySprite)):
-        if spriteutils.distance_between(obsidian, mySprite) > 300:
-            mySprite.follow(None)
-        else:
-            mySprite.follow(obsidian, 100)
-    pause(100)
-    if not (spriteutils.is_destroyed(mySprite)):
-        if spriteutils.distance_between(obsidian, mySprite) > 300:
-            mySprite.follow(None)
-        else:
-            mySprite.follow(obsidian, 100)
-forever(on_forever4)
-
-def on_forever5():
     if not (spriteutils.is_destroyed(opal)):
         if spriteutils.distance_between(obsidian, opal) > 125:
             opal.follow(None)
         else:
             opal.follow(obsidian, 80)
+forever(on_forever4)
+
+def on_forever5():
+    if not (spriteutils.is_destroyed(myEnemy)):
+        if spriteutils.distance_between(obsidian, myEnemy) > 300:
+            myEnemy.follow(None)
+        else:
+            myEnemy.follow(obsidian, 100)
 forever(on_forever5)
 
 def on_forever6():
-    if not (spriteutils.is_destroyed(myEnemy)):
-        if spriteutils.distance_between(obsidian, myEnemy) > 300:
-            myEnemy.follow(None)
+    if not (spriteutils.is_destroyed(erm)):
+        if spriteutils.distance_between(obsidian, erm) > 125:
+            erm.follow(None)
         else:
-            myEnemy.follow(obsidian, 100)
-    pause(100)
-    if not (spriteutils.is_destroyed(myEnemy)):
-        if spriteutils.distance_between(obsidian, myEnemy) > 300:
-            myEnemy.follow(None)
-        else:
-            myEnemy.follow(obsidian, 100)
+            erm.follow(obsidian, 100)
 forever(on_forever6)
+
+def on_forever7():
+    if not (spriteutils.is_destroyed(meh)):
+        if spriteutils.distance_between(obsidian, meh) > 300:
+            meh.follow(None)
+        else:
+            meh.follow(obsidian, 95)
+forever(on_forever7)
+
+def on_forever8():
+    if not (spriteutils.is_destroyed(helioite)):
+        if spriteutils.distance_between(obsidian, helioite) > 125:
+            helioite.follow(None)
+        else:
+            helioite.follow(obsidian, 80)
+forever(on_forever8)
 
 def on_update_interval2():
     global helioite

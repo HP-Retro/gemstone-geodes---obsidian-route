@@ -7,6 +7,15 @@ namespace SpriteKind {
     export const t3enemy = SpriteKind.create()
     export const Finale_Ultima_Boss_Phase_1 = SpriteKind.create()
     export const Finale_Ultima_Boss_Phase_2 = SpriteKind.create()
+    export const NPC_Cosmetic = SpriteKind.create()
+    export const cosmetic2 = SpriteKind.create()
+    export const takingtoolong = SpriteKind.create()
+    export const Hatsunemiku = SpriteKind.create()
+    export const npcchallengesecretboss = SpriteKind.create()
+    export const EOC = SpriteKind.create()
+    export const NPC = SpriteKind.create()
+    export const cosmetic_peak = SpriteKind.create()
+    export const cosmetic = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile43`, function (sprite10, location7) {
     tiles.setCurrentTilemap(tilemap`level6`)
@@ -25,97 +34,327 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.t3enemy, function (sprite25,
     }
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    obsidian,
-    [img`
-        . . . . . f f c c f f . . . . . 
-        . . . . f b c b b c b f . . . . 
-        . . . f a a a a a a a a f . . . 
-        . . f b a a a a a a a a b f . . 
-        . . f a a a a a a a a a a f . . 
-        . f a a a a a a a a a a a a f . 
-        . f b a a a a a a a a a a b f . 
-        . f b b a a a a a a a a b b f . 
-        . f b b b b b b b b b b b b f . 
-        f a b b b b b b b b b b b b a f 
-        f a a b b b b b b b b b b a a f 
-        . f a a b b b b b b b b a a f . 
-        . . 1 1 a f f f f f f a 1 1 . . 
-        . . 1 f b f b f b f b b f 1 . . 
-        . . . f f b f b f b f f f . . . 
-        . . . . . f b f b f f . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . f f c c f f . . . . . 
-        . . . . f b c b b c b f . . . . 
-        . . . f a a a a a a a a f . . . 
-        . . f a a a a a a a a a b f . . 
-        . . f a a a a a a a a a a f . . 
-        . f b a a a a a a a a a a b f . 
-        . f b b a a a a a a a a b b f . 
-        . f b b b b b b b b b b b b f . 
-        f b b b b b b b b b b b b b f . 
-        f a a b b b b b b b b b a a f . 
-        f f a a b b b b b b a a a f . . 
-        . f a a a f f f f f f f f b . . 
-        . f a f a f b f b f f 1 1 f . . 
-        . f a f f b f b f b f f f . . . 
-        . . f . . f b f b f f . . . . . 
-        `,img`
-        . . . . . f f c c f f . . . . . 
-        . . . . f b c b b c b f . . . . 
-        . . . f a a a a a a a a f . . . 
-        . . f b a a a a a a a a b f . . 
-        . . f a a a a a a a a a a f . . 
-        . f a a a a a a a a a a a a f . 
-        . f b a a a a a a a a a a b f . 
-        . f b b a a a a a a a a b b f . 
-        . f b b b b b b b b b b b b f . 
-        f a b b b b b b b b b b b b a f 
-        f a a b b b b b b b b b b a a f 
-        . f a a b b b b b b b b a a f . 
-        . . 1 1 a f f f f f f a 1 1 . . 
-        . . 1 f b f b f b f b b f 1 . . 
-        . . . f f b f b f b f f f . . . 
-        . . . . . f b f b f f . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . f f c c f f . . . . . 
-        . . . . f b c b b c b f . . . . 
-        . . . f a a a a a a a a f . . . 
-        . . f b a a a a a a a a a f . . 
-        . . f a a a a a a a a a a f . . 
-        . f b a a a a a a a a a a b f . 
-        . f b b a a a a a a a a b b f . 
-        . f b b b b b b b b b b b b f . 
-        . f b b b b b b b b b b b b b f 
-        . f a a b b b b b b b b b a a f 
-        . . f a a a b b b b b b a a f f 
-        . . b f f f f f f f f a a a f . 
-        . . f 1 1 f f b f b f a f a f . 
-        . . . f f f b f b f b f f a f . 
-        . . . . . f f b f b f . . f . . 
-        `,img`
-        . . . . . f f c c f f . . . . . 
-        . . . . f b c b b c b f . . . . 
-        . . . f a a a a a a a a f . . . 
-        . . f b a a a a a a a a b f . . 
-        . . f a a a a a a a a a a f . . 
-        . f a a a a a a a a a a a a f . 
-        . f b a a a a a a a a a a b f . 
-        . f b b a a a a a a a a b b f . 
-        . f b b b b b b b b b b b b f . 
-        f a b b b b b b b b b b b b a f 
-        f a a b b b b b b b b b b a a f 
-        . f a a b b b b b b b b a a f . 
-        . . 1 1 a f f f f f f a 1 1 . . 
-        . . 1 f b f b f b f b b f 1 . . 
-        . . . f f b f b f b f f f . . . 
-        . . . . . f b f b f f . . . . . 
-        `],
-    600,
-    true
-    )
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 0) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . f f c c f f . . . . . 
+            . . . . f b c b b c b f . . . . 
+            . . . f a a a a a a a a f . . . 
+            . . f b a a a a a a a a b f . . 
+            . . f a a a a a a a a a a f . . 
+            . f a a a a a a a a a a a a f . 
+            . f b a a a a a a a a a a b f . 
+            . f b b a a a a a a a a b b f . 
+            . f b b b b b b b b b b b b f . 
+            f a b b b b b b b b b b b b a f 
+            f a a b b b b b b b b b b a a f 
+            . f a a b b b b b b b b a a f . 
+            . . 1 1 a f f f f f f a 1 1 . . 
+            . . 1 f b f b f b f b b f 1 . . 
+            . . . f f b f b f b f f f . . . 
+            . . . . . f b f b f f . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f c c f f . . . . . 
+            . . . . f b c b b c b f . . . . 
+            . . . f a a a a a a a a f . . . 
+            . . f a a a a a a a a a b f . . 
+            . . f a a a a a a a a a a f . . 
+            . f b a a a a a a a a a a b f . 
+            . f b b a a a a a a a a b b f . 
+            . f b b b b b b b b b b b b f . 
+            f b b b b b b b b b b b b b f . 
+            f a a b b b b b b b b b a a f . 
+            f f a a b b b b b b a a a f . . 
+            . f a a a f f f f f f f f b . . 
+            . f a f a f b f b f f 1 1 f . . 
+            . f a f f b f b f b f f f . . . 
+            . . f . . f b f b f f . . . . . 
+            `,img`
+            . . . . . f f c c f f . . . . . 
+            . . . . f b c b b c b f . . . . 
+            . . . f a a a a a a a a f . . . 
+            . . f b a a a a a a a a b f . . 
+            . . f a a a a a a a a a a f . . 
+            . f a a a a a a a a a a a a f . 
+            . f b a a a a a a a a a a b f . 
+            . f b b a a a a a a a a b b f . 
+            . f b b b b b b b b b b b b f . 
+            f a b b b b b b b b b b b b a f 
+            f a a b b b b b b b b b b a a f 
+            . f a a b b b b b b b b a a f . 
+            . . 1 1 a f f f f f f a 1 1 . . 
+            . . 1 f b f b f b f b b f 1 . . 
+            . . . f f b f b f b f f f . . . 
+            . . . . . f b f b f f . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f c c f f . . . . . 
+            . . . . f b c b b c b f . . . . 
+            . . . f a a a a a a a a f . . . 
+            . . f b a a a a a a a a a f . . 
+            . . f a a a a a a a a a a f . . 
+            . f b a a a a a a a a a a b f . 
+            . f b b a a a a a a a a b b f . 
+            . f b b b b b b b b b b b b f . 
+            . f b b b b b b b b b b b b b f 
+            . f a a b b b b b b b b b a a f 
+            . . f a a a b b b b b b a a f f 
+            . . b f f f f f f f f a a a f . 
+            . . f 1 1 f f b f b f a f a f . 
+            . . . f f f b f b f b f f a f . 
+            . . . . . f f b f b f . . f . . 
+            `,img`
+            . . . . . f f c c f f . . . . . 
+            . . . . f b c b b c b f . . . . 
+            . . . f a a a a a a a a f . . . 
+            . . f b a a a a a a a a b f . . 
+            . . f a a a a a a a a a a f . . 
+            . f a a a a a a a a a a a a f . 
+            . f b a a a a a a a a a a b f . 
+            . f b b a a a a a a a a b b f . 
+            . f b b b b b b b b b b b b f . 
+            f a b b b b b b b b b b b b a f 
+            f a a b b b b b b b b b b a a f 
+            . f a a b b b b b b b b a a f . 
+            . . 1 1 a f f f f f f a 1 1 . . 
+            . . 1 f b f b f b f b b f 1 . . 
+            . . . f f b f b f b f f f . . . 
+            . . . . . f b f b f f . . . . . 
+            `],
+        600,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 1) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . f f b b f f . . . . . 
+            . . . . f 5 b 9 9 b 5 f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 5 5 b b 5 5 b 5 f . . 
+            . . f 5 5 5 5 5 5 5 5 5 5 f . . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+            f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . . d d 5 f f f f f f 5 d d . . 
+            . . d f 8 9 8 9 8 9 8 8 f d . . 
+            . . . f f 8 9 8 9 8 f f f . . . 
+            . . . . . f 8 9 8 9 f . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f b b f f . . . . . 
+            . . . . f 5 b 9 9 b 5 f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 5 5 b b 5 5 b 5 f . . 
+            . . f 5 5 5 5 5 5 5 5 5 5 f . . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            f 5 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            f 5 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            f f 5 5 5 5 5 5 5 5 5 5 5 f . . 
+            . f 5 5 5 f f f f f f f f . . . 
+            . f 5 f 5 f 8 9 8 9 f d d f . . 
+            . f 5 f f 8 9 8 9 8 9 f f . . . 
+            . . f . . 9 8 9 8 9 f . . . . . 
+            `,img`
+            . . . . . f f b b f f . . . . . 
+            . . . . f 5 b 9 9 b 5 f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 5 5 b b 5 5 b 5 f . . 
+            . . f 5 5 5 5 5 5 5 5 5 5 f . . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+            f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . . d d 5 f f f f f f 5 d d . . 
+            . . d f 8 9 8 9 8 9 8 8 f d . . 
+            . . . f f 8 9 8 9 8 f f f . . . 
+            . . . . . f 8 9 8 9 f . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f b b f f . . . . . 
+            . . . . f 5 b 9 9 b 5 f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 5 5 b b 5 5 b 5 f . . 
+            . . f 5 5 5 5 5 5 5 5 5 5 f . . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+            . . f 5 5 5 5 5 5 5 5 5 5 5 f f 
+            . . . f f f f f f f f 5 5 5 f . 
+            . . f d d f 9 8 9 8 f 5 f 5 f . 
+            . . . f f 9 8 9 8 9 8 f f 5 f . 
+            . . . . . f 9 8 9 8 9 . . f . . 
+            `,img`
+            . . . . . f f b b f f . . . . . 
+            . . . . f 5 b 9 9 b 5 f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 5 5 b b 5 5 b 5 f . . 
+            . . f 5 5 5 5 5 5 5 5 5 5 f . . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+            f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . . d d 5 f f f f f f 5 d d . . 
+            . . d f 8 9 8 9 8 9 8 8 f d . . 
+            . . . f f 8 9 8 9 8 f f f . . . 
+            . . . . . f 8 9 8 9 f . . . . . 
+            `],
+        600,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 3) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . . . 9 . . . . . . . . 
+            . . . . . . 9 b 9 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . . 
+            . . . . . 9 b 9 b 9 . . . . . . 
+            . . . . . 5 5 5 5 5 . . . . . . 
+            . . . . . 9 b 9 b 9 . . . . . . 
+            . . . . . 5 5 5 5 5 . . . . . . 
+            . . . . . f f f f f . . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . . 2 2 2 2 2 . . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . . f f f f f . . . . . . 
+            . . . . . b b b b b . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . 9 . . . . . . . . 
+            . . . . . . 9 b 9 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . . 
+            . . . . . 9 b 9 b 9 . . . . . . 
+            . . . . 9 5 5 5 5 5 9 . . . . . 
+            . . . . . 9 b 9 b 9 . . . . . . 
+            . . . . 9 5 5 5 5 5 9 . . . . . 
+            . . . . . f f f f f . . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . . 2 2 2 2 2 . . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . . f f f f f . . . . . . 
+            . . . . . b b b b b . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . 9 . . . . . . . . 
+            . . . . . . 9 b 9 . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . . 
+            . . . . . 9 b 9 b 9 . . . . . . 
+            . . . . . 5 5 5 5 5 . . . . . . 
+            . . . . . 9 b 9 b 9 . . . . . . 
+            . . . . . 5 5 5 5 5 . . . . . . 
+            . . . . . f f f f f . . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . . 2 2 2 2 2 . . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . e 2 2 2 2 2 e . . . . . 
+            . . . . . f f f f f . . . . . . 
+            . . . . . b b b b b . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `],
+        500,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 2) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . 1 . . . . 1 . . . . . . 
+            . . . 1 . . . . . . 1 . . . . . 
+            . . . 1 . . . . . . 1 . . . . . 
+            . . . 1 1 1 1 1 1 1 1 . . . . . 
+            . . . 1 1 1 1 1 1 1 1 . . . . . 
+            . . . 1 1 1 1 1 1 1 1 . . . . . 
+            . . . 1 1 1 1 1 1 1 1 . . . . . 
+            . . . 1 1 1 1 1 1 1 1 . . . . . 
+            . . . b 1 1 1 1 1 1 . . . . . . 
+            . . . . b b c c c . . . . . . . 
+            . . . . b b b c c c . . . . . . 
+            . . . . c b b c c c . . . . . . 
+            . . . . c c c b c c . . . . . . 
+            . . . . c c c c b c . . . . . . 
+            . . . . . f . . f b . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . 1 . . . . 1 . . . . 
+            . . . . . 1 . . . . . . 1 . . . 
+            . . . . . 1 . . . . . . 1 . . . 
+            . . . . . 1 1 1 1 1 1 1 1 . . . 
+            . . . . . 1 1 1 1 1 1 1 1 . . . 
+            . . . . . 1 1 1 1 1 1 1 1 . . . 
+            . . . . . 1 1 1 1 1 1 1 1 . . . 
+            . . . . . 1 1 1 1 1 1 1 1 . . . 
+            . . . . . . 1 1 1 1 1 1 b . . . 
+            . . . . . . . c c c b b . . . . 
+            . . . . . . c c c b b b . . . . 
+            . . . . . . c c c b b c . . . . 
+            . . . . . . c c b c c c . . . . 
+            . . . . . . c b c c c c . . . . 
+            . . . . . . b f . . f . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . 1 . . . . 1 . . . . . . 
+            . . . 1 . . . . . . 1 . . . . . 
+            . . . 1 . . . . . . 1 . . . . . 
+            . . . 1 1 1 1 1 1 1 1 . . . . . 
+            . . . 1 1 1 1 1 1 1 1 . . . . . 
+            . . . 1 1 1 1 1 1 1 1 . . . . . 
+            . . . 1 1 1 1 1 1 1 1 . . . . . 
+            . . . 1 1 1 1 1 1 1 1 . . . . . 
+            . . . b 1 1 1 1 1 1 . . . . . . 
+            . . . . b b c c c . . . . . . . 
+            . . . . b b b c c c . . . . . . 
+            . . . . c b b c c c . . . . . . 
+            . . . . c c c b c c . . . . . . 
+            . . . . c c c c b c . . . . . . 
+            . . . . . f . . f b . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . 1 . . . . 1 . . . . 
+            . . . . . 1 . . . . . . 1 . . . 
+            . . . . . 1 . . . . . . 1 . . . 
+            . . . . . 1 1 1 1 1 1 1 1 . . . 
+            . . . . . 1 1 1 1 1 1 1 1 . . . 
+            . . . . . 1 1 1 1 1 1 1 1 . . . 
+            . . . . . 1 1 1 1 1 1 1 1 . . . 
+            . . . . . 1 1 1 1 1 1 1 1 . . . 
+            . . . . . . 1 1 1 1 1 1 b . . . 
+            . . . . . . . c c c b b . . . . 
+            . . . . . . c c c b b b . . . . 
+            . . . . . . c c c b b c . . . . 
+            . . . . . . c c b c c c . . . . 
+            . . . . . . c b c c c c . . . . 
+            . . . . . . b f . . f . . . . . 
+            `],
+        500,
+        true
+        )
+    }
 })
 scene.onOverlapTile(SpriteKind.t2enemy, assets.tile`myTile22`, function (sprite, location) {
     sprites.destroy(sprite)
@@ -127,9 +366,6 @@ info.onScore(1300, function () {
 sprites.onCreated(SpriteKind.Boss, function (sprite5) {
     sprites.setDataNumber(sprite5, "HP", 1000)
 })
-scene.onOverlapTile(SpriteKind.t2enemy, sprites.swamp.swampTile16, function (sprite9, location6) {
-    sprites.destroy(sprite9)
-})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite255, otherSprite6) {
     sprites.destroy(projectile)
     sprites.changeDataNumberBy(otherSprite6, "HP", -15)
@@ -139,58 +375,182 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite255, 
         info.changeLifeBy(1)
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Hatsunemiku, function (sprite, otherSprite) {
+    miku.sayText("Kon'nichiwa! Watashi wa hatsunemikudesu! Kono o-ten no ōnādesu. Hitsuyōna keiken-chi ga tamatte ireba, dono sukin demo jiyū ni sōbi shite kudasai ne!", 5000, true)
+    pause(5000)
+})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (LostSoul == true) {
-        timer.after(500, function () {
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 0) {
+        if (LostSoul == true) {
+            timer.after(500, function () {
+                chargeblast = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . f f . . . . . f f f . . . . . 
+                    f f f . f f f f f f f f f a a . 
+                    f f f f f f f f f f f f f f a a 
+                    a f f f f f f f f a f f f f f a 
+                    a a a a a a a a a a a a a a a a 
+                    a a a a a a a a a a a a a a a a 
+                    a f f f f f f f f a f f f f f a 
+                    f f f f f f f f f f f f f f a a 
+                    f f f . f f f f f f f f f a a . 
+                    . f f . . . . . f f f . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 80, 0)
+                LostSoul = false
+            })
+            pause(100)
+            timer.after(10000, function () {
+                LostSoul = true
+            })
+        }
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 1) {
+        if (LostSoul == true) {
+            timer.after(500, function () {
+                chargeblast = sprites.createProjectileFromSprite(img`
+                    . 1 . . . . 1 9 1 . . . . 1 . . 
+                    1 9 1 . . . 1 9 1 . . . 1 9 1 . 
+                    . 1 9 1 . . 9 9 9 . . 1 9 1 . . 
+                    . . 1 9 1 . 9 9 9 . 1 9 1 . . . 
+                    . . . 1 9 9 9 9 9 9 9 1 . . . . 
+                    . . . . 9 9 9 9 9 9 9 . . . . . 
+                    1 1 9 9 9 9 1 1 1 9 9 9 9 1 1 1 
+                    9 9 9 9 9 9 1 1 1 9 9 9 9 9 9 9 
+                    1 1 9 9 9 9 1 1 1 9 9 9 9 1 1 1 
+                    . . . . 9 9 9 9 9 9 9 . . . . . 
+                    . . . 1 9 9 9 9 9 9 9 1 . . . . 
+                    . . 1 9 1 . 9 9 9 . 1 9 1 . . . 
+                    . 1 9 . . . 9 9 9 . . 1 9 1 . . 
+                    1 9 1 . . . 9 9 9 . . . 1 9 1 . 
+                    . 1 . . . . 1 9 1 . . . . 1 . . 
+                    . . . . . . 1 9 1 . . . . . . . 
+                    `, obsidian, 80, 0)
+                LostSoul = false
+            })
+            pause(100)
+            timer.after(10000, function () {
+                LostSoul = true
+            })
+        }
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 2) {
+        if (LostSoul == true) {
+            timer.after(500, function () {
+                chargeblast = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . f . . . . . . . . . . . . . . 
+                    f . . . . . . . . . . . . . . . 
+                    . . . . f f f f f f f f f f f . 
+                    f . f f f f f f f f f f f f f f 
+                    . f . f f f f f f f f f 1 1 f 1 
+                    f . f f f f f f f f f f 1 1 f 1 
+                    . f . f f f f f f f f f f f f f 
+                    f . f f f f f f f f f f f f f f 
+                    . . . . f f f f f f f f f f f . 
+                    f . . . . . . . . . . . . . . . 
+                    . . f . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 80, 0)
+                LostSoul = false
+            })
+            pause(100)
+            timer.after(10000, function () {
+                LostSoul = true
+            })
+        }
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 3) {
+        if (LostSoul == true) {
+            animation.stopAnimation(animation.AnimationTypes.All, obsidian)
+            music.play(music.createSong(hex`005a000408010201001c000f05001202c102c20100040500280000006400280003140006020004120004000800015810001400015c1c002000015f02001c000c960064006d019001000478002c010000640032000000000a06000514000400080001291000140001291c0020000324292c`), music.PlaybackMode.InBackground)
+            obsidian.setImage(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . f 2 2 2 2 2 f 5 9 5 . . . . . 
+                . f 2 2 2 2 2 f 5 b 5 b 5 . . . 
+                . f 2 2 2 2 2 f 5 9 5 . 5 b . . 
+                b f 2 2 2 2 2 f 5 b 5 b 5 . . . 
+                b f 2 2 2 2 2 f 5 9 5 . . . . . 
+                b b b b b b b b b b b b b b . . 
+                e e e e e e e e e e b b b . . . 
+                e e e e e e e e e e b b b b . . 
+                e e e e e e e e e e b b b . . . 
+                e e e e e e e e e e b b b b . . 
+                . e b e . . . e b e . . . . . . 
+                . e e e . . . e e e . . . . . . 
+                `)
+            pause(1000)
+            obsidian.setImage(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . f 2 2 2 2 2 f 5 9 5 9 . . . . 
+                . f 2 2 2 2 2 f 5 b 5 b 5 . . . 
+                . f 2 2 2 2 2 f 5 9 5 9 5 b . . 
+                b f 2 2 2 2 2 f 5 b 5 b 5 . . . 
+                b f 2 2 2 2 2 f 5 9 5 9 . . . . 
+                b b b b b b b b b b b b b b . . 
+                e e e e e e e e e e b b b . . . 
+                e e e e e e e e e e b b b b . . 
+                e e e e e e e e e e b b b . . . 
+                e e e e e e e e e e b b b b . . 
+                . e b e . . . e b e . . . . . . 
+                . e e e . . . e e e . . . . . . 
+                `)
+            pause(1000)
+            obsidian.setImage(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . f 2 2 2 2 2 f 5 9 5 9 . . . . 
+                . f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+                . f 2 2 2 2 2 f 5 9 5 9 5 b 9 . 
+                b f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+                b f 2 2 2 2 2 f 5 9 5 9 . . . . 
+                b b b b b b b b b b b b b b . . 
+                e e e e e e e e e e b b b . . . 
+                e e e e e e e e e e b b b b . . 
+                e e e e e e e e e e b b b . . . 
+                e e e e e e e e e e b b b b . . 
+                . e b e . . . e b e . . . . . . 
+                . e e e . . . e e e . . . . . . 
+                `)
+            pause(1000)
             chargeblast = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . f f . . . . . f f f . . . . . 
-                f f f . f f f f f f f f f a a . 
-                f f f f f f f f f f f f f f a a 
-                a f f f f f f f f a f f f f f a 
-                a a a a a a a a a a a a a a a a 
-                a a a a a a a a a a a a a a a a 
-                a f f f f f f f f a f f f f f a 
-                f f f f f f f f f f f f f f a a 
-                f f f . f f f f f f f f f a a . 
-                . f f . . . . . f f f . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . 9 . 9 9 9 . 
+                . . . . . . . . . 9 . 9 . . . 9 
+                . . . . . . . . . . . . . . . 9 
+                . . . . . . . . . . 9 9 9 9 9 9 
+                . . . . . . . . . . 9 9 9 9 9 9 
+                . . . . . . . . . 9 9 9 9 9 9 9 
+                . . 9 9 9 . . . . 9 9 9 9 9 9 9 
+                9 9 9 . . 9 9 . 9 9 9 9 9 9 9 9 
+                . . . . . . 9 9 9 . 9 9 9 9 9 9 
+                . . . . . . . . . . 9 9 9 9 9 9 
+                . . . . . . . . . . 9 9 9 9 9 9 
+                . . . . . . . . . . . . . . . 9 
+                . . . . . . . . . 9 . 9 . . . 9 
+                . . . . . . . . . . 9 . 9 9 9 . 
                 . . . . . . . . . . . . . . . . 
                 `, obsidian, 80, 0)
-        })
-        pause(100)
-        if (info.score() >= 1500) {
-            if (LostSoul == true) {
-                timer.after(500, function () {
-                    chargeblast = sprites.createProjectileFromSprite(img`
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . f f . . . . . f f f . . . . . 
-                        f f f . f f f f f f f f f a a . 
-                        f f f f f f f f f f f f f f a a 
-                        a f f f f f f f f a f f f f f a 
-                        a a a a a a a a a a a a a a a a 
-                        a a a a a a a a a a a a a a a a 
-                        a f f f f f f f f a f f f f f a 
-                        f f f f f f f f f f f f f f a a 
-                        f f f . f f f f f f f f f a a . 
-                        . f f . . . . . f f f . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        `, obsidian, 80, 0)
-                })
-                pause(100)
-            }
+            LostSoul = false
+            timer.after(10000, function () {
+                LostSoul = true
+            })
         }
-        LostSoul = false
-        timer.after(10000, function () {
-            LostSoul = true
-        })
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite27, otherSprite2) {
@@ -221,152 +581,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite15
     tiles.setCurrentTilemap(tilemap`level6`)
     tiles.placeOnTile(obsidian, tiles.getTileLocation(123, 253))
 })
+scene.onOverlapTile(SpriteKind.t3enemy, assets.tile`transparency16`, function (sprite4, location3) {
+    sprites.destroy(sprite4)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (shards == true) {
-        projectile = sprites.createProjectileFromSprite(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . f f f f . . . . . . . . . . 
-            . f b a a b f . . . . . . . . . 
-            f b b a b a b f . . . . . . . . 
-            a a a b a a a a f . . . . . . . 
-            f b b a b a b f . . . . . . . . 
-            . f b a a b f . . . . . . . . . 
-            . . f f f f . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, obsidian, 110, 0)
-        shards = false
-        timer.after(250, function () {
-            shards = true
-        })
-    }
-})
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite256, otherSprite7) {
-    sprites.destroy(sprite256)
-    sprites.changeDataNumberBy(otherSprite7, "HP", -10)
-    if (sprites.readDataNumber(otherSprite7, "HP") <= 0) {
-        sprites.destroy(otherSprite7)
-        info.changeScoreBy(1000)
-        if (info.life() < 50) {
-            info.changeLifeBy(25)
-        }
-    }
-})
-scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile22`, function (sprite3, location2) {
-    sprites.destroy(sprite3)
-})
-info.onScore(1700, function () {
-    info.setLife(325)
-    controller.moveSprite(obsidian, 110, 110)
-})
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    obsidian,
-    [img`
-        . . . f b c f f f f . . . . . . 
-        . . f c a b c b f b f f . . . . 
-        . . f a b a b c a a b b f . . . 
-        . . f b c b c a a a a a b f . . 
-        . . f a a a a a a a a a b f . . 
-        . f a a f f b b b b a a b f . . 
-        . f a a f f f f f b a a b f . . 
-        . f a f f f a f f b a a b f . . 
-        . . f f 1 1 a f f b a a b f . . 
-        . . . f 1 1 1 1 f b a a b f f . 
-        . . . f f f f f f f b a a b f . 
-        . . . f c c c f 1 1 f b b f . . 
-        . . . f c c c f 1 1 f f f . . . 
-        . . f f b f b f b f f f . . . . 
-        . . f f f b f b f b f f . . . . 
-        . . . . f f b f b f . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . f b c f f f f . . . . . . 
-        . . f c c b c b f b f f . . . . 
-        . . f c b c b c b a b b f . . . 
-        . . f b c b c a a a a a b f . . 
-        . f a a a a a a a a a a b f . . 
-        . f a a f f b b b b a a b f . . 
-        . f a a f f f f f b a a b f . . 
-        . . f f f f a f f b a a b f f . 
-        . . . f 1 1 a f f b a a a b f . 
-        . . . f 1 1 1 1 f b a a a b f . 
-        . . . f f f f f 1 1 b b b f . . 
-        . . . f c c c f 1 1 f f f . . . 
-        . . f c c c c c f f c c f . . . 
-        . . f b f b f b f b f f . . . . 
-        . . . f b f b f b f f . . . . . 
-        `,img`
-        . . . f b c f f f f . . . . . . 
-        . . f c a b c b f b f f . . . . 
-        . . f a b a b c a a b b f . . . 
-        . . f b c b c a a a a a b f . . 
-        . . f a a a a a a a a a b f . . 
-        . f a a f f b b b b a a b f . . 
-        . f a a f f f f f b a a b f . . 
-        . f a f f f a f f b a a b f . . 
-        . . f f 1 1 a f f b a a b f . . 
-        . . . f 1 1 1 1 f b a a b f f . 
-        . . . f f f f f f f b a a b f . 
-        . . . f c c c f 1 1 f b b f . . 
-        . . . f c c c f 1 1 f f f . . . 
-        . . f f b f b f b f f f . . . . 
-        . . f f f b f b f b f f . . . . 
-        . . . . f f b f b f . . . . . . 
-        `],
-    600,
-    true
-    )
-})
-controller.combos.attachCombo("a+b", function () {
-    if (bleh == false) {
-        animation.runImageAnimation(
-        obsidian,
-        [img`
-            . . . . . f f c c f f . . . . . 
-            . . . . f a c b b c a f . . . . 
-            . . . f a b b a a b b a f . . . 
-            . . f c b d c b b c d b c f . . 
-            . . f b d b b c c b b d b f . . 
-            . f a a f b c f f c b f a a f . 
-            . a 1 1 a f a f f f a f 1 1 a . 
-            . f a a f f f a f a f f a a f . 
-            . f a a f f a f f f a f a a f . 
-            . a c c a 1 1 1 1 1 1 a c c a . 
-            . c c c f 1 1 f f 1 1 f c c c . 
-            . f c c f c b b b b c f c c f . 
-            . . f a c b b b b b b c a f . . 
-            . . f f c c c a a c c c f f . . 
-            . . . f f b f b f b f f f . . . 
-            . . . . f f b f b f b f f . . . 
-            `,img`
-            . . . . . f f c c f f . . . . . 
-            . . . . f a c b b c a f . . . . 
-            . . . f a b b a a b b a f . . . 
-            . . f c b d c b b c d b c f . . 
-            . . f b d b b c c b b d b f . . 
-            . f a a f b c f f c b f a a f . 
-            . f a a f f f f f f f f a a f . 
-            . f c c f f a f f a f f c c f . 
-            . f c c f f a f f a f f c c f . 
-            f f c c f 1 1 1 1 1 1 f c c f f 
-            f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
-            . f 1 1 f c b b b b c f 1 1 f . 
-            . . f a c b b b b b b c a f . . 
-            . . f f c c c a a c c c f f . . 
-            . . . f f b f b f b f f f . . . 
-            . . . . f f b f b f b f . . . . 
-            `],
-        1000,
-        false
-        )
-        timer.after(1, function () {
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 0) {
+        if (shards == true) {
             projectile = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
@@ -385,135 +605,936 @@ controller.combos.attachCombo("a+b", function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `, obsidian, 110, 0)
+            shards = false
+            timer.after(250, function () {
+                shards = true
+            })
+        }
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 3) {
+        if (shards == true) {
             projectile = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                a a a b a a a a f . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . 9 . . 9 9 9 . . . . . . . 
+                9 . 9 . 9 9 9 9 9 . . . . . . . 
+                . 9 . . 9 . 9 9 9 . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
-                `, obsidian, -110, 0)
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, obsidian, 110, 0)
+            shards = false
+            timer.after(250, function () {
+                shards = true
+            })
+        }
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 2) {
+        if (shards == true) {
             projectile = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
+                . 1 . . . . . . . . . . . . . . 
+                1 . . 1 . . . . . . . . . . . . 
+                . . . . . 1 1 1 1 1 1 1 1 1 1 . 
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                . . . 1 1 1 1 1 1 1 1 1 f f 1 f 
+                . . 1 1 1 1 1 1 1 1 1 1 f f 1 f 
+                . . . 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+                1 . . . . 1 1 1 1 1 1 1 1 1 1 . 
+                . . . 1 . . . . . . . . . . . . 
+                . . 1 . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                a a a b a a a a f . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
+                `, obsidian, 110, 0)
+            shards = false
+            timer.after(250, function () {
+                shards = true
+            })
+        }
+    }
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite256, otherSprite7) {
+    sprites.destroy(sprite256)
+    sprites.changeDataNumberBy(otherSprite7, "HP", -10)
+    if (sprites.readDataNumber(otherSprite7, "HP") <= 0) {
+        sprites.destroy(otherSprite7)
+        info.changeScoreBy(1000)
+        if (info.life() < 50) {
+            info.changeLifeBy(25)
+        }
+    }
+})
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile22`, function (sprite3, location2) {
+    sprites.destroy(sprite3)
+})
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`transparency16`, function (sprite8, location5) {
+    sprites.destroy(sprite8)
+})
+info.onScore(1700, function () {
+    info.setLife(325)
+    controller.moveSprite(obsidian, 110, 110)
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 0) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . f b c f f f f . . . . . . 
+            . . f c a b c b f b f f . . . . 
+            . . f a b a b c a a b b f . . . 
+            . . f b c b c a a a a a b f . . 
+            . . f a a a a a a a a a b f . . 
+            . f a a f f b b b b a a b f . . 
+            . f a a f f f f f b a a b f . . 
+            . f a f f f a f f b a a b f . . 
+            . . f f 1 1 a f f b a a b f . . 
+            . . . f 1 1 1 1 f b a a b f f . 
+            . . . f f f f f f f b a a b f . 
+            . . . f c c c f 1 1 f b b f . . 
+            . . . f c c c f 1 1 f f f . . . 
+            . . f f b f b f b f f f . . . . 
+            . . f f f b f b f b f f . . . . 
+            . . . . f f b f b f . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . f b c f f f f . . . . . . 
+            . . f c c b c b f b f f . . . . 
+            . . f c b c b c b a b b f . . . 
+            . . f b c b c a a a a a b f . . 
+            . f a a a a a a a a a a b f . . 
+            . f a a f f b b b b a a b f . . 
+            . f a a f f f f f b a a b f . . 
+            . . f f f f a f f b a a b f f . 
+            . . . f 1 1 a f f b a a a b f . 
+            . . . f 1 1 1 1 f b a a a b f . 
+            . . . f f f f f 1 1 b b b f . . 
+            . . . f c c c f 1 1 f f f . . . 
+            . . f c c c c c f f c c f . . . 
+            . . f b f b f b f b f f . . . . 
+            . . . f b f b f b f f . . . . . 
+            `,img`
+            . . . f b c f f f f . . . . . . 
+            . . f c a b c b f b f f . . . . 
+            . . f a b a b c a a b b f . . . 
+            . . f b c b c a a a a a b f . . 
+            . . f a a a a a a a a a b f . . 
+            . f a a f f b b b b a a b f . . 
+            . f a a f f f f f b a a b f . . 
+            . f a f f f a f f b a a b f . . 
+            . . f f 1 1 a f f b a a b f . . 
+            . . . f 1 1 1 1 f b a a b f f . 
+            . . . f f f f f f f b a a b f . 
+            . . . f c c c f 1 1 f b b f . . 
+            . . . f c c c f 1 1 f f f . . . 
+            . . f f b f b f b f f f . . . . 
+            . . f f f b f b f b f f . . . . 
+            . . . . f f b f b f . . . . . . 
+            `],
+        600,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 1) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . f 5 5 f f f f . . . . . . 
+            . . f b b 5 5 5 f 5 f f . . . . 
+            . . f 9 9 b 5 5 5 5 5 5 f . . . 
+            . . f b b 5 b 5 5 5 5 5 5 f . . 
+            . . f 5 5 b b 5 5 5 5 5 5 f . . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 f . . 
+            . f 5 5 d d f d f 5 5 5 5 f . . 
+            . f 5 f d d 6 f f 5 5 5 5 f . . 
+            . . f f d d 6 d f 5 5 5 5 f . . 
+            . . . f d d d d f 5 5 5 5 f f . 
+            . . . f f f f f f f 5 5 5 5 f . 
+            . . . f 9 9 9 f d d f 5 5 f . . 
+            . . . f 9 9 9 f d d f f f . . . 
+            . . f f 8 9 8 f 8 9 f f . . . . 
+            . . f f f 8 9 8 9 8 f f . . . . 
+            . . . . f 9 8 9 8 f . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . f f f f f f f . . . . . . 
+            . . f b b 5 5 5 f 5 f f . . . . 
+            . . f 9 9 b 5 5 5 5 5 5 f . . . 
+            . . f b b 5 b 5 5 5 5 5 5 f . . 
+            . f 5 5 5 b b 5 5 5 5 5 5 f . . 
+            . f 5 5 f f 5 5 5 5 5 5 5 f . . 
+            . f 5 5 d d f f f 5 5 5 5 f . . 
+            . . f f d d 6 1 f 5 5 5 5 f f . 
+            . . . f d d 6 1 f 5 5 5 5 5 f . 
+            . . . f d d d d f 5 5 5 5 5 f . 
+            . . . f f f f f d d 5 5 5 f . . 
+            . . . f 9 9 9 f d d f f f . . . 
+            . . f 9 9 9 9 9 f f 9 9 f . . . 
+            . . f 8 9 8 9 8 9 8 f f . . . . 
+            . . . f 8 9 8 9 8 f f . . . . . 
+            `,img`
+            . . . f 5 5 f f f f . . . . . . 
+            . . f b b 5 5 5 f 5 f f . . . . 
+            . . f 9 9 b 5 5 5 5 5 5 f . . . 
+            . . f b b 5 b 5 5 5 5 5 5 f . . 
+            . . f 5 5 b b 5 5 5 5 5 5 f . . 
+            . f 5 5 5 5 5 5 5 5 5 5 5 f . . 
+            . f 5 5 d d f d f 5 5 5 5 f . . 
+            . f 5 f d d 6 f f 5 5 5 5 f . . 
+            . . f f d d 6 1 f 5 5 5 5 f . . 
+            . . . f d d d d f 5 5 5 5 f f . 
+            . . . f f f f f f f 5 5 5 5 f . 
+            . . . f 9 9 9 f d d f 5 5 f . . 
+            . . . f 9 9 9 f d d f f f . . . 
+            . . f f 8 9 8 9 8 9 f f . . . . 
+            . . f f 9 8 9 8 9 8 f f . . . . 
+            . . . . f f 8 9 8 f . . . . . . 
+            `],
+        600,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 2) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . 1 . . . 1 . . . . . . . 
+            . . . 1 . . . . . 1 . . . . . . 
+            . . . 1 . . . . . 1 . . . . . . 
+            . . . 1 1 1 1 1 1 1 . . . . . . 
+            . . . 1 f 1 1 f 1 1 . . . . . . 
+            . . . 1 f 1 1 f 1 1 . . . . . . 
+            . . . 1 1 1 1 1 1 1 . . . . . . 
+            . . . b 1 1 1 1 1 . . . . . . . 
+            . . . . b c c c . . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . f . . f . b . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . 1 . . . 1 . . . . . . . 
+            . . . 1 . . . . . 1 . . . . . . 
+            . . . 1 . . . . . 1 . . . . . . 
+            . . . 1 1 1 1 1 1 1 . . . . . . 
+            . . . 1 f 1 1 f 1 1 . . . . . . 
+            . . . 1 f 1 1 f 1 1 . . . . . . 
+            . . . 1 1 1 1 1 1 1 . . . . . . 
+            . . . b 1 1 1 1 1 . . . . . . . 
+            . . . . b c c c . . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . f . . . f . b . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . 1 . . . 1 . . . . . . . 
+            . . . 1 . . . . . 1 . . . . . . 
+            . . . 1 . . . . . 1 . . . . . . 
+            . . . 1 1 1 1 1 1 1 . . . . . . 
+            . . . 1 f 1 1 f 1 1 . . . . . . 
+            . . . 1 f 1 1 f 1 1 . . . . . . 
+            . . . 1 1 1 1 1 1 1 . . . . . . 
+            . . . b 1 1 1 1 1 . . . . . . . 
+            . . . . b c c c . . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . f . . f . b . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . 1 . . . 1 . . . . . . . 
+            . . . 1 . . . . . 1 . . . . . . 
+            . . . 1 . . . . . 1 . . . . . . 
+            . . . 1 1 1 1 1 1 1 . . . . . . 
+            . . . 1 f 1 1 f 1 1 . . . . . . 
+            . . . 1 f 1 1 f 1 1 . . . . . . 
+            . . . 1 1 1 1 1 1 1 . . . . . . 
+            . . . b 1 1 1 1 1 . . . . . . . 
+            . . . . b c c c . . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . . c c c c c . . . . . . . 
+            . . . f . . . f . b . . . . . . 
+            `],
+        500,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 3) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . 9 5 9 5 f 2 2 2 2 2 f . 
+            . . 9 5 b 5 b 5 f 2 2 2 2 2 f . 
+            . 9 b 5 9 5 9 5 f 2 2 2 2 2 f . 
+            . . 9 5 b 5 b 5 f 2 2 2 2 2 f b 
+            . . . . 9 5 9 5 f 2 2 2 2 2 f b 
+            . . b b b b b b b b b b b b b b 
+            . . . b b b e e e e e e e e e e 
+            . . b b b b e e e e e e e e e e 
+            . . . b b b e e e e e e e e e e 
+            . . b b b b e e e e e e e e e e 
+            . . . . . . e b e . . . e b e . 
+            . . . . . . e e e . . . e e e . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . 9 . 9 . . . . . . . . 
+            . . . . 9 5 9 5 f 2 2 2 2 2 f . 
+            . . 9 5 b 5 b 5 f 2 2 2 2 2 f . 
+            . 9 b 5 9 5 9 5 f 2 2 2 2 2 f . 
+            . . 9 5 b 5 b 5 f 2 2 2 2 2 f b 
+            . . . . 9 5 9 5 f 2 2 2 2 2 f b 
+            . . b b b b b b b b b b b b b b 
+            . . . b b b e e e e e e e e e e 
+            . . b b b b e e e e e e e e e e 
+            . . . b b b e e e e e e e e e e 
+            . . b b b b e e e e e e e e e e 
+            . . . . . . . e e f f . e e f f 
+            . . . . . . . e b e . . e b e . 
+            . . . . . . . . e e f . . e e f 
+            `],
+        500,
+        true
+        )
+    }
+})
+controller.combos.attachCombo("a+b", function () {
+    if (bleh == false) {
+        if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 0) {
+            animation.runImageAnimation(
+            obsidian,
+            [img`
+                . . . . . f f c c f f . . . . . 
+                . . . . f a c b b c a f . . . . 
+                . . . f a b b a a b b a f . . . 
+                . . f c b d c b b c d b c f . . 
+                . . f b d b b c c b b d b f . . 
+                . f a a f b c f f c b f a a f . 
+                . a 1 1 a f a f f f a f 1 1 a . 
+                . f a a f f f a f a f f a a f . 
+                . f a a f f a f f f a f a a f . 
+                . a c c a 1 1 1 1 1 1 a c c a . 
+                . c c c f 1 1 f f 1 1 f c c c . 
+                . f c c f c b b b b c f c c f . 
+                . . f a c b b b b b b c a f . . 
+                . . f f c c c a a c c c f f . . 
+                . . . f f b f b f b f f f . . . 
+                . . . . f f b f b f b f f . . . 
+                `,img`
+                . . . . . f f c c f f . . . . . 
+                . . . . f a c b b c a f . . . . 
+                . . . f a b b a a b b a f . . . 
+                . . f c b d c b b c d b c f . . 
+                . . f b d b b c c b b d b f . . 
+                . f a a f b c f f c b f a a f . 
+                . f a a f f f f f f f f a a f . 
+                . f c c f f a f f a f f c c f . 
+                . f c c f f a f f a f f c c f . 
+                f f c c f 1 1 1 1 1 1 f c c f f 
+                f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
+                . f 1 1 f c b b b b c f 1 1 f . 
+                . . f a c b b b b b b c a f . . 
+                . . f f c c c a a c c c f f . . 
+                . . . f f b f b f b f f f . . . 
+                . . . . f f b f b f b f . . . . 
+                `],
+            1000,
+            false
+            )
+            timer.after(1, function () {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    a a a b a a a a f . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 110, 0)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    a a a b a a a a f . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, -110, 0)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    a a a b a a a a f . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 110, -110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    a a a b a a a a f . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 110, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    a a a b a a a a f . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, -110, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    a a a b a a a a f . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, -110, -110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    a a a b a a a a f . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 0, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    a a a b a a a a f . . . . . . . 
+                    f b b a b a b f . . . . . . . . 
+                    . f b a a b f . . . . . . . . . 
+                    . . f f f f . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 0, -110)
+                bleh = true
+                info.startCountdown(60)
+            })
+        }
+        if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 1) {
+            animation.runImageAnimation(
+            obsidian,
+            [img`
+                . . . . . f f 5 5 f f . . . . . 
+                . . . . f b 5 b b 5 b f . . . . 
+                . . . f 5 b b 9 9 b b 5 f . . . 
+                . . f 5 b 9 9 b b 9 9 b 5 f . . 
+                . . f b 5 b b 9 9 b b 5 b f . . 
+                . f 5 5 b b f b b f b b 5 5 f . 
+                . f 5 5 f 5 5 f f 5 5 f 5 5 f . 
+                . f 5 5 d f f d d f f d 5 5 f . 
+                . f 5 9 f 6 6 d d 6 6 f 9 5 f . 
+                f f 5 5 d d d d d d d d 5 5 f f 
+                f 9 6 6 d d d f f d d d 6 6 9 f 
+                . f 6 6 8 8 9 9 9 9 8 8 6 6 f . 
+                . . f 8 8 9 9 9 9 9 9 8 8 f . . 
+                . . f f 9 8 8 8 8 8 8 9 f f . . 
+                . . . f f 9 9 9 9 9 9 f f . . . 
+                . . . . f 8 8 9 9 8 8 f f . . . 
+                `,img`
+                . . . . . f f 5 5 f f . . . . . 
+                . . . . f b 5 b b 5 b f . . . . 
+                . . . f 5 b b 9 9 b b 5 f . . . 
+                . . f 5 b 9 9 b b 9 9 b 5 f . . 
+                . . f b 5 b b 9 9 b b 5 b f . . 
+                . f 5 5 b b 5 b b 5 b b 5 5 f . 
+                . f 5 5 f 5 5 5 5 5 5 f 5 5 f . 
+                . f 5 5 d f f d d f f d 5 5 f . 
+                . f 5 9 d 1 6 d d 6 1 d 9 5 f . 
+                f f 5 5 d d d d d d d d 5 5 f f 
+                f 9 1 1 d d d f f d d d 1 1 9 f 
+                . f 1 1 8 8 9 9 9 9 8 8 1 1 f . 
+                . . f 8 8 9 9 9 9 9 9 8 8 f . . 
+                . . f f 9 8 8 8 8 8 8 9 f f . . 
+                . . . f f 9 9 9 9 9 9 f f . . . 
+                . . . . f 8 8 9 9 8 8 f . . . . 
+                `],
+            1000,
+            false
+            )
+            timer.after(1, function () {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    9 9 . . . . . . . . . . . . . . 
+                    9 9 9 9 9 . . . . . . . . . . . 
+                    9 9 9 9 9 9 9 9 . . . . . . . . 
+                    9 9 9 9 9 9 9 9 9 9 9 9 9 9 . . 
+                    9 9 9 9 9 9 9 9 9 9 9 9 9 9 . . 
+                    9 9 9 9 9 9 9 9 . . . . . . . . 
+                    9 9 9 9 9 . . . . . . . . . . . 
+                    9 9 . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 110, 0)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . 9 9 . . 
+                    . . . . . . . . . 9 9 9 9 9 . . 
+                    . . . . . . 9 9 9 9 9 9 9 9 . . 
+                    9 9 9 9 9 9 9 9 9 9 9 9 9 9 . . 
+                    9 9 9 9 9 9 9 9 9 9 9 9 9 9 . . 
+                    . . . . . . 9 9 9 9 9 9 9 9 . . 
+                    . . . . . . . . . 9 9 9 9 9 . . 
+                    . . . . . . . . . . . . 9 9 . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, -110, 0)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . 9 9 . . . . . . 
+                    . . . . . . . 9 9 9 . . . . . . 
+                    . . . . . . 9 9 9 . . . . . . . 
+                    . . . . . 9 9 9 . . . . . . . . 
+                    . . . . 9 9 9 . . . . . . . . . 
+                    9 . . 9 9 9 . . . . . . . . . . 
+                    9 9 9 9 9 . . . . . . . . . . . 
+                    . 9 9 9 . . . . . . . . . . . . 
+                    9 9 9 9 . . . . . . . . . . . . 
+                    9 9 . 9 9 . . . . . . . . . . . 
+                    `, obsidian, 110, -110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    9 9 . 9 9 . . . . . . . . . . . 
+                    9 9 9 9 . . . . . . . . . . . . 
+                    . 9 9 9 . . . . . . . . . . . . 
+                    9 9 9 9 9 . . . . . . . . . . . 
+                    9 . . 9 9 9 . . . . . . . . . . 
+                    . . . . 9 9 9 . . . . . . . . . 
+                    . . . . . 9 9 9 . . . . . . . . 
+                    . . . . . . 9 9 9 . . . . . . . 
+                    . . . . . . . 9 9 9 . . . . . . 
+                    . . . . . . . . 9 9 . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 110, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . 9 9 . 9 9 
+                    . . . . . . . . . . . . 9 9 9 9 
+                    . . . . . . . . . . . . 9 9 9 . 
+                    . . . . . . . . . . . 9 9 9 9 9 
+                    . . . . . . . . . . 9 9 9 . . 9 
+                    . . . . . . . . . 9 9 9 . . . . 
+                    . . . . . . . . 9 9 9 . . . . . 
+                    . . . . . . . 9 9 9 . . . . . . 
+                    . . . . . . 9 9 9 . . . . . . . 
+                    . . . . . . 9 9 . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, -110, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . 9 9 . . . . . . . . 
+                    . . . . . . 9 9 9 . . . . . . . 
+                    . . . . . . . 9 9 9 . . . . . . 
+                    . . . . . . . . 9 9 9 . . . . . 
+                    . . . . . . . . . 9 9 9 . . . . 
+                    . . . . . . . . . . 9 9 9 . . 9 
+                    . . . . . . . . . . . 9 9 9 9 9 
+                    . . . . . . . . . . . . 9 9 9 . 
+                    . . . . . . . . . . . . 9 9 9 9 
+                    . . . . . . . . . . . 9 9 . 9 9 
+                    `, obsidian, -110, -110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . 9 9 9 9 9 9 9 9 . . . . 
+                    . . . . 9 9 9 9 9 9 9 9 . . . . 
+                    . . . . . 9 9 9 9 9 9 . . . . . 
+                    . . . . . 9 9 9 9 9 9 . . . . . 
+                    . . . . . 9 9 9 9 9 9 . . . . . 
+                    . . . . . . 9 9 9 9 . . . . . . 
+                    . . . . . . 9 9 9 9 . . . . . . 
+                    . . . . . . 9 9 9 9 . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    `, obsidian, 0, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . . 9 9 . . . . . . . 
+                    . . . . . . 9 9 9 9 . . . . . . 
+                    . . . . . . 9 9 9 9 . . . . . . 
+                    . . . . . . 9 9 9 9 . . . . . . 
+                    . . . . . 9 9 9 9 9 9 . . . . . 
+                    . . . . . 9 9 9 9 9 9 . . . . . 
+                    . . . . . 9 9 9 9 9 9 . . . . . 
+                    . . . . 9 9 9 9 9 9 9 9 . . . . 
+                    . . . . 9 9 9 9 9 9 9 9 . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 0, -110)
+                bleh = true
+                info.startCountdown(60)
+            })
+        }
+        if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 1) {
+            animation.runImageAnimation(
+            obsidian,
+            [img`
+                . . . . f . . . . f . . . . . . 
+                . . . f . . . . . . f . . . . . 
+                . . . f . . . . . . f . . . . . 
+                . . . f f f f f f f f . . . . . 
+                . . . f 1 1 f f 1 1 f . . . . . 
+                . . . f 1 1 f f 1 1 f . . . . . 
+                . . . f f f f f f f f . . . . . 
+                . . . f f f f f f f f . . . . . 
+                . . . . f f f f f f . . . . . . 
+                . . . . . f f f f . . . . . . . 
+                f f f . f f f f f f . f f f f . 
+                f . f f f f f f f f f f . . f . 
+                . . f f f f f f f f f . . . . . 
+                . . f . f f f f f f . f f . . . 
+                . f . f . f f . f . f . . f . . 
+                . f . . f . . f . f . . f . f . 
+                `,img`
                 . . . . . . . . . . . . . . . . 
+                . . . . f . . . . f . . . . . . 
+                . . . f . . . . . . f . . . . . 
+                . . . f . . . . . . f . . . . . 
+                . . . f f f f f f f f . . . . . 
+                . . . f 1 1 f f 1 1 f . . . . . 
+                . . . f 1 1 f f 1 1 f . . . . . 
+                . . . f f f f f f f f . . . . . 
+                . f . f f f f f f f f . . . . . 
+                . . f . f f f f f f . . . . . . 
+                . . . f f f f f f . . . . . . . 
+                . . . f f f f f f f . . . . . . 
+                . . . . f f f f f f . . . . . . 
+                . . . . f f f f f f . . . . . . 
+                . . . . f f f f f f . . . . . . 
+                . . . . . f . . f . f . . . . . 
+                `,img`
                 . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, 110, -110)
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                a a a b a a a a f . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, 110, 110)
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                a a a b a a a a f . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, -110, 110)
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                a a a b a a a a f . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, -110, -110)
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                a a a b a a a a f . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, 0, 110)
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                a a a b a a a a f . . . . . . . 
-                f b b a b a b f . . . . . . . . 
-                . f b a a b f . . . . . . . . . 
-                . . f f f f . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, obsidian, 0, -110)
-            bleh = true
-            info.startCountdown(60)
-        })
+                . . . . 1 . . . . 1 . . . . . . 
+                . . . 1 . . . . . . 1 . . . . . 
+                . . . 1 . . . . . . 1 . . . . . 
+                . . . 1 1 1 1 1 1 1 1 . . . . . 
+                . . . 1 1 1 1 1 1 1 1 . . . . . 
+                . . . 1 f f 1 1 f f 1 . . . . . 
+                . . . 1 f f 1 1 f f 1 . . . . . 
+                . b . 1 1 1 1 1 1 1 1 . . . . . 
+                . . b . 1 1 1 1 1 1 . . . . . . 
+                . . . b b f f c c . . . . . . . 
+                . . . b c c f c c c . . . . . . 
+                . . . . c c f c c c . . . . . . 
+                . . . . c c c f c c . . . . . . 
+                . . . . c c c f c c . . . . . . 
+                . . . . . f . . f . b . . . . . 
+                `],
+            1000,
+            false
+            )
+            timer.after(1, function () {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    1 . . . . . . . . . . . . . . . 
+                    . . 1 . . . . . . . . . . . . . 
+                    . . . . 1 1 1 1 1 1 1 1 1 1 . . 
+                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                    . . 1 1 1 1 1 1 1 1 1 f f 1 f . 
+                    . 1 1 1 1 1 1 1 1 1 1 f f 1 f . 
+                    . . 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                    . . . . 1 1 1 1 1 1 1 1 1 1 . . 
+                    . . 1 . . . . . . . . . . . . . 
+                    . 1 . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 110, 0)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . 1 . 
+                    . . . . . . . . . . . . 1 . . 1 
+                    . 1 1 1 1 1 1 1 1 1 1 . . . . . 
+                    1 1 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                    f 1 f f 1 1 1 1 1 1 1 1 1 . . . 
+                    f 1 f f 1 1 1 1 1 1 1 1 1 1 . . 
+                    1 1 1 1 1 1 1 1 1 1 1 1 1 . . . 
+                    1 1 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                    . 1 1 1 1 1 1 1 1 1 1 . . . . 1 
+                    . . . . . . . . . . . . 1 . . . 
+                    . . . . . . . . . . . . . 1 . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, -110, 0)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . b . . . . . 
+                    . . . . . . . . . b . . . . . . 
+                    . . . . . . . b b . . . . . . . 
+                    . . . . . b b b b . . . . . . . 
+                    . . . . b b b b . . . . . . . . 
+                    . . . b b b b b . . . . . . . . 
+                    b b b b b b b . . . . . . . . . 
+                    b b b b b b . . . . . . . . . . 
+                    . b b b b . . . . . . . . . . . 
+                    . b b b b . . . . . . . . . . . 
+                    b . . b b . . . . . . . . . . . 
+                    `, obsidian, 110, -110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    b . . b b . . . . . . . . . . . 
+                    . b b b b . . . . . . . . . . . 
+                    . b b b b . . . . . . . . . . . 
+                    b b b b b b . . . . . . . . . . 
+                    b b b b b b b . . . . . . . . . 
+                    . . . b b b b b . . . . . . . . 
+                    . . . . b b b b . . . . . . . . 
+                    . . . . . b b b b . . . . . . . 
+                    . . . . . . . b b . . . . . . . 
+                    . . . . . . . . . b . . . . . . 
+                    . . . . . . . . . . b . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 110, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . b b . . b 
+                    . . . . . . . . . . . b b b b . 
+                    . . . . . . . . . . . b b b b . 
+                    . . . . . . . . . . b b b b b b 
+                    . . . . . . . . . b b b b b b b 
+                    . . . . . . . . b b b b b . . . 
+                    . . . . . . . . b b b b . . . . 
+                    . . . . . . . b b b b . . . . . 
+                    . . . . . . . b b . . . . . . . 
+                    . . . . . . b . . . . . . . . . 
+                    . . . . . b . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, -110, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . b . . . . . . . . . . 
+                    . . . . . . b . . . . . . . . . 
+                    . . . . . . . b b . . . . . . . 
+                    . . . . . . . b b b b . . . . . 
+                    . . . . . . . . b b b b . . . . 
+                    . . . . . . . . b b b b b . . . 
+                    . . . . . . . . . b b b b b b b 
+                    . . . . . . . . . . b b b b b b 
+                    . . . . . . . . . . . b b b b . 
+                    . . . . . . . . . . . b b b b . 
+                    . . . . . . . . . . . b b . . b 
+                    `, obsidian, -110, -110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . 1 . . . . . . 1 . . . . 
+                    . . . . . . . . . . . . 1 . . . 
+                    . . 1 . . 1 . 1 . 1 . . . . . . 
+                    . . . 1 . 1 1 1 1 1 . 1 . . . . 
+                    . . . . . 1 1 1 1 1 . . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 f f 1 1 . . . . . 
+                    . . . . 1 1 1 f f 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . . 1 1 f f 1 . . . . . . 
+                    `, obsidian, 0, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . 1 f f 1 1 . . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 f f 1 1 1 . . . . . 
+                    . . . . 1 1 f f 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . 1 1 1 1 1 1 1 . . . . . 
+                    . . . . . 1 1 1 1 1 . . . . . . 
+                    . . . 1 . 1 1 1 1 1 . 1 . . . . 
+                    . . . . . 1 . 1 . 1 . . 1 . . . 
+                    . . 1 . . . . . . . . . . . . . 
+                    . . . 1 . . . . . . 1 . . . . . 
+                    `, obsidian, 0, -110)
+                bleh = true
+                info.startCountdown(60)
+            })
+        }
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.cosmetic2, function (sprite, otherSprite) {
+    if (info.score() >= 1000) {
+        obsidian.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . 1 . . . . 1 . . . . . 
+            . . . . 1 . . . . . . 1 . . . . 
+            . . . . 1 . . . . . . 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 f f 1 1 f f 1 . . . . 
+            . . . . 1 f f 1 1 f f 1 . . . . 
+            . . b . 1 1 1 1 1 1 1 1 . . . . 
+            . . . b . 1 1 1 1 1 1 . . . . . 
+            . . . . b b f f c c . . . . . . 
+            . . . . b c c f c c c . . . . . 
+            . . . . . c c f c c c . . . . . 
+            . . . . . c c c f c c . . . . . 
+            . . . . . c c c f c c . . . . . 
+            . . . . . . f . . f . b . . . . 
+            `)
+        sprites.setDataNumber(obsidian, "CosmeticPoints", 2)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite6, location4) {
@@ -547,203 +1568,293 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.miniboss, function (sprite276, o
         })
     }
 })
-scene.onOverlapTile(SpriteKind.t3enemy, sprites.swamp.swampTile16, function (sprite4, location3) {
-    sprites.destroy(sprite4)
-})
 info.onCountdownEnd(function () {
     bleh = false
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.cosmetic_peak, function (sprite, otherSprite) {
+    if (info.score() >= 1500) {
+        obsidian.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . f 2 2 2 2 2 f 5 9 5 9 . . . . 
+            . f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+            . f 2 2 2 2 2 f 5 9 5 9 5 b 9 . 
+            b f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+            b f 2 2 2 2 2 f 5 9 5 9 . . . . 
+            b b b b b b b b b b b b b b . . 
+            e e e e e e e e e e b b b . . . 
+            e e e e e e e e e e b b b b . . 
+            e e e e e e e e e e b b b . . . 
+            e e e e e e e e e e b b b b . . 
+            . e b e . . . e b e . . . . . . 
+            . e e e . . . e e e . . . . . . 
+            `)
+        sprites.setDataNumber(obsidian, "CosmeticPoints", 3)
+    }
 })
 sprites.onCreated(SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite11) {
     sprites.setDataNumber(sprite11, "HP", 1000)
 })
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    obsidian,
-    [img`
-        . . . . . . f f f f c b f . . . 
-        . . . . f f b f b c b a c f . . 
-        . . . f b b a a c b a b a f . . 
-        . . f b a a a a a c b c b f . . 
-        . . f b a a a a a a a a a f . . 
-        . . f b a a b b b b f f a a f . 
-        . . f b a a b f f f f f a a f . 
-        . . f b a a b f f a f f f a f . 
-        . . f b a a b f f a 1 1 f f . . 
-        . f f b a a b f 1 1 1 1 f . . . 
-        . f b a a b f f f f f f f . . . 
-        . . f b b f 1 1 f c c c f . . . 
-        . . . f f f 1 1 f c c c f . . . 
-        . . . . f f f b f b f b f f . . 
-        . . . . f f b f b f b f f f . . 
-        . . . . . . f b f b f f . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f f c b f . . . 
-        . . . . f f b f b c b c c f . . 
-        . . . f b b a b c b c b c f . . 
-        . . f b a a a a a c b c b f . . 
-        . . f b a a a a a a a a a a f . 
-        . . f b a a b b b b f f a a f . 
-        . . f b a a b f f f f f a a f . 
-        . f f b a a b f f a f f f f . . 
-        . f b a a a b f f a 1 1 f . . . 
-        . f b a a a b f 1 1 1 1 f . . . 
-        . . f b b b 1 1 f f f f f . . . 
-        . . . f f f 1 1 f c c c f . . . 
-        . . . f c c f f c c c c c f . . 
-        . . . . f f b f b f b f b f . . 
-        . . . . . f f b f b f b f . . . 
-        `,img`
-        . . . . . . f f f f c b f . . . 
-        . . . . f f b f b c b a c f . . 
-        . . . f b b a a c b a b a f . . 
-        . . f b a a a a a c b c b f . . 
-        . . f b a a a a a a a a a f . . 
-        . . f b a a b b b b f f a a f . 
-        . . f b a a b f f f f f a a f . 
-        . . f b a a b f f a f f f a f . 
-        . . f b a a b f f a 1 1 f f . . 
-        . f f b a a b f 1 1 1 1 f . . . 
-        . f b a a b f f f f f f f . . . 
-        . . f b b f 1 1 f c c c f . . . 
-        . . . f f f 1 1 f c c c f . . . 
-        . . . . f f f b f b f b f f . . 
-        . . . . f f b f b f b f f f . . 
-        . . . . . . f b f b f f . . . . 
-        `],
-    600,
-    true
-    )
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile61`, function (sprite4, location3) {
+    tiles.setCurrentTilemap(tilemap`level6`)
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(127, 127))
 })
-sprites.onDestroyed(SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite12) {
-    animation.runMovementAnimation(
-    you,
-    animation.animationPresets(animation.flyToCenter),
-    2000,
-    false
-    )
-    you = sprites.create(img`
-        ................
-        ......2..2......
-        ....222..2222...
-        ...2222...222...
-        ...2.2.....22...
-        ...2........2...
-        ...2fffaafff2...
-        ...2ffaffaff2...
-        ....fa2222af....
-        ....af2ff2fa....
-        ....fa2222af....
-        ...fffaffafff...
-        ...ffffaaffff...
-        ...f11111111f...
-        ...f11111111f...
-        ...ff111111ff...
-        .aaff111111ffaaa
-        aa.ff111111ff..a
-        a.22f111111f22.a
-        a.2.f111111f.2.a
-        a.2.f111111f.2.a
-        a.2..211112f2.aa
-        aa.2.221122ffff.
-        .aaff222222fffff
-        ..ff..2222ffffff
-        ..ff..2222111.ff
-        ..ff..f22f11f..f
-        ..ff..f1f11ff..f
-        ..ff..fffffff..f
-        ..ff..ffffff...f
-        ..ff..f1f1ff...f
-        .fff.f11f1ff..ff
-        .ff..f1ff1ff..ff
-        .ff..11ff111..ff
-        .ff..fffffff..ff
-        .ff..ffff1ff..ff
-        .ff..ff1f1ff..ff
-        .22..f11f11f..22
-        .2..f11fff1f..22
-        .2..f1ffff11...2
-        ..2.ffffffff...2
-        ....ff....ff....
-        ....ff....ff....
-        ....f......ff...
-        ...22......ff...
-        ...2.......ff...
-        ...2........22..
-        ...2........22..
-        `, SpriteKind.Finale_Ultima_Boss_Phase_2)
-    projectile = sprites.createProjectileFromSprite(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        2 f f f . . . . . . . 2 . . . . 
-        2 2 f f f . . . . . 2 . 2 . . . 
-        f 2 2 2 f f f f f 2 . . . 2 . . 
-        f f f 2 2 f f f f f f . . . 2 . 
-        f f f f f 2 2 f f f f f f f f 2 
-        f f f f f 2 2 f f f f f f f f 2 
-        f f f 2 2 f f f f f f . . . 2 . 
-        f 2 2 2 f f f f f 2 . . . 2 . . 
-        2 2 f f f . . . . . 2 . 2 . . . 
-        2 f f f . . . . . . . 2 . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, you, 110, 0)
-    projectile = sprites.createProjectileFromSprite(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . 2 . . . . . . . f f f 2 
-        . . . 2 . 2 . . . . . f f f 2 2 
-        . . 2 . . . 2 f f f f f 2 2 2 f 
-        . 2 . . . f f f f f f 2 2 f f f 
-        2 f f f f f f f f 2 2 f f f f f 
-        2 f f f f f f f f 2 2 f f f f f 
-        . 2 . . . f f f f f f 2 2 f f f 
-        . . 2 . . . 2 f f f f f 2 2 2 f 
-        . . . 2 . 2 . . . . . f f f 2 2 
-        . . . . 2 . . . . . . . f f f 2 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, you, -110, 0)
-    projectile = sprites.createProjectileFromSprite(img`
-        . . . . . . . 2 2 . . . . . . . 
-        . . . . . . 2 f f 2 . . . . . . 
-        . . . . . 2 . f f . 2 . . . . . 
-        . . . . 2 . . f f . . 2 . . . . 
-        . . . 2 . . . f f . . . 2 . . . 
-        . . . . 2 . f f f f . 2 . . . . 
-        . . . . . 2 f f f f 2 . . . . . 
-        . . . . . f f f f f f . . . . . 
-        . . . . . f f f f f f . . . . . 
-        . . . . . f f 2 2 f f . . . . . 
-        . . . . . f f 2 2 f f . . . . . 
-        . . . . f f 2 f f 2 f f . . . . 
-        . . . f f 2 2 f f 2 2 f f . . . 
-        . . . f f 2 f f f f 2 f f . . . 
-        . . . f 2 2 f f f f 2 2 f . . . 
-        . . . 2 2 f f f f f f 2 2 . . . 
-        `, you, 0, 110)
-    projectile = sprites.createProjectileFromSprite(img`
-        . . . 2 2 f f f f f f 2 2 . . . 
-        . . . f 2 2 f f f f 2 2 f . . . 
-        . . . f f 2 f f f f 2 f f . . . 
-        . . . f f 2 2 f f 2 2 f f . . . 
-        . . . . f f 2 f f 2 f f . . . . 
-        . . . . . f f 2 2 f f . . . . . 
-        . . . . . f f 2 2 f f . . . . . 
-        . . . . . f f f f f f . . . . . 
-        . . . . . f f f f f f . . . . . 
-        . . . . . 2 f f f f 2 . . . . . 
-        . . . . 2 . f f f f . 2 . . . . 
-        . . . 2 . . . f f . . . 2 . . . 
-        . . . . 2 . . f f . . 2 . . . . 
-        . . . . . 2 . f f . 2 . . . . . 
-        . . . . . . 2 f f 2 . . . . . . 
-        . . . . . . . 2 2 . . . . . . . 
-        `, you, 0, -110)
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 0) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . . f f f f c b f . . . 
+            . . . . f f b f b c b a c f . . 
+            . . . f b b a a c b a b a f . . 
+            . . f b a a a a a c b c b f . . 
+            . . f b a a a a a a a a a f . . 
+            . . f b a a b b b b f f a a f . 
+            . . f b a a b f f f f f a a f . 
+            . . f b a a b f f a f f f a f . 
+            . . f b a a b f f a 1 1 f f . . 
+            . f f b a a b f 1 1 1 1 f . . . 
+            . f b a a b f f f f f f f . . . 
+            . . f b b f 1 1 f c c c f . . . 
+            . . . f f f 1 1 f c c c f . . . 
+            . . . . f f f b f b f b f f . . 
+            . . . . f f b f b f b f f f . . 
+            . . . . . . f b f b f f . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . f f f f c b f . . . 
+            . . . . f f b f b c b c c f . . 
+            . . . f b b a b c b c b c f . . 
+            . . f b a a a a a c b c b f . . 
+            . . f b a a a a a a a a a a f . 
+            . . f b a a b b b b f f a a f . 
+            . . f b a a b f f f f f a a f . 
+            . f f b a a b f f a f f f f . . 
+            . f b a a a b f f a 1 1 f . . . 
+            . f b a a a b f 1 1 1 1 f . . . 
+            . . f b b b 1 1 f f f f f . . . 
+            . . . f f f 1 1 f c c c f . . . 
+            . . . f c c f f c c c c c f . . 
+            . . . . f f b f b f b f b f . . 
+            . . . . . f f b f b f b f . . . 
+            `,img`
+            . . . . . . f f f f c b f . . . 
+            . . . . f f b f b c b a c f . . 
+            . . . f b b a a c b a b a f . . 
+            . . f b a a a a a c b c b f . . 
+            . . f b a a a a a a a a a f . . 
+            . . f b a a b b b b f f a a f . 
+            . . f b a a b f f f f f a a f . 
+            . . f b a a b f f a f f f a f . 
+            . . f b a a b f f a 1 1 f f . . 
+            . f f b a a b f 1 1 1 1 f . . . 
+            . f b a a b f f f f f f f . . . 
+            . . f b b f 1 1 f c c c f . . . 
+            . . . f f f 1 1 f c c c f . . . 
+            . . . . f f f b f b f b f f . . 
+            . . . . f f b f b f b f f f . . 
+            . . . . . . f b f b f f . . . . 
+            `],
+        600,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 1) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . . f f f f 5 5 f . . . 
+            . . . . f f 5 f 5 5 5 b b f . . 
+            . . . f 5 5 5 5 5 5 b 9 9 f . . 
+            . . f 5 5 5 5 5 5 b 5 b b f . . 
+            . . f 5 5 5 5 5 5 b b 5 5 f . . 
+            . . f 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . . f 5 5 5 5 f d f d d 5 5 f . 
+            . . f 5 5 5 5 f f 6 d d f 5 f . 
+            . . f 5 5 5 5 f 1 6 d d f f . . 
+            . f f 5 5 5 5 f d d d d f . . . 
+            . f 5 5 5 5 f f f f f f f . . . 
+            . . f 5 5 f d d f 9 9 9 f . . . 
+            . . . f f f d d f 9 9 9 f . . . 
+            . . . . f f f 8 f 8 f 8 f f . . 
+            . . . . f f 8 f 8 f 8 f f f . . 
+            . . . . . . f 8 f 8 f f . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . f f f f f f f . . . 
+            . . . . f f 5 f 5 5 5 b b f . . 
+            . . . f 5 5 5 5 5 5 b 9 9 f . . 
+            . . f 5 5 5 5 5 5 b 5 b b f . . 
+            . . f 5 5 5 5 5 5 b b 5 5 5 f . 
+            . . f 5 5 5 5 5 5 5 f f 5 5 f . 
+            . . f 5 5 5 5 f f f d d 5 5 f . 
+            . f f 5 5 5 5 f 1 6 d d f f . . 
+            . f 5 5 5 5 5 f 1 6 d d f . . . 
+            . f 5 5 5 5 5 f d d d d f . . . 
+            . . f 5 5 5 d d f f f f f . . . 
+            . . . f f f d d f 9 9 9 f . . . 
+            . . . f 9 9 f f 9 9 9 9 9 f . . 
+            . . . . f f 8 f 8 f 8 f 8 f . . 
+            . . . . . f f 8 f 8 f 8 f . . . 
+            `,img`
+            . . . . . . f f f f 5 5 f . . . 
+            . . . . f f 5 f 5 5 5 b b f . . 
+            . . . f 5 5 5 5 5 5 b 9 9 f . . 
+            . . f 5 5 5 5 5 5 b 5 b b f . . 
+            . . f 5 5 5 5 5 5 b b 5 5 f . . 
+            . . f 5 5 5 5 5 5 5 5 5 5 5 f . 
+            . . f 5 5 5 5 f d f d d 5 5 f . 
+            . . f 5 5 5 5 f f 6 d d f 5 f . 
+            . . f 5 5 5 5 f 1 6 d d f f . . 
+            . f f 5 5 5 5 f d d d d f . . . 
+            . f 5 5 5 5 f f f f f f f . . . 
+            . . f 5 5 f d d f 9 9 9 f . . . 
+            . . . f f f d d f 9 9 9 f . . . 
+            . . . . f f f 8 f 8 f 8 f f . . 
+            . . . . f f 8 f 8 f 8 f f f . . 
+            . . . . . . f 8 f 8 f f . . . . 
+            `],
+        600,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 2) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 1 . . . 1 . . . . 
+            . . . . . . 1 . . . . . 1 . . . 
+            . . . . . . 1 . . . . . 1 . . . 
+            . . . . . . 1 1 1 1 1 1 1 . . . 
+            . . . . . . 1 1 f 1 1 f 1 . . . 
+            . . . . . . 1 1 f 1 1 f 1 . . . 
+            . . . . . . 1 1 1 1 1 1 1 . . . 
+            . . . . . . . 1 1 1 1 1 b . . . 
+            . . . . . . . . c c c b . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . b . f . . f . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 1 . . . 1 . . . . 
+            . . . . . . 1 . . . . . 1 . . . 
+            . . . . . . 1 . . . . . 1 . . . 
+            . . . . . . 1 1 1 1 1 1 1 . . . 
+            . . . . . . 1 1 f 1 1 f 1 . . . 
+            . . . . . . 1 1 f 1 1 f 1 . . . 
+            . . . . . . 1 1 1 1 1 1 1 . . . 
+            . . . . . . . 1 1 1 1 1 b . . . 
+            . . . . . . . . c c c b . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . b . f . . . f . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 1 . . . 1 . . . . 
+            . . . . . . 1 . . . . . 1 . . . 
+            . . . . . . 1 . . . . . 1 . . . 
+            . . . . . . 1 1 1 1 1 1 1 . . . 
+            . . . . . . 1 1 f 1 1 f 1 . . . 
+            . . . . . . 1 1 f 1 1 f 1 . . . 
+            . . . . . . 1 1 1 1 1 1 1 . . . 
+            . . . . . . . 1 1 1 1 1 b . . . 
+            . . . . . . . . c c c b . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . b . f . . f . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 1 . . . 1 . . . . 
+            . . . . . . 1 . . . . . 1 . . . 
+            . . . . . . 1 . . . . . 1 . . . 
+            . . . . . . 1 1 1 1 1 1 1 . . . 
+            . . . . . . 1 1 f 1 1 f 1 . . . 
+            . . . . . . 1 1 f 1 1 f 1 . . . 
+            . . . . . . 1 1 1 1 1 1 1 . . . 
+            . . . . . . . 1 1 1 1 1 b . . . 
+            . . . . . . . . c c c b . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . . c c c c c . . . . 
+            . . . . . . b . f . . . f . . . 
+            `],
+        500,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 3) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . f 2 2 2 2 2 f 5 9 5 9 . . . . 
+            . f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+            . f 2 2 2 2 2 f 5 9 5 9 5 b 9 . 
+            b f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+            b f 2 2 2 2 2 f 5 9 5 9 . . . . 
+            b b b b b b b b b b b b b b . . 
+            e e e e e e e e e e b b b . . . 
+            e e e e e e e e e e b b b b . . 
+            e e e e e e e e e e b b b . . . 
+            e e e e e e e e e e b b b b . . 
+            . e b e . . . e b e . . . . . . 
+            . e e e . . . e e e . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . f 2 2 2 2 2 f 5 9 5 9 . . . . 
+            . f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+            . f 2 2 2 2 2 f 5 9 5 9 5 b 9 . 
+            b f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+            b f 2 2 2 2 2 f 5 9 5 9 . . . . 
+            b b b b b b b b b b b b b b . . 
+            e e e e e e e e e e b b b . . . 
+            e e e e e e e e e e b b b b . . 
+            e e e e e e e e e e b b b . . . 
+            e e e e e e e e e e b b b b . . 
+            f f e e . f f e e . . . . . . . 
+            . e b e . . e b e . . . . . . . 
+            f e e . . f e e . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . f 2 2 2 2 2 f 5 9 5 9 . . . . 
+            . f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+            . f 2 2 2 2 2 f 5 9 5 9 5 b 9 . 
+            b f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+            b f 2 2 2 2 2 f 5 9 5 9 . . . . 
+            b b b b b b b b b b b b b b . . 
+            e e e e e e e e e e b b b . . . 
+            e e e e e e e e e e b b b b . . 
+            e e e e e e e e e e b b b . . . 
+            e e e e e e e e e e b b b b . . 
+            . e b e . . . e b e . . . . . . 
+            . e e e . . . e e e . . . . . . 
+            `],
+        500,
+        true
+        )
+    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.t3enemy, function (sprite275, otherSprite25) {
     if (isInvincible == false) {
@@ -952,101 +2063,332 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite252, o
         info.changeScoreBy(500)
     }
 })
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    obsidian,
-    [img`
-        . . . . . f f c c f f . . . . . 
-        . . . . f a c b b c a f . . . . 
-        . . . f a b b a a b b a f . . . 
-        . . f c b d c b b c d b c f . . 
-        . . f b d b b c c b b d b f . . 
-        . f a a f b c f f c b f a a f . 
-        . f a a f f f f f f f f a a f . 
-        . f c c f f a f f a f f c c f . 
-        . f c c f f a f f a f f c c f . 
-        f f c c f 1 1 1 1 1 1 f c c f f 
-        f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
-        . f 1 1 f c b b b b c f 1 1 f . 
-        . . f a c b b b b b b c a f . . 
-        . . f f c c c a a c c c f f . . 
-        . . . f f b f b f b f f f . . . 
-        . . . . f f b f b f b f . . . . 
-        `,img`
-        . . . . . . . f f . . . . . . . 
-        . . . . . f f b b f f . . . . . 
-        . . . . f c b a a b c f . . . . 
-        . . . f c 1 c b b c 1 c f . . . 
-        . . f c 1 c b c c b c 1 c f . . 
-        . f a a f b c f f c b f a a f . 
-        . f a a f f f f f f f f a a f . 
-        . f b a f f f f f f f f a b f . 
-        f f b b f f a f f a f f b b f f 
-        f b b b f f a 1 1 a f f b b b f 
-        . f b b f 1 1 f f 1 1 f b b f . 
-        . . f 1 1 1 f b b b c f f f . . 
-        . . f f 1 1 f b b b b c 1 f . . 
-        . . . f f f b b c b c c f f . . 
-        . . . f f f b f b f b f f . . . 
-        . . . . f f f b f b f b f . . . 
-        `,img`
-        . . . . . f f c c f f . . . . . 
-        . . . . f a c b b c a f . . . . 
-        . . . f a b b a a b b a f . . . 
-        . . f c b d c b b c d b c f . . 
-        . . f b d b b c c b b d b f . . 
-        . f a a f b c f f c b f a a f . 
-        . f a a f f f f f f f f a a f . 
-        . f c c f f a f f a f f c c f . 
-        . f c c f f a f f a f f c c f . 
-        f f c c f 1 1 1 1 1 1 f c c f f 
-        f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
-        . f 1 1 f c b b b b c f 1 1 f . 
-        . . f a c b b b b b b c a f . . 
-        . . f f c c c a a c c c f f . . 
-        . . . f f b f b f b f f f . . . 
-        . . . . f f b f b f b f . . . . 
-        `,img`
-        . . . . . . . f f . . . . . . . 
-        . . . . . f f b b f f . . . . . 
-        . . . . f c b a a b c f . . . . 
-        . . . f c 1 c b b c 1 c f . . . 
-        . . f c 1 c b c c b c 1 c f . . 
-        . f a a f b c f f c b f a a f . 
-        . f a a f f f f f f f f a a f . 
-        . f b a f f f f f f f f a b f . 
-        f f b b f f a f f a f f b b f f 
-        f b b b f f a 1 1 a f f b b b f 
-        . f b b f 1 1 f f 1 1 f b b f . 
-        . . f f f c b b b f 1 1 1 f . . 
-        . . f 1 c b b b b f 1 1 f f . . 
-        . . f f c c b c b b f f f . . . 
-        . . . f f b f b f b f f f . . . 
-        . . . f b f b f b f f f . . . . 
-        `,img`
-        . . . . . f f c c f f . . . . . 
-        . . . . f a c b b c a f . . . . 
-        . . . f a b b a a b b a f . . . 
-        . . f c b d c b b c d b c f . . 
-        . . f b d b b c c b b d b f . . 
-        . f a a f b c f f c b f a a f . 
-        . f a a f f f f f f f f a a f . 
-        . f c c f f a f f a f f c c f . 
-        . f c c f f a f f a f f c c f . 
-        f f c c f 1 1 1 1 1 1 f c c f f 
-        f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
-        . f 1 1 f c b b b b c f 1 1 f . 
-        . . f a c b b b b b b c a f . . 
-        . . f f c c c a a c c c f f . . 
-        . . . f f b f b f b f f f . . . 
-        . . . . f f b f b f b f . . . . 
-        `],
-    600,
-    true
-    )
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile62`, function (sprite4, location3) {
+    tiles.setCurrentTilemap(tilemap`level6`)
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(127, 127))
 })
-scene.onOverlapTile(SpriteKind.Enemy, sprites.swamp.swampTile16, function (sprite8, location5) {
-    sprites.destroy(sprite8)
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 0) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . f f c c f f . . . . . 
+            . . . . f a c b b c a f . . . . 
+            . . . f a b b a a b b a f . . . 
+            . . f c b d c b b c d b c f . . 
+            . . f b d b b c c b b d b f . . 
+            . f a a f b c f f c b f a a f . 
+            . f a a f f f f f f f f a a f . 
+            . f c c f f a f f a f f c c f . 
+            . f c c f f a f f a f f c c f . 
+            f f c c f 1 1 1 1 1 1 f c c f f 
+            f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
+            . f 1 1 f c b b b b c f 1 1 f . 
+            . . f a c b b b b b b c a f . . 
+            . . f f c c c a a c c c f f . . 
+            . . . f f b f b f b f f f . . . 
+            . . . . f f b f b f b f . . . . 
+            `,img`
+            . . . . . . . f f . . . . . . . 
+            . . . . . f f b b f f . . . . . 
+            . . . . f c b a a b c f . . . . 
+            . . . f c 1 c b b c 1 c f . . . 
+            . . f c 1 c b c c b c 1 c f . . 
+            . f a a f b c f f c b f a a f . 
+            . f a a f f f f f f f f a a f . 
+            . f b a f f f f f f f f a b f . 
+            f f b b f f a f f a f f b b f f 
+            f b b b f f a 1 1 a f f b b b f 
+            . f b b f 1 1 f f 1 1 f b b f . 
+            . . f 1 1 1 f b b b c f f f . . 
+            . . f f 1 1 f b b b b c 1 f . . 
+            . . . f f f b b c b c c f f . . 
+            . . . f f f b f b f b f f . . . 
+            . . . . f f f b f b f b f . . . 
+            `,img`
+            . . . . . f f c c f f . . . . . 
+            . . . . f a c b b c a f . . . . 
+            . . . f a b b a a b b a f . . . 
+            . . f c b d c b b c d b c f . . 
+            . . f b d b b c c b b d b f . . 
+            . f a a f b c f f c b f a a f . 
+            . f a a f f f f f f f f a a f . 
+            . f c c f f a f f a f f c c f . 
+            . f c c f f a f f a f f c c f . 
+            f f c c f 1 1 1 1 1 1 f c c f f 
+            f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
+            . f 1 1 f c b b b b c f 1 1 f . 
+            . . f a c b b b b b b c a f . . 
+            . . f f c c c a a c c c f f . . 
+            . . . f f b f b f b f f f . . . 
+            . . . . f f b f b f b f . . . . 
+            `,img`
+            . . . . . . . f f . . . . . . . 
+            . . . . . f f b b f f . . . . . 
+            . . . . f c b a a b c f . . . . 
+            . . . f c 1 c b b c 1 c f . . . 
+            . . f c 1 c b c c b c 1 c f . . 
+            . f a a f b c f f c b f a a f . 
+            . f a a f f f f f f f f a a f . 
+            . f b a f f f f f f f f a b f . 
+            f f b b f f a f f a f f b b f f 
+            f b b b f f a 1 1 a f f b b b f 
+            . f b b f 1 1 f f 1 1 f b b f . 
+            . . f f f c b b b f 1 1 1 f . . 
+            . . f 1 c b b b b f 1 1 f f . . 
+            . . f f c c b c b b f f f . . . 
+            . . . f f b f b f b f f f . . . 
+            . . . f b f b f b f f f . . . . 
+            `,img`
+            . . . . . f f c c f f . . . . . 
+            . . . . f a c b b c a f . . . . 
+            . . . f a b b a a b b a f . . . 
+            . . f c b d c b b c d b c f . . 
+            . . f b d b b c c b b d b f . . 
+            . f a a f b c f f c b f a a f . 
+            . f a a f f f f f f f f a a f . 
+            . f c c f f a f f a f f c c f . 
+            . f c c f f a f f a f f c c f . 
+            f f c c f 1 1 1 1 1 1 f c c f f 
+            f c 1 1 f 1 1 f f 1 1 f 1 1 c f 
+            . f 1 1 f c b b b b c f 1 1 f . 
+            . . f a c b b b b b b c a f . . 
+            . . f f c c c a a c c c f f . . 
+            . . . f f b f b f b f f f . . . 
+            . . . . f f b f b f b f . . . . 
+            `],
+        600,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 1) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . f f 5 5 f f . . . . . 
+            . . . . f b 5 b b 5 b f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 9 9 b b 9 9 b 5 f . . 
+            . . f b 5 b b 9 9 b b 5 b f . . 
+            . f 5 5 b b 5 b b 5 b b 5 5 f . 
+            . f 5 5 f 5 5 5 5 5 5 f 5 5 f . 
+            . f 5 5 d f f d d f f d 5 5 f . 
+            . f 5 9 f 1 6 d d 6 1 f 9 5 f . 
+            f f 5 5 d d d d d d d d 5 5 f f 
+            f 9 1 1 d d d f f d d d 1 1 9 f 
+            . f 1 1 8 8 9 9 9 9 8 8 1 1 f . 
+            . . f 8 8 9 9 9 9 9 9 8 8 f . . 
+            . . f f 9 8 8 8 8 8 8 9 f f . . 
+            . . . f f 9 9 9 9 9 9 f f . . . 
+            . . . . f 8 8 9 9 8 8 f . . . . 
+            `,img`
+            . . . . . . . f f . . . . . . . 
+            . . . . . f f 5 5 f f . . . . . 
+            . . . . f 5 5 b b 5 5 f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 9 9 b b 9 9 b 5 f . . 
+            . f 5 b 5 b b 9 9 b b 5 b 5 f . 
+            . f b 5 f 5 5 b b 5 5 f 5 b f . 
+            . f 5 5 d f f d d f f d 5 5 f . 
+            f f 5 5 f 1 6 d d 6 1 f 5 5 f f 
+            f 5 5 5 d d d d d d d d 5 5 5 f 
+            . f 5 5 f f d f f d d d 5 5 f . 
+            . . f d d d f 9 9 9 8 f f f . . 
+            . . f f d d f 9 9 9 9 8 d f . . 
+            . . . f f f 9 9 8 9 8 8 f f . . 
+            . . . f f f 9 9 8 9 8 9 f . . . 
+            . . . . f f 9 8 9 8 9 8 f . . . 
+            `,img`
+            . . . . . f f 5 5 f f . . . . . 
+            . . . . f b 5 b b 5 b f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 9 9 b b 9 9 b 5 f . . 
+            . . f b 5 b b 9 9 b b 5 b f . . 
+            . f 5 5 b b 5 b b 5 b b 5 5 f . 
+            . f 5 5 f 5 5 5 5 5 5 f 5 5 f . 
+            . f 5 5 d f f d d f f d 5 5 f . 
+            . f 5 9 f 1 6 d d 6 1 f 9 5 f . 
+            f f 5 5 d d d d d d d d 5 5 f f 
+            f 9 1 1 d d d f f d d d 1 1 9 f 
+            . f 1 1 8 8 9 9 9 9 8 8 1 1 f . 
+            . . f 8 8 9 9 9 9 9 9 8 8 f . . 
+            . . f f 9 8 8 8 8 8 8 9 f f . . 
+            . . . f f 9 9 9 9 9 9 f f . . . 
+            . . . . f 8 8 9 9 8 8 f . . . . 
+            `,img`
+            . . . . . . . f f . . . . . . . 
+            . . . . . f f 5 5 f f . . . . . 
+            . . . . f 5 5 b b 5 5 f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 9 9 b b 9 9 b 5 f . . 
+            . f 5 b 5 b b 9 9 b b 5 b 5 f . 
+            . f b 5 f 5 5 b b 5 5 f 5 b f . 
+            . f 5 5 d f f d d f f d 5 5 f . 
+            f f 5 5 f 1 6 d d 6 1 f 5 5 f f 
+            f 5 5 5 d d d d d d d d 5 5 5 f 
+            . f 5 5 d d d f f d f f 5 5 f . 
+            . . f f f 8 9 9 9 f d d d f . . 
+            . . f d 8 9 9 9 9 f d d f f . . 
+            . . f f 8 8 9 8 9 9 f f f . . . 
+            . . . f 9 8 9 8 9 9 f f f . . . 
+            . . . f 8 9 8 9 8 f f f . . . . 
+            `,img`
+            . . . . . f f 5 5 f f . . . . . 
+            . . . . f b 5 b b 5 b f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 9 9 b b 9 9 b 5 f . . 
+            . . f b 5 b b 9 9 b b 5 b f . . 
+            . f 5 5 b b 5 b b 5 b b 5 5 f . 
+            . f 5 5 f 5 5 5 5 5 5 f 5 5 f . 
+            . f 5 5 d f f d d f f d 5 5 f . 
+            . f 5 9 f 1 6 d d 6 1 f 9 5 f . 
+            f f 5 5 d d d d d d d d 5 5 f f 
+            f 9 1 1 d d d f f d d d 1 1 9 f 
+            . f 1 1 8 8 9 9 9 9 8 8 1 1 f . 
+            . . f 8 8 9 9 9 9 9 9 8 8 f . . 
+            . . f f 9 8 8 8 8 8 8 9 f f . . 
+            . . . f f 9 9 9 9 9 9 f f . . . 
+            . . . . f 8 8 9 9 8 8 f . . . . 
+            `],
+        600,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 3) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . b b b b b . . . . . 
+            . . . . . . f f f f f . . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . . 2 2 2 2 2 . . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . . f f f f f . . . . . 
+            . . . . . . 5 5 5 5 5 . . . . . 
+            . . . . . . 9 b 9 b 9 . . . . . 
+            . . . . . . 5 5 5 5 5 . . . . . 
+            . . . . . . 9 b 9 b 9 . . . . . 
+            . . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 9 b 9 . . . . . . 
+            . . . . . . . . 9 . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . b b b b b . . . . . 
+            . . . . . . f f f f f . . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . . 2 2 2 2 2 . . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . . f f f f f . . . . . 
+            . . . . . 9 5 5 5 5 5 9 . . . . 
+            . . . . . . 9 b 9 b 9 . . . . . 
+            . . . . . 9 5 5 5 5 5 9 . . . . 
+            . . . . . . 9 b 9 b 9 . . . . . 
+            . . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 9 b 9 . . . . . . 
+            . . . . . . . . 9 . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . b b b b b . . . . . 
+            . . . . . . f f f f f . . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . . 2 2 2 2 2 . . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . e 2 2 2 2 2 e . . . . 
+            . . . . . . f f f f f . . . . . 
+            . . . . . . 5 5 5 5 5 . . . . . 
+            . . . . . . 9 b 9 b 9 . . . . . 
+            . . . . . . 5 5 5 5 5 . . . . . 
+            . . . . . . 9 b 9 b 9 . . . . . 
+            . . . . . . . 5 5 5 . . . . . . 
+            . . . . . . . 9 b 9 . . . . . . 
+            . . . . . . . . 9 . . . . . . . 
+            `],
+        500,
+        true
+        )
+    }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 2) {
+        animation.runImageAnimation(
+        obsidian,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . 1 . . . . 1 . . . . . 
+            . . . . 1 . . . . . . 1 . . . . 
+            . . . . 1 . . . . . . 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 f f 1 1 f f 1 . . . . 
+            . . . . 1 f f 1 1 f f 1 . . . . 
+            . . b . 1 1 1 1 1 1 1 1 . . . . 
+            . . . b . 1 1 1 1 1 1 . . . . . 
+            . . . . b b f f c c . . . . . . 
+            . . . . b c c f c c c . . . . . 
+            . . . . . c c f c c c . . . . . 
+            . . . . . c c c f c c . . . . . 
+            . . . . . c c c f c c . . . . . 
+            . . . . . . f . . . . b . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . 1 . . . . 1 . . . . . 
+            . . . . 1 . . . . . . 1 . . . . 
+            . . . . 1 . . . . . . 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 f f 1 1 f f 1 . . . . 
+            . . . . 1 f f 1 1 f f 1 . . . . 
+            . . b . 1 1 1 1 1 1 1 1 . . . . 
+            . . . b . 1 1 1 1 1 1 . . . . . 
+            . . . . b b f f c c . . . . . . 
+            . . . . b c c f c c c . . . . . 
+            . . . . . c c f c c c . . . . . 
+            . . . . . c c c f c c . . . . . 
+            . . . . . c c c f c c . . . . . 
+            . . . . . . . . . f . b . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . 1 . . . . 1 . . . . . 
+            . . . . 1 . . . . . . 1 . . . . 
+            . . . . 1 . . . . . . 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 f f 1 1 f f 1 . . . . 
+            . . . . 1 f f 1 1 f f 1 . . . . 
+            . . b . 1 1 1 1 1 1 1 1 . . . . 
+            . . . b . 1 1 1 1 1 1 . . . . . 
+            . . . . b b f f c c . . . . . . 
+            . . . . b c c f c c c . . . . . 
+            . . . . . c c f c c c . . . . . 
+            . . . . . c c c f c c . . . . . 
+            . . . . . c c c f c c . . . . . 
+            . . . . . . f . . . . b . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . 1 . . . . 1 . . . . . 
+            . . . . 1 . . . . . . 1 . . . . 
+            . . . . 1 . . . . . . 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 1 1 1 1 1 1 1 . . . . 
+            . . . . 1 f f 1 1 f f 1 . . . . 
+            . . . . 1 f f 1 1 f f 1 . . . . 
+            . . b . 1 1 1 1 1 1 1 1 . . . . 
+            . . . b . 1 1 1 1 1 1 . . . . . 
+            . . . . b b f f c c . . . . . . 
+            . . . . b c c f c c c . . . . . 
+            . . . . . c c f c c c . . . . . 
+            . . . . . c c c f c c . . . . . 
+            . . . . . c c c f c c . . . . . 
+            . . . . . . . . . f . b . . . . 
+            `],
+        500,
+        true
+        )
+    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite277, otherSprite27) {
     if (isInvincible == false) {
@@ -1065,8 +2407,109 @@ info.onScore(2100, function () {
     info.setLife(375)
     controller.moveSprite(obsidian, 120, 120)
 })
+scene.onOverlapTile(SpriteKind.t2enemy, assets.tile`transparency16`, function (sprite9, location6) {
+    sprites.destroy(sprite9)
+})
 scene.onOverlapTile(SpriteKind.t3enemy, assets.tile`myTile22`, function (sprite13, location8) {
     sprites.destroy(sprite13)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile68`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level1`)
+    Maddie = sprites.create(img`
+        . . . . . f f 5 5 f f . . . . . 
+        . . . . f b 5 b b 5 b f . . . . 
+        . . . f 5 b b 9 9 b b 5 f . . . 
+        . . f 5 b 9 9 b b 9 9 b 5 f . . 
+        . . f b 5 b b 9 9 b b 5 b f . . 
+        . f 5 5 b b 5 b b 5 b b 5 5 f . 
+        . f 5 5 f 5 5 5 5 5 5 f 5 5 f . 
+        . f 5 5 d f f d d f f d 5 5 f . 
+        . f 5 9 d 1 6 d d 6 1 d 9 5 f . 
+        f f 5 5 d d d d d d d d 5 5 f f 
+        f 9 1 1 d d d f f d d d 1 1 9 f 
+        . f 1 1 8 8 9 9 9 9 8 8 1 1 f . 
+        . . f 8 8 9 9 9 9 9 9 8 8 f . . 
+        . . f f 9 8 8 8 8 8 8 9 f f . . 
+        . . . f f 9 9 9 9 9 9 f f . . . 
+        . . . . f 8 8 9 9 8 8 f . . . . 
+        `, SpriteKind.NPC_Cosmetic)
+    knight = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . 1 . . . . 1 . . . . . 
+        . . . . 1 . . . . . . 1 . . . . 
+        . . . . 1 . . . . . . 1 . . . . 
+        . . . . 1 1 1 1 1 1 1 1 . . . . 
+        . . . . 1 1 1 1 1 1 1 1 . . . . 
+        . . . . 1 f f 1 1 f f 1 . . . . 
+        . . . . 1 f f 1 1 f f 1 . . . . 
+        . . b . 1 1 1 1 1 1 1 1 . . . . 
+        . . . b . 1 1 1 1 1 1 . . . . . 
+        . . . . b b f f c c . . . . . . 
+        . . . . b c c f c c c . . . . . 
+        . . . . . c c f c c c . . . . . 
+        . . . . . c c c f c c . . . . . 
+        . . . . . c c c f c c . . . . . 
+        . . . . . . f . . f . b . . . . 
+        `, SpriteKind.cosmetic2)
+    lancer = sprites.create(img`
+        . . . . . . f f . . . . . 
+        . . . . . f 8 8 f . . . . 
+        . . . . f 8 8 f 8 f . . . 
+        . . . f 8 8 f f 8 8 f . . 
+        . . f 8 8 f f f f 8 8 f . 
+        . . f 8 1 f f f f 1 8 f . 
+        . . f 1 f 1 1 1 1 f 1 f . 
+        . f f 1 1 f f f 8 8 1 f . 
+        f 8 8 1 1 1 1 1 8 8 f . . 
+        f f 1 f f f f f f 1 1 f . 
+        . f 1 1 f f 8 f f f 1 f f 
+        . . f f f 8 8 8 f f 1 f f 
+        . . . . f f f f f f 8 8 . 
+        . . . f 1 1 f f 1 1 f . . 
+        . . f 8 8 f . . f 8 8 f . 
+        `, SpriteKind.cosmetic)
+    sparky = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . f 2 2 2 2 2 f 5 9 5 9 . . . . 
+        . f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+        . f 2 2 2 2 2 f 5 9 5 9 5 b 9 . 
+        b f 2 2 2 2 2 f 5 b 5 b 5 9 . . 
+        b f 2 2 2 2 2 f 5 9 5 9 . . . . 
+        b b b b b b b b b b b b b b . . 
+        e e e e e e e e e e b b b . . . 
+        e e e e e e e e e e b b b b . . 
+        e e e e e e e e e e b b b . . . 
+        e e e e e e e e e e b b b b . . 
+        . e b e . . . e b e . . . . . . 
+        . e e e . . . e e e . . . . . . 
+        `, SpriteKind.cosmetic_peak)
+    miku = sprites.create(img`
+        . . f f f f . . . . f f f f . . 
+        . f 9 9 2 f f f f f f 2 9 9 f . 
+        f 9 9 2 f 9 9 9 9 9 9 f 2 9 9 f 
+        f 9 2 f 9 9 9 9 9 9 9 9 f 2 9 f 
+        f 9 9 f 9 9 f f f f 9 9 f 9 9 f 
+        f 9 9 f 9 f 6 d d 6 f 9 f 9 9 f 
+        f 9 f 9 9 f f d d f f 9 9 f 9 f 
+        f 9 9 f 9 f d d d d f 9 f 9 9 f 
+        . f 9 9 f f f b b f f f 9 9 f . 
+        . f 9 9 f d b 9 9 b d f 9 9 f . 
+        f 9 9 f d d b b 9 b d d f 9 9 f 
+        . f f d d f b b 9 b f d d f f . 
+        . . f f f f c c c c f f f f . . 
+        . . . . . f c c c c f . . . . . 
+        . . . . . f d d b d f . . . . . 
+        . . . . . f c c a c f . . . . . 
+        `, SpriteKind.Hatsunemiku)
+    tiles.placeOnTile(Maddie, tiles.getTileLocation(26, 28))
+    tiles.placeOnTile(knight, tiles.getTileLocation(7, 22))
+    tiles.placeOnTile(miku, tiles.getTileLocation(14, 25))
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(15, 29))
+    tiles.placeOnTile(lancer, tiles.getTileLocation(15, 13))
+    tiles.placeOnTile(sparky, tiles.getTileLocation(9, 9))
 })
 sprites.onCreated(SpriteKind.miniboss, function (sprite7) {
     sprites.setDataNumber(sprite7, "HP", 500)
@@ -1095,6 +2538,29 @@ info.onScore(3100, function () {
     info.setLife(500)
     controller.moveSprite(obsidian, 150, 150)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC_Cosmetic, function (sprite, otherSprite) {
+    if (info.score() >= 500) {
+        obsidian.setImage(img`
+            . . . . . f f 5 5 f f . . . . . 
+            . . . . f b 5 b b 5 b f . . . . 
+            . . . f 5 b b 9 9 b b 5 f . . . 
+            . . f 5 b 9 9 b b 9 9 b 5 f . . 
+            . . f b 5 b b 9 9 b b 5 b f . . 
+            . f 5 5 b b 5 b b 5 b b 5 5 f . 
+            . f 5 5 f 5 5 5 5 5 5 f 5 5 f . 
+            . f 5 5 d f f d d f f d 5 5 f . 
+            . f 5 9 d 1 6 d d 6 1 d 9 5 f . 
+            f f 5 5 d d d d d d d d 5 5 f f 
+            f 9 1 1 d d d f f d d d 1 1 9 f 
+            . f 1 1 8 8 9 9 9 9 8 8 1 1 f . 
+            . . f 8 8 9 9 9 9 9 9 8 8 f . . 
+            . . f f 9 8 8 8 8 8 8 9 f f . . 
+            . . . f f 9 9 9 9 9 9 f f . . . 
+            . . . . f 8 8 9 9 8 8 f . . . . 
+            `)
+        sprites.setDataNumber(obsidian, "CosmeticPoints", 1)
+    }
+})
 sprites.onCreated(SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite2) {
     sprites.setDataNumber(sprite2, "HP", 2000)
 })
@@ -1102,11 +2568,16 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile30`, function (sprite16
     tiles.setCurrentTilemap(tilemap`level7`)
     tiles.placeOnTile(obsidian, tiles.getTileLocation(1, 40))
 })
-let ruby: Sprite = null
 let helioite: Sprite = null
+let ruby: Sprite = null
 let opal: Sprite = null
+let sparky: Sprite = null
+let lancer: Sprite = null
+let knight: Sprite = null
+let Maddie: Sprite = null
 let you: Sprite = null
 let chargeblast: Sprite = null
+let miku: Sprite = null
 let projectile: Sprite = null
 let LostSoul = false
 let shards = false
@@ -1340,6 +2811,7 @@ controller.moveSprite(obsidian, 85, 85)
 LostSoul = true
 info.setLife(50)
 info.changeScoreBy(3095)
+sprites.setDataNumber(obsidian, "CosmeticPoints", 0)
 game.onUpdateInterval(15000, function () {
     opal = sprites.create(img`
         ........................
@@ -1372,15 +2844,6 @@ game.onUpdateInterval(15000, function () {
     timer.after(20000, function () {
         sprites.destroy(opal)
     })
-})
-forever(function () {
-    if (!(spriteutils.isDestroyed(helioite))) {
-        if (spriteutils.distanceBetween(obsidian, helioite) > 125) {
-            helioite.follow(null)
-        } else {
-            helioite.follow(obsidian, 80)
-        }
-    }
 })
 forever(function () {
     if (info.score() >= 1000) {
@@ -1530,6 +2993,15 @@ forever(function () {
             erm.follow(null)
         } else {
             erm.follow(obsidian, 100)
+        }
+    }
+})
+forever(function () {
+    if (!(spriteutils.isDestroyed(helioite))) {
+        if (spriteutils.distanceBetween(obsidian, helioite) > 125) {
+            helioite.follow(null)
+        } else {
+            helioite.follow(obsidian, 80)
         }
     }
 })
