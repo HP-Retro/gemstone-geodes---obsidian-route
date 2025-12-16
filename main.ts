@@ -16,6 +16,9 @@ namespace SpriteKind {
     export const NPC = SpriteKind.create()
     export const cosmetic_peak = SpriteKind.create()
     export const cosmetic = SpriteKind.create()
+    export const goldnpc = SpriteKind.create()
+    export const shopnpc = SpriteKind.create()
+    export const stopper = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile43`, function (sprite10, location7) {
     tiles.setCurrentTilemap(tilemap`level6`)
@@ -366,6 +369,10 @@ info.onScore(1300, function () {
 sprites.onCreated(SpriteKind.Boss, function (sprite5) {
     sprites.setDataNumber(sprite5, "HP", 1000)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
+    tutorial.sayText("hello princess! welcome to the overworld! i know its different from gemlandia, but you must vanquish the kings! i bid thee good luck!", 5000, true)
+    pause(5500)
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite255, otherSprite6) {
     sprites.destroy(projectile)
     sprites.changeDataNumberBy(otherSprite6, "HP", -15)
@@ -377,6 +384,46 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite255, 
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Hatsunemiku, function (sprite, otherSprite) {
     miku.sayText("Kon'nichiwa! Watashi wa hatsunemikudesu! Kono o-ten no ōnādesu. Hitsuyōna keiken-chi ga tamatte ireba, dono sukin demo jiyū ni sōbi shite kudasai ne!", 5000, true)
+    animation.runImageAnimation(
+    miku,
+    [img`
+        . . f f f f . . . . f f f f . . 
+        . f 9 9 2 f f f f f f 2 9 9 f . 
+        f 9 9 2 f 9 9 9 9 9 9 f 7 9 9 f 
+        f 9 2 f 9 9 9 9 9 9 7 9 7 2 7 f 
+        f 9 9 f 9 9 f f f f 9 7 7 7 9 f 
+        f 9 9 f 9 f 6 d d 6 f 9 1 9 9 f 
+        f 9 f 9 9 f f d d f f 9 1 f 9 f 
+        f 9 9 f 9 f d d d d f 9 d 9 9 f 
+        . f 9 9 f f f b b f f d d 9 f . 
+        . f 9 9 f d b 9 9 b d d 9 9 f . 
+        f 9 9 f d d b b 9 b f . f 9 9 f 
+        . f f d d f b b 9 b f . . f f . 
+        . . f f f f c c c c f . . . . . 
+        . . . . . f c c c c f . . . . . 
+        . . . . . f d d b d f . . . . . 
+        . . . . . f c c a c f . . . . . 
+        `,img`
+        . . f f f f . . . . f f f f . . 
+        . f 9 9 2 f f f f f f 2 9 9 f . 
+        f 9 9 2 f 9 9 9 9 9 9 f 2 7 9 f 
+        f 9 2 f 9 9 9 9 9 9 9 7 9 7 9 7 
+        f 9 9 f 9 9 f f f f 9 9 7 7 7 f 
+        f 9 9 f 9 f 6 d d 6 f 9 9 1 9 f 
+        f 9 f 9 9 f f d d f f 9 1 f 9 f 
+        f 9 9 f 9 f d d d d f 9 d 9 9 f 
+        . f 9 9 f f f b b f f d d 9 f . 
+        . f 9 9 f d b 9 9 b d d 9 9 f . 
+        f 9 9 f d d b b 9 b f . f 9 9 f 
+        . f f d d f b b 9 b f . . f f . 
+        . . f f f f c c c c f . . . . . 
+        . . . . . f c c c c f . . . . . 
+        . . . . . f d d b d f . . . . . 
+        . . . . . f c c a c f . . . . . 
+        `],
+    500,
+    true
+    )
     pause(5000)
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -579,6 +626,7 @@ info.onScore(1000, function () {
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite15, location10) {
     tiles.setCurrentTilemap(tilemap`level6`)
+    sprites.destroyAllSpritesOfKind(SpriteKind.goldnpc)
     tiles.placeOnTile(obsidian, tiles.getTileLocation(123, 253))
 })
 scene.onOverlapTile(SpriteKind.t3enemy, assets.tile`transparency16`, function (sprite4, location3) {
@@ -684,6 +732,14 @@ scene.onOverlapTile(SpriteKind.Enemy, assets.tile`transparency16`, function (spr
 info.onScore(1700, function () {
     info.setLife(325)
     controller.moveSprite(obsidian, 110, 110)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.stopper, function (sprite, otherSprite) {
+    if (info.score() >= 2000 && sprites.readDataNumber(obsidian, "Bosses Slain") == 4) {
+        otherSprite.sayText("you are ready. kill the entity.", 2000, true)
+    } else {
+        otherSprite.sayText("you are not yet ready. BEGONE!", 500, true)
+        tiles.placeOnTile(obsidian, tiles.getTileLocation(133, 126))
+    }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 0) {
@@ -1305,7 +1361,7 @@ controller.combos.attachCombo("a+b", function () {
                 info.startCountdown(60)
             })
         }
-        if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 1) {
+        if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 2) {
             animation.runImageAnimation(
             obsidian,
             [img`
@@ -1539,7 +1595,27 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.cosmetic2, function (sprite, oth
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite6, location4) {
     tiles.setCurrentTilemap(tilemap`level9`)
+    mySprite3 = sprites.create(img`
+        . . . . . f f 4 4 f f . . . . . 
+        . . . . f 5 4 5 5 4 5 f . . . . 
+        . . . f e 4 5 5 5 5 4 e f . . . 
+        . . f 8 6 e 4 4 4 4 e 6 8 f . . 
+        . . f 6 6 6 6 6 6 6 6 6 6 f . . 
+        . f 6 6 e 6 6 e e 6 6 e 6 6 f . 
+        . f 6 6 f f e e e e f f 6 6 f . 
+        . f 8 8 f 6 5 e e 5 6 f 8 8 f . 
+        . f 8 8 e 1 5 4 4 5 1 e 8 8 f . 
+        f f 8 8 f 4 4 4 4 4 4 f 8 8 f f 
+        f 8 8 f f f e e e e f f f 8 8 f 
+        . f e e f 6 9 9 9 9 6 f e e f . 
+        . . e 4 c 9 9 9 9 9 9 c 4 e . . 
+        . . e f 6 9 6 9 6 9 6 6 f e . . 
+        . . . f f 8 9 8 9 8 9 f f . . . 
+        . . . . . f f 6 6 f f . . . . . 
+        `, SpriteKind.goldnpc)
     tiles.placeOnTile(obsidian, tiles.getTileLocation(81, 97))
+    tiles.placeOnTile(mySprite3, tiles.getTileLocation(79, 94))
+    sprites.setDataNumber(mySprite3, "npc", 1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.t2enemy, function (sprite272, otherSprite22) {
     if (isInvincible == false) {
@@ -1549,6 +1625,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.t2enemy, function (sprite272, ot
             isInvincible = false
         })
     }
+})
+scene.onOverlapTile(SpriteKind.t2enemy, assets.tile`myTile81`, function (sprite, location) {
+    sprites.destroy(sprite)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite274, otherSprite24) {
     if (isInvincible == false) {
@@ -1599,7 +1678,17 @@ sprites.onCreated(SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite11) {
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile61`, function (sprite4, location3) {
     tiles.setCurrentTilemap(tilemap`level6`)
+    sprites.destroy(miku)
+    sprites.destroy(lancer)
+    sprites.destroy(knight)
+    sprites.destroy(sparky)
+    sprites.destroy(Maddie)
     tiles.placeOnTile(obsidian, tiles.getTileLocation(127, 127))
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.goldnpc, function (sprite, otherSprite) {
+    if (sprites.readDataNumber(mySprite3, "npc") == 1) {
+        mySprite3.sayText("filthy gemstone scum.. begone!")
+    }
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 0) {
@@ -2063,8 +2152,94 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite252, o
         info.changeScoreBy(500)
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile52`, function (sprite, location) {
+    sprites.destroyAllSpritesOfKind(SpriteKind.goldnpc)
+    shopkeeper = sprites.create(img`
+        . . . . . f f f f . . . . . 
+        . . . f f f 5 5 f f f . . . 
+        . . f 5 5 5 f f 5 5 5 f . . 
+        . f 5 5 5 5 5 5 5 5 5 5 f . 
+        . f 5 5 f f 7 7 f f 5 5 f . 
+        f 5 5 f 9 9 f f 9 9 f 5 5 f 
+        f 5 5 7 f f 4 4 f f 7 5 5 f 
+        f 7 7 f 1 5 4 4 5 1 f 7 7 f 
+        f 7 7 4 1 5 d d 5 1 4 7 7 f 
+        . f 7 f d d d d d d f 7 f . 
+        . f e f e 4 4 4 4 e f e f . 
+        . e 4 f 7 5 5 5 5 7 f 4 e . 
+        . 4 f f 5 5 5 5 5 5 f f 4 . 
+        . 4 f 5 7 5 7 5 7 5 5 f 4 . 
+        . . f f 7 5 7 5 7 7 f f . . 
+        . . . . f f 5 5 f f . . . . 
+        `, SpriteKind.shopnpc)
+    animation.runImageAnimation(
+    shopkeeper,
+    [img`
+        . . . . . f f f f . . . . . . . 
+        . . . f f f 5 5 f f f . . . . . 
+        . . f 5 5 5 f f 5 5 5 f . . . . 
+        . f 5 5 5 5 5 5 5 5 5 5 f . . . 
+        . f 5 5 f f 7 7 f f 5 5 f . . . 
+        f 5 5 f 9 9 f f 9 9 f 5 5 f . . 
+        f 5 5 7 f f 4 4 f f 7 5 5 f . . 
+        f 7 7 f 1 5 4 4 5 1 f 7 7 f . . 
+        f 7 7 4 1 5 d d 5 1 4 7 7 f . . 
+        . f 7 f d d d d d d f 7 f . . . 
+        . f e f e 4 4 4 4 e f e f . . . 
+        . e 4 f 7 5 5 5 5 7 f 4 e . . . 
+        . 4 f f 5 5 5 5 5 5 f f 4 . . . 
+        . 4 f 5 7 5 7 5 7 5 5 f 4 . . . 
+        . . f f 7 5 7 5 7 7 f f . . . . 
+        . . . . f f 5 5 f f . . . . . . 
+        `,img`
+        . . . . . f f f f . . . . . . . 
+        . . . f f 5 5 5 5 f f . . . . . 
+        . . f 5 5 5 5 5 5 5 5 f . . . . 
+        . f 5 5 5 f 5 5 f 5 5 5 f . . . 
+        . f 5 5 7 7 f f 7 7 5 5 f . f . 
+        f 5 5 7 7 7 7 7 7 7 7 5 5 f . . 
+        f 5 5 7 f f 4 4 f f 7 5 5 f . . 
+        f 7 7 f 9 9 f f 9 9 f 7 7 f . . 
+        f 7 7 4 f f d d f f 4 7 7 f . . 
+        . f 7 f d d d d d d f 7 f . . . 
+        . f e f e 4 4 4 4 e f e f . . . 
+        . e 4 f 7 5 5 5 5 7 f 4 e . . . 
+        . 4 f f 5 5 5 5 5 5 f f 4 . . . 
+        . 4 f 5 7 5 7 5 7 5 5 f 4 . . . 
+        . . f f 7 5 7 5 7 7 f f . . . . 
+        . . . . f f 5 5 f f . . . . . . 
+        `,img`
+        . . . . . f f f f . . . . . f . 
+        . . . f f 5 5 5 5 f f . . . f . 
+        . . f 5 5 5 5 5 5 5 5 f . . f . 
+        . f 5 5 5 f 5 5 f 5 5 5 f . . . 
+        . f 5 5 7 7 f f 7 7 5 5 f . f . 
+        f 5 5 7 7 7 7 7 7 7 7 5 5 f . . 
+        f 5 5 7 f f 4 4 f f 7 5 5 f . . 
+        f 7 7 f 9 9 f f 9 9 f 7 7 f . . 
+        f 7 7 4 f f d d f f 4 7 7 f . . 
+        . f 7 f d d d d d d f 7 f . . . 
+        . f e f e 4 4 4 4 e f e f . . . 
+        . e 4 f 7 5 5 5 5 7 f 4 e . . . 
+        . 4 f f 5 5 5 5 5 5 f f 4 . . . 
+        . 4 f 5 7 5 7 5 7 5 5 f 4 . . . 
+        . . f f 7 5 7 5 7 7 f f . . . . 
+        . . . . f f 5 5 f f . . . . . . 
+        `],
+    500,
+    true
+    )
+    tiles.setCurrentTilemap(tilemap`level0`)
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(9, 14))
+    tiles.placeOnTile(shopkeeper, tiles.getTileLocation(7, 9))
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile62`, function (sprite4, location3) {
     tiles.setCurrentTilemap(tilemap`level6`)
+    sprites.destroy(miku)
+    sprites.destroy(lancer)
+    sprites.destroy(knight)
+    sprites.destroy(sparky)
+    sprites.destroy(Maddie)
     tiles.placeOnTile(obsidian, tiles.getTileLocation(127, 127))
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -2407,6 +2582,9 @@ info.onScore(2100, function () {
     info.setLife(375)
     controller.moveSprite(obsidian, 120, 120)
 })
+scene.onOverlapTile(SpriteKind.t3enemy, assets.tile`myTile81`, function (sprite, location) {
+    sprites.destroy(sprite)
+})
 scene.onOverlapTile(SpriteKind.t2enemy, assets.tile`transparency16`, function (sprite9, location6) {
     sprites.destroy(sprite9)
 })
@@ -2414,6 +2592,7 @@ scene.onOverlapTile(SpriteKind.t3enemy, assets.tile`myTile22`, function (sprite1
     sprites.destroy(sprite13)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile68`, function (sprite, location) {
+    sprites.destroyAllSpritesOfKind(SpriteKind.NPC)
     tiles.setCurrentTilemap(tilemap`level1`)
     Maddie = sprites.create(img`
         . . . . . f f 5 5 f f . . . . . 
@@ -2511,6 +2690,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile68`, function (sprite, 
     tiles.placeOnTile(lancer, tiles.getTileLocation(15, 13))
     tiles.placeOnTile(sparky, tiles.getTileLocation(9, 9))
 })
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile81`, function (sprite, location) {
+    sprites.destroy(sprite)
+})
 sprites.onCreated(SpriteKind.miniboss, function (sprite7) {
     sprites.setDataNumber(sprite7, "HP", 500)
 })
@@ -2571,11 +2753,13 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile30`, function (sprite16
 let helioite: Sprite = null
 let ruby: Sprite = null
 let opal: Sprite = null
-let sparky: Sprite = null
-let lancer: Sprite = null
-let knight: Sprite = null
-let Maddie: Sprite = null
+let shopkeeper: Sprite = null
 let you: Sprite = null
+let Maddie: Sprite = null
+let sparky: Sprite = null
+let knight: Sprite = null
+let lancer: Sprite = null
+let mySprite3: Sprite = null
 let chargeblast: Sprite = null
 let miku: Sprite = null
 let projectile: Sprite = null
@@ -2583,6 +2767,7 @@ let LostSoul = false
 let shards = false
 let isInvincible = false
 let bleh = false
+let tutorial: Sprite = null
 let obsidian: Sprite = null
 scene.cameraFollowSprite(obsidian)
 tiles.setCurrentTilemap(tilemap`level6`)
@@ -2726,6 +2911,42 @@ obsidian = sprites.create(img`
     . . . f f b f b f b f f f . . . 
     . . . . f f b f b f b f . . . . 
     `, SpriteKind.Player)
+tutorial = sprites.create(img`
+    . . . . . f f f f . . . . . . . 
+    . . . . f f f f f f . . . . . . 
+    . . . . f 1 f f 1 f . . . . . . 
+    . . . . f f f f f f . . . . . . 
+    . . . . . f f f f . . . . . . . 
+    . . . f f f f f f f f . . . . . 
+    . . f . f f f f f f . f . . . . 
+    . f . . f f f f f f . . f . . . 
+    . f . . f f f f f f . . f . . . 
+    . . f . f f f f f f . f . . . . 
+    . . . . . f f f f . . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . f f f . . f f f . . . . . 
+    . . f f f f . . f f f f . . . . 
+    `, SpriteKind.NPC)
+let mySprite4 = sprites.create(img`
+    . . . . . . f f f f . . . . . . 
+    . . . . f f f 7 7 f f f . . . . 
+    . . . f f f 7 7 7 7 f f f . . . 
+    . . f f f 7 7 7 7 7 7 f f f . . 
+    . . f f 7 7 7 7 7 7 7 7 7 f . . 
+    . . f 7 7 f f f f f f 7 7 f . . 
+    . . f f f f 5 5 5 5 f f f f . . 
+    . f f 5 f b 2 4 4 2 b f 5 f f . 
+    . f 5 5 4 1 2 d d 2 1 4 5 5 f . 
+    . . f f f f d d d d d 5 5 f . . 
+    . f a a a a f 4 4 4 5 5 f . . . 
+    . f a c c a f 2 2 2 2 f 4 e . . 
+    . f a c c a f 2 2 2 2 f d 4 . . 
+    . . f a a f 4 5 5 4 4 f 4 4 . . 
+    . . . f f f f f f f f . . . . . 
+    . . . . . f f . . f f . . . . . 
+    `, SpriteKind.stopper)
 scene.cameraFollowSprite(obsidian)
 let mySprite = sprites.create(img`
     . . . . . . e e e e . . . . . . 
@@ -2802,16 +3023,110 @@ let erm = sprites.create(img`
 bleh = false
 isInvincible = false
 shards = true
+sprites.setDataNumber(obsidian, "Bosses Slain", 4)
 tiles.placeOnTile(myEnemy, tiles.getTileLocation(1, 129))
 tiles.placeOnTile(obsidian, tiles.getTileLocation(127, 127))
 tiles.placeOnTile(mySprite, tiles.getTileLocation(127, 4))
+tiles.placeOnTile(tutorial, tiles.getTileLocation(130, 128))
 tiles.placeOnTile(meh, tiles.getTileLocation(123, 253))
 tiles.placeOnTile(erm, tiles.getTileLocation(253, 115))
+animation.runImageAnimation(
+tutorial,
+[img`
+    . . . . . f f f f . . . f f . . 
+    . . . . f f f f f f . . . . f . 
+    . . . . f 1 f f 1 f . . . . f . 
+    . . . . f f f f f f . . . f . . 
+    . . . . . f f f f . . . . f . . 
+    . . . f f f f f f f f . . . . . 
+    . . f . f f f f f f . f . f . . 
+    . f . . f f f f f f . . f . . . 
+    . f . . f f f f f f . . f . . . 
+    . . f . f f f f f f . f . . . . 
+    . . . . . f f f f . . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . f f f . . f f f . . . . . 
+    . . f f f f . . f f f f . . . . 
+    `,img`
+    . . . . . f f f f . . . . . f . 
+    . . . . f 1 f f 1 f . . f . f . 
+    . . . . f 1 f f 1 f . . f . f . 
+    . . . . f f f f f f . f . . f . 
+    . . . . . f f f f . . f . . . . 
+    . . . f f f f f f f f . . . f . 
+    . . f . f f f f f f . . . . . . 
+    . f . . f f f f f f . . . . . . 
+    . f . . f f f f f f . . . . . . 
+    . . f . f f f f f f . . . . . . 
+    . . . . . f f f f . . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . f f f . . f f f . . . . . 
+    . . f f f f . . f f f f . . . . 
+    `,img`
+    . . . . . f f f f . . . . . . . 
+    . . . . f 1 f f 1 f . . . f . . 
+    . . . . f 1 f f 1 f . . f . . . 
+    . . . . f f f f f f . . f . . . 
+    . . . . . f f f f . . f . . . . 
+    . . . f f f f f f f f . . . . . 
+    . . f . f f f f f f . . . . . . 
+    . f . . f f f f f f . . . . . . 
+    . f . . f f f f f f . . . . . . 
+    . . f . f f f f f f . . . . . . 
+    . . . . . f f f f . . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . f f f . . f f f . . . . . 
+    . . f f f f . . f f f f . . . . 
+    `,img`
+    . . . . . f f f f . . . . . . . 
+    . . . . f 1 f f 1 f . . f . . . 
+    . . . . f 1 f f 1 f . . f . . . 
+    . . . . f f f f f f . f . . . . 
+    . . . . . f f f f . . f . . . . 
+    . . . f f f f f f f f . . . . . 
+    . . f . f f f f f f . . . . . . 
+    . f . . f f f f f f . . . . . . 
+    . f . . f f f f f f . . . . . . 
+    . . f . f f f f f f . . . . . . 
+    . . . . . f f f f . . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . . f f . . f f . . . . . . 
+    . . . f f f . . f f f . . . . . 
+    . . f f f f . . f f f f . . . . 
+    `],
+500,
+true
+)
 controller.moveSprite(obsidian, 85, 85)
 LostSoul = true
 info.setLife(50)
 info.changeScoreBy(3095)
 sprites.setDataNumber(obsidian, "CosmeticPoints", 0)
+obsidian.z = 1
+tiles.placeOnTile(mySprite4, tiles.getTileLocation(133, 124))
+game.onUpdateInterval(5000, function () {
+    if (spriteutils.isDestroyed(mySprite3) == false) {
+        if (randint(1, 4) == 1) {
+            mySprite3.setVelocity(20, 20)
+        }
+        if (randint(1, 4) == 2) {
+            mySprite3.setVelocity(-20, -20)
+        }
+        if (randint(1, 4) == 3) {
+            mySprite3.setVelocity(-20, 20)
+        }
+        if (randint(1, 4) == 4) {
+            mySprite3.setVelocity(20, -20)
+        }
+    }
+})
 game.onUpdateInterval(15000, function () {
     opal = sprites.create(img`
         ........................
