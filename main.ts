@@ -609,6 +609,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Finale_Ultima_Boss_Phase_2, func
         })
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile113`, function (sprite, location) {
+    info.changeLifeBy(-1)
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite254, otherSprite5) {
     sprites.destroy(sprite254)
     sprites.changeDataNumberBy(otherSprite5, "HP", -10)
@@ -722,9 +725,6 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Finale_Ultima_Boss_Phase_1, 
             info.changeLifeBy(25)
         }
     }
-})
-scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile22`, function (sprite3, location2) {
-    sprites.destroy(sprite3)
 })
 scene.onOverlapTile(SpriteKind.Enemy, assets.tile`transparency16`, function (sprite8, location5) {
     sprites.destroy(sprite8)
@@ -1613,8 +1613,8 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite6, 
         . . . f f 8 9 8 9 8 9 f f . . . 
         . . . . . f f 6 6 f f . . . . . 
         `, SpriteKind.goldnpc)
-    tiles.placeOnTile(obsidian, tiles.getTileLocation(81, 97))
-    tiles.placeOnTile(mySprite3, tiles.getTileLocation(79, 94))
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(31, 48))
+    tiles.placeOnTile(mySprite3, tiles.getTileLocation(26, 39))
     sprites.setDataNumber(mySprite3, "npc", 1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.t2enemy, function (sprite272, otherSprite22) {
@@ -2743,6 +2743,31 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC_Cosmetic, function (sprite, 
         sprites.setDataNumber(obsidian, "CosmeticPoints", 1)
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile14`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level10`)
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(16, 31))
+    KingMidas = sprites.create(img`
+        . 2 2 . . . 5 5 5 5 . . . 2 2 . 
+        2 . 2 2 2 5 5 4 4 5 5 2 2 2 . 2 
+        . 2 . 2 5 4 4 4 4 4 4 5 2 . 2 . 
+        . . f 5 4 5 5 5 5 5 5 4 5 f . . 
+        . . f 5 5 2 4 4 4 4 2 5 5 f . . 
+        . . f 5 4 5 2 5 5 2 5 4 5 f . . 
+        . . f f e f f 2 2 f f e f f . . 
+        . f f 5 f e e e e e e f 5 f f . 
+        . f 5 5 e 7 5 f f 5 7 e 5 5 f . 
+        5 . f 5 5 e e e e e e 5 5 f . 5 
+        5 5 . f 5 4 e 5 5 e 4 5 f . 5 5 
+        2 2 5 5 4 e 4 e e 4 e 4 5 5 2 2 
+        2 2 5 1 f 4 5 5 5 5 4 f 1 5 2 2 
+        2 5 4 f 4 f 5 5 5 5 f 4 f 4 5 2 
+        5 2 . . . 4 f 5 5 f 4 . . . 2 5 
+        5 . . . . f f . . f f . . . . 5 
+        `, SpriteKind.Boss)
+    tiles.placeOnTile(KingMidas, tiles.getTileLocation(15, 16))
+    KingMidas.sayText("surprised you came to face me, now face my golden blade!", 1000, false)
+    KingMidas.follow(obsidian, 130)
+})
 sprites.onCreated(SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite2) {
     sprites.setDataNumber(sprite2, "HP", 2000)
 })
@@ -2753,6 +2778,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile30`, function (sprite16
 let helioite: Sprite = null
 let ruby: Sprite = null
 let opal: Sprite = null
+let KingMidas: Sprite = null
 let shopkeeper: Sprite = null
 let you: Sprite = null
 let Maddie: Sprite = null
