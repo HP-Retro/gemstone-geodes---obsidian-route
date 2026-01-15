@@ -367,7 +367,7 @@ info.onScore(1300, function () {
     controller.moveSprite(obsidian, 100, 100)
 })
 sprites.onCreated(SpriteKind.Boss, function (sprite5) {
-    sprites.setDataNumber(sprite5, "HP", 1000)
+    sprites.setDataNumber(sprite5, "HP", 1250)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
     tutorial.sayText("hello princess! welcome to the overworld! i know its different from gemlandia, but you must vanquish the kings! i bid thee good luck!", 5000, true)
@@ -599,6 +599,31 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             })
         }
     }
+    if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 3) {
+        if (LostSoul == true) {
+            chargeblast = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . 9 . 9 9 9 . 
+                . . . . . . . . . 9 . 9 . . . 9 
+                . . . . . . . . . . . . . . . 9 
+                . . . . . . . . . . 9 9 9 9 9 9 
+                . . . . . . . . . . 9 9 9 9 9 9 
+                . . . . . . . . . 9 9 9 9 9 9 9 
+                . . 9 9 9 . . . . 9 9 9 9 9 9 9 
+                9 9 9 . . 9 9 . 9 9 9 9 9 9 9 9 
+                . . . . . . 9 9 9 . 9 9 9 9 9 9 
+                . . . . . . . . . . 9 9 9 9 9 9 
+                . . . . . . . . . . 9 9 9 9 9 9 
+                . . . . . . . . . . . . . . . 9 
+                . . . . . . . . . 9 . 9 . . . 9 
+                . . . . . . . . . . 9 . 9 9 9 . 
+                . . . . . . . . . . . . . . . . 
+                `, obsidian, 80, 0)
+            timer.after(10000, function () {
+                LostSoul = true
+            })
+        }
+    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite27, otherSprite2) {
     if (isInvincible == false) {
@@ -715,6 +740,31 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile120`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level12`)
+    KingSilver = sprites.create(img`
+        c c c . c . b b b b . c . c c c 
+        . c c c . b b d d b b . c c c . 
+        c . c c b d d d d d d b c c . c 
+        . . f b d b b b b b b d b f . . 
+        . . f b b c d d d d c b b f . . 
+        . . f b d b b b b b b d b f . . 
+        . . f f d f f f f f f d f f . . 
+        . f f b f f f f f f f f b f f . 
+        . f b b d f b f f b f d b b f . 
+        b . f b b d d d d d d b b f . b 
+        b c . f b c d f f d c b f . c b 
+        c b b b c b c c c c b c b b b c 
+        c c c c f c b c c b c f c c c c 
+        c b b f c f b c c b f c f b b c 
+        b c . . . c f b b f c . . . c b 
+        b . . . . f f . . f f . . . . b 
+        `, SpriteKind.Boss)
+    tiles.placeOnTile(KingSilver, tiles.getTileLocation(25, 22))
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(11, 22))
+    KingSilver.sayText("I have no words to say to you, brat.", 2000, true)
+    KingSilver.follow(obsidian)
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Finale_Ultima_Boss_Phase_1, function (sprite256, otherSprite7) {
     sprites.destroy(sprite256)
     sprites.changeDataNumberBy(otherSprite7, "HP", -10)
@@ -732,6 +782,9 @@ scene.onOverlapTile(SpriteKind.Enemy, assets.tile`transparency16`, function (spr
 info.onScore(1700, function () {
     info.setLife(325)
     controller.moveSprite(obsidian, 110, 110)
+})
+sprites.onDestroyed(SpriteKind.Boss, function (sprite) {
+    sprites.changeDataNumberBy(obsidian, "Bosses Slain", 1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.stopper, function (sprite, otherSprite) {
     if (info.score() >= 2000 && sprites.readDataNumber(obsidian, "Bosses Slain") == 4) {
@@ -1568,7 +1621,160 @@ controller.combos.attachCombo("a+b", function () {
                 info.startCountdown(60)
             })
         }
+        if (sprites.readDataNumber(obsidian, "CosmeticPoints") == 3) {
+            timer.after(1, function () {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . 9 . . 9 9 9 . . . . . . . 
+                    9 . 9 . 9 9 9 9 9 . . . . . . . 
+                    . 9 . . 9 . 9 9 9 . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 110, 0)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . 9 9 9 . 9 . . 9 . 
+                    . . . . . . . 9 9 9 9 9 . 9 . 9 
+                    . . . . . . . 9 9 9 . . 9 . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, -110, 0)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . 9 9 9 . . . . . . . . 
+                    . . . . . 9 9 9 . . . . . . . . 
+                    . . . . 9 9 9 9 . . . . . . . . 
+                    . . . . 9 9 . . . . . . . . . . 
+                    . . . 9 . . . . . . . . . . . . 
+                    . . . 9 . . . . . . . . . . . . 
+                    . . 9 . . . . . . . . . . . . . 
+                    . 9 . . . . . . . . . . . . . . 
+                    9 . . . . . . . . . . . . . . . 
+                    `, obsidian, 110, -110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    9 . . . . . . . . . . . . . . . 
+                    . 9 . . . . . . . . . . . . . . 
+                    . . 9 . . . . . . . . . . . . . 
+                    . . . 9 9 . . . . . . . . . . . 
+                    . . . . . 9 9 . . . . . . . . . 
+                    . . . . . 9 9 9 9 . . . . . . . 
+                    . . . . . . 9 9 9 . . . . . . . 
+                    . . . . . . 9 9 9 . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 110, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . 9 
+                    . . . . . . . . . . . . . . 9 . 
+                    . . . . . . . . . . . . . 9 . . 
+                    . . . . . . . . . . . . 9 . . . 
+                    . . . . . . . . . . . . 9 . . . 
+                    . . . . . . . . . . 9 9 . . . . 
+                    . . . . . . . . 9 9 9 9 . . . . 
+                    . . . . . . . . 9 9 9 . . . . . 
+                    . . . . . . . . 9 9 9 . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, -110, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . 9 9 9 . . . . . . 
+                    . . . . . . . 9 9 9 . . . . . . 
+                    . . . . . . . 9 9 9 9 . . . . . 
+                    . . . . . . . . . 9 9 . . . . . 
+                    . . . . . . . . . . . 9 9 . . . 
+                    . . . . . . . . . . . . . 9 . . 
+                    . . . . . . . . . . . . . . 9 . 
+                    . . . . . . . . . . . . . . . 9 
+                    `, obsidian, -110, -110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . 9 . . . . . . . . 
+                    . . . . . . 9 . . . . . . . . . 
+                    . . . . . . . 9 . . . . . . . . 
+                    . . . . . . . . 9 . . . . . . . 
+                    . . . . . . 9 9 . . . . . . . . 
+                    . . . . . . . 9 . . . . . . . . 
+                    . . . . . . 9 9 9 . . . . . . . 
+                    . . . . . . 9 9 9 . . . . . . . 
+                    . . . . . . 9 9 9 . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, obsidian, 0, 110)
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . 9 9 9 . . . . . . 
+                    . . . . . . . 9 9 9 . . . . . . 
+                    . . . . . . . 9 9 9 . . . . . . 
+                    . . . . . . . . 9 . . . . . . . 
+                    . . . . . . . . 9 9 . . . . . . 
+                    . . . . . . . 9 . . . . . . . . 
+                    . . . . . . . . 9 . . . . . . . 
+                    . . . . . . . . . 9 . . . . . . 
+                    . . . . . . . . 9 . . . . . . . 
+                    `, obsidian, 0, -110)
+                bleh = true
+                info.startCountdown(60)
+            })
+        }
     }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile124`, function (sprite, location) {
+    info.changeLifeBy(-1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cosmetic2, function (sprite, otherSprite) {
     if (info.score() >= 1000) {
@@ -1649,6 +1855,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.miniboss, function (sprite276, o
 })
 info.onCountdownEnd(function () {
     bleh = false
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile85`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level7`)
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(44, 25))
+    sprites.destroyAllSpritesOfKind(SpriteKind.Boss)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cosmetic_peak, function (sprite, otherSprite) {
     if (info.score() >= 1500) {
@@ -2087,15 +2298,15 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile23`, function (sprite14
         ................
         ................
         ................
-        ................
-        ................
-        .....ffffff.....
-        ....ffffffff....
-        ....f1ff11ff....
-        ....f1ff11ff....
-        ....ffffffff....
-        ...ffffffffff...
-        ...ffffffffff...
+        .............9..
+        .7..........99..
+        ..77.ff77ff999..
+        ....7f77f7ff9...
+        ....77ff22ff....
+        .77777ff22ff....
+        ..7.777fffff....
+        ...fff7ffffff...
+        ...fff7ffffff...
         ...f11111111f...
         ...f11111111f...
         ...ff111111ff...
@@ -2107,22 +2318,22 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile23`, function (sprite14
         .....f1111ff....
         .....ff11ffffff.
         ...fffffffffffff
-        ..ff..1fffffffff
-        ..ff..11ff111.ff
-        ..ff..f1ff11f..f
-        ..ff..f1f11ff..f
+        ..ff..2fffffffff
+        ..ff..22ff999.ff
+        ..ff..f2ff99f..f
+        ..ff..f2f99ff..f
         ..ff..fffffff..f
         ..ff..ffffff...f
-        ..ff..f1f1ff...f
-        .fff.f11f1ff..ff
-        .ff..f1ff1ff..ff
-        .ff..11ff111..ff
+        ..ff..faf5ff...f
+        .fff.faaf5ff..ff
+        .ff..faff5ff..ff
+        .ff..aaff555..ff
         .ff..fffffff..ff
-        .ff..ffff1ff..ff
-        .ff..ff1f1ff..ff
-        .22..f11f11f..22
-        .2..f11fff1f..22
-        .2..f1ffff11...2
+        .ff..ffff8ff..ff
+        .ff..ff1f8ff..ff
+        .22..f11f88f..22
+        .2..f11fff8f..22
+        .2..f1ffff88...2
         ..2.ffffffff...2
         ....ff....ff....
         ....ff....ff....
@@ -2150,6 +2361,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite252, o
     if (sprites.readDataNumber(otherSprite3, "HP") <= 0) {
         sprites.destroy(otherSprite3)
         info.changeScoreBy(500)
+        sprites.changeDataNumberBy(obsidian, "Bosses Slain", 1)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile52`, function (sprite, location) {
@@ -2696,6 +2908,30 @@ scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile81`, function (sprite, l
 sprites.onCreated(SpriteKind.miniboss, function (sprite7) {
     sprites.setDataNumber(sprite7, "HP", 500)
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile122`, function (sprite6, location4) {
+    tiles.setCurrentTilemap(tilemap`level9`)
+    mySprite3 = sprites.create(img`
+        . . . . . f f 4 4 f f . . . . . 
+        . . . . f 5 4 5 5 4 5 f . . . . 
+        . . . f e 4 5 5 5 5 4 e f . . . 
+        . . f 8 6 e 4 4 4 4 e 6 8 f . . 
+        . . f 6 6 6 6 6 6 6 6 6 6 f . . 
+        . f 6 6 e 6 6 e e 6 6 e 6 6 f . 
+        . f 6 6 f f e e e e f f 6 6 f . 
+        . f 8 8 f 6 5 e e 5 6 f 8 8 f . 
+        . f 8 8 e 1 5 4 4 5 1 e 8 8 f . 
+        f f 8 8 f 4 4 4 4 4 4 f 8 8 f f 
+        f 8 8 f f f e e e e f f f 8 8 f 
+        . f e e f 6 9 9 9 9 6 f e e f . 
+        . . e 4 c 9 9 9 9 9 9 c 4 e . . 
+        . . e f 6 9 6 9 6 9 6 6 f e . . 
+        . . . f f 8 9 8 9 8 9 f f . . . 
+        . . . . . f f 6 6 f f . . . . . 
+        `, SpriteKind.goldnpc)
+    tiles.placeOnTile(obsidian, tiles.getTileLocation(21, 17))
+    tiles.placeOnTile(mySprite3, tiles.getTileLocation(26, 39))
+    sprites.setDataNumber(mySprite3, "npc", 1)
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.miniboss, function (sprite253, otherSprite4) {
     sprites.changeDataNumberBy(otherSprite4, "HP", -12)
     sprites.destroy(projectile)
@@ -2764,9 +3000,10 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile14`, function (sprite, 
         5 2 . . . 4 f 5 5 f 4 . . . 2 5 
         5 . . . . f f . . f f . . . . 5 
         `, SpriteKind.Boss)
-    tiles.placeOnTile(KingMidas, tiles.getTileLocation(15, 16))
+    tiles.placeOnTile(KingMidas, tiles.getTileLocation(15, 22))
     KingMidas.sayText("surprised you came to face me, now face my golden blade!", 1000, false)
     KingMidas.follow(obsidian, 130)
+    sprites.destroyAllSpritesOfKind(SpriteKind.goldnpc)
 })
 sprites.onCreated(SpriteKind.Finale_Ultima_Boss_Phase_2, function (sprite2) {
     sprites.setDataNumber(sprite2, "HP", 2000)
@@ -2775,8 +3012,8 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile30`, function (sprite16
     tiles.setCurrentTilemap(tilemap`level7`)
     tiles.placeOnTile(obsidian, tiles.getTileLocation(1, 40))
 })
-let helioite: Sprite = null
 let ruby: Sprite = null
+let helioite: Sprite = null
 let opal: Sprite = null
 let KingMidas: Sprite = null
 let shopkeeper: Sprite = null
@@ -2786,6 +3023,7 @@ let sparky: Sprite = null
 let knight: Sprite = null
 let lancer: Sprite = null
 let mySprite3: Sprite = null
+let KingSilver: Sprite = null
 let chargeblast: Sprite = null
 let miku: Sprite = null
 let projectile: Sprite = null
@@ -3049,7 +3287,7 @@ let erm = sprites.create(img`
 bleh = false
 isInvincible = false
 shards = true
-sprites.setDataNumber(obsidian, "Bosses Slain", 4)
+sprites.setDataNumber(obsidian, "Bosses Slain", 0)
 tiles.placeOnTile(myEnemy, tiles.getTileLocation(1, 129))
 tiles.placeOnTile(obsidian, tiles.getTileLocation(127, 127))
 tiles.placeOnTile(mySprite, tiles.getTileLocation(127, 4))
@@ -3133,7 +3371,7 @@ true
 controller.moveSprite(obsidian, 85, 85)
 LostSoul = true
 info.setLife(50)
-info.changeScoreBy(3095)
+info.changeScoreBy(11000)
 sprites.setDataNumber(obsidian, "CosmeticPoints", 0)
 obsidian.z = 1
 tiles.placeOnTile(mySprite4, tiles.getTileLocation(133, 124))
@@ -3187,23 +3425,6 @@ game.onUpdateInterval(15000, function () {
         timer.after(20000, function () {
             sprites.destroy(opal)
         })
-    }
-})
-forever(function () {
-    if (!(spriteutils.isDestroyed(mySprite))) {
-        if (spriteutils.distanceBetween(obsidian, mySprite) > 300) {
-            mySprite.follow(null)
-        } else {
-            mySprite.follow(obsidian, 100)
-        }
-    }
-    pause(100)
-    if (!(spriteutils.isDestroyed(mySprite))) {
-        if (spriteutils.distanceBetween(obsidian, mySprite) > 300) {
-            mySprite.follow(null)
-        } else {
-            mySprite.follow(obsidian, 90)
-        }
     }
 })
 forever(function () {
@@ -3305,20 +3526,19 @@ forever(function () {
     }
 })
 forever(function () {
-    if (!(spriteutils.isDestroyed(ruby))) {
-        if (spriteutils.distanceBetween(obsidian, ruby) > 125) {
-            ruby.follow(null)
+    if (!(spriteutils.isDestroyed(mySprite))) {
+        if (spriteutils.distanceBetween(obsidian, mySprite) > 300) {
+            mySprite.follow(null)
         } else {
-            ruby.follow(obsidian, 80)
+            mySprite.follow(obsidian, 100)
         }
     }
-})
-forever(function () {
-    if (!(spriteutils.isDestroyed(myEnemy))) {
-        if (spriteutils.distanceBetween(obsidian, myEnemy) > 300) {
-            myEnemy.follow(null)
+    pause(100)
+    if (!(spriteutils.isDestroyed(mySprite))) {
+        if (spriteutils.distanceBetween(obsidian, mySprite) > 300) {
+            mySprite.follow(null)
         } else {
-            myEnemy.follow(obsidian, 100)
+            mySprite.follow(obsidian, 90)
         }
     }
 })
@@ -3346,6 +3566,24 @@ forever(function () {
             opal.follow(null)
         } else {
             opal.follow(obsidian, 80)
+        }
+    }
+})
+forever(function () {
+    if (!(spriteutils.isDestroyed(ruby))) {
+        if (spriteutils.distanceBetween(obsidian, ruby) > 125) {
+            ruby.follow(null)
+        } else {
+            ruby.follow(obsidian, 80)
+        }
+    }
+})
+forever(function () {
+    if (!(spriteutils.isDestroyed(myEnemy))) {
+        if (spriteutils.distanceBetween(obsidian, myEnemy) > 300) {
+            myEnemy.follow(null)
+        } else {
+            myEnemy.follow(obsidian, 100)
         }
     }
 })
@@ -3410,12 +3648,12 @@ game.onUpdateInterval(20000, function () {
             ....555ee555555ee555....
             .......e5ee55ee5e.......
             ........eeeeeeee........
-            .....555...ee...555.....
-            ....5..............5....
-            ........................
-            ........................
-            ........................
-            ........................
+            .....555f11ee11f555.....
+            ....5..dff1111ffd..5....
+            .......d1ff11ff1d.......
+            .......d111ff111d.......
+            ........d1f11f1d........
+            .........dddddd.........
             ........................
             ........................
             `, SpriteKind.t3enemy)
